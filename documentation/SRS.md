@@ -7,8 +7,6 @@ The goal is to create a webtool to manage logistics in order to optimize the wor
 ### Stakeholders
 #### Product Owners
 - Silas Berger
-- Manuel Leuenberger
-- Mathias Fuchs
 
 #### Clients/Users
 - Logisticians
