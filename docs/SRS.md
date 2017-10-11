@@ -20,16 +20,15 @@ The goal is to create a webtool to manage logistics in order to optimize the wor
 - Alain Stulz
 
 ### Definitions
-Order: One or multiple _Items_ that will be delivered to a _Customer_
-Delivery: One or multiple _Orders_ that will be delivered to a single _Customer_
-Tour: An ordered series of _Deliveries_ to multiple _Customers_
+Customer: A delivery target, including Name, Address, Contact Data
+Package: A delivery item, including dimensions, weight, additional info
+Delivery: A delivery consisting of a destination (Client), one or more Packages, a scheduled date and a status
 
 
 ### System Overview
 
-
-
 ### References
+Meeting Notes: https://docs.google.com/document/d/14YOSGv_hTwon7aVOoag-TymgAiYwRcQLe8z8clhV6DE/edit?usp=sharing
 
 ## Overall Description
 ### Use Cases
