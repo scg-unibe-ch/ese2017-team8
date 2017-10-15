@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface CustomerRepo extends CrudRepository<Customer, Integer> {
+public interface OrderRepo extends CrudRepository<Order, Integer> {
 
 	// Spring Data JPA also allows you to define other query methods by simply declaring their method signature.
-    public List<Customer> findByLastName(String lastName);
+    public List<Order> findByCustomer(Customer customer);
 }
