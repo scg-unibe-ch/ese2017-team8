@@ -16,24 +16,24 @@ public class Order {
     private int quantity;
     private double price;
     private Date purchaseOrderDate;
-    private Customer customer;
+    private int customerID;
    
     
     protected Order() {}
 
-    public Order(String product, int quantity, double price, Date purchaseOrderDate, Customer customer) {
+    public Order(String product, int quantity, double price, Date purchaseOrderDate, int customer) {
       this.product = product;
       this.quantity = quantity;
       this.price = price;
       this.purchaseOrderDate = purchaseOrderDate;
-      this.customer = customer;
+      this.customerID = customer;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Order[id=%d, product='%s', price='%s', customer.id=%d]",
-                id, product, customer);
+                "Order[id=%d, product='%s', price='%s', customerId=%d]",
+                id, product, customerID);
     }
 
 }
