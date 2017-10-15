@@ -10,7 +10,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String firstName;
     private String lastName;
     private String streetName;
