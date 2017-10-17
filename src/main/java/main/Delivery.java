@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Delivery
 {
 	public enum Status {
-		newPackage, delivered, attempted; //...
+		unscheduled, scheduled, delivered, attempted;
 	}
 
 	@Id
@@ -18,25 +18,22 @@ public class Delivery
 	private Date plannedDate;
 	private Date actualDate;
 	private Long customerId;
-	private Long pckg;
+	private Long packageId;
 	private Status status;
 
 	protected Delivery() {};
 
-	public Delivery(Date plannedDate,Date actualDate, Long customerId, Long pckg, Status status)
-	{
-		this.plannedDate=plannedDate;
-		this.actualDate=actualDate;
-		this.customerId =customerId;
-		this.pckg=pckg;
-		this.status=status;
+	public Delivery(Date planned, Date actual, Long customerId, Long packageId, Status status) {
+		this.plannedDate = plannedDate;
+		this.actualDate = actualDate;
+		this.customerId = customerId;
+		this.packageId = packageId;
+		this.status = status;
 	}
 
 	@Override
-	public String toString()
-	{
-		String tmp= "Delivery id= " + id;
-		return tmp;
+	public String toString() {
+		return String.format("Delivery - Id: %l", id);
 	}
 
 }

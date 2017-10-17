@@ -4,8 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "packages")
-public class Package
-{
+public class Package {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -19,8 +18,7 @@ public class Package
 
 	protected Package() {};
 
-	public Package(int length,int width,int height,float weight,boolean dangerous ,boolean fragile,String comment)
-	{
+	public Package(int length,int width,int height,float weight,boolean dangerous ,boolean fragile,String comment) {
 		this.length=length;
 		this.width=width;
 		this.height=height;
@@ -31,10 +29,8 @@ public class Package
 
 
 	@Override
-	public String toString()
-	{
-		String tmp="Package id=" + id + "";
-		return tmp;
+	public String toString() {
+		return String.format("Package – Id: %l", id)
 	}
 
 }
