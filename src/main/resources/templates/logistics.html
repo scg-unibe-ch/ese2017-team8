@@ -6,6 +6,15 @@
 </head>
 <body>
 <h1>Hello Logistician!</h1>
-<a href="/logout">Log out</a>
+<h2>Neue Bestellung erfassen</h2>
+	<form action="#" th:action="@{/order}" th:object="${order}" method="post">
+    	<p>Produkt: <input type="text" th:field="*{product}" />
+    	Anzahl: <input type="number" min="1"th:field="*{quantity}" />
+    	Preis: <input type="number" min="1" th:field="*{price}" />
+    	Bestelldatum: <input type="date" th:field="*{purchaseOrderDate}" />
+    	KundenId: <input type="text" th:field="*{customerID}" />
+        <input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+	</form>
+<a th:href="@{/logout}">Logout</a>
 </body>
 </html>
