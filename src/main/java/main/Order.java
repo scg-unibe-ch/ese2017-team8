@@ -1,17 +1,16 @@
 package main;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "orders")
 public class Order {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+    private Long id;
+
     private String product;
     private int quantity;
     private double price;

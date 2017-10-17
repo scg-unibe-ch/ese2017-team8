@@ -16,37 +16,37 @@ public class Application {
 		SpringApplication.run(Application.class);
 	}
 
-	@Bean
-	public CommandLineRunner demo(CustomerRepo repository) {
-		return (args) -> {
-			// save a couple of customers
-			repository.save(new Customer(
-					"Jack",
-					"Bauer",
-					"Bernstrasse",
-					"48",
-					"c",
-					"d",
-					"e",
-					"mr@emxample.com"
-			));
-
-			// fetch all customers
-			log.info("Customers found with findAll():");
-			log.info("-------------------------------");
-			for (Customer customer : repository.findAll()) {
-				log.info(customer.toString());
-			}
-			log.info("");
-
-			// fetch customers by last name
-			log.info("Customer found with findByLastName('Bauer'):");
-			log.info("--------------------------------------------");
-			for (Customer bauer : repository.findByLastName("Bauer")) {
-				log.info(bauer.toString());
-			}
-			log.info("");
-		};
-	}
+//	@Bean
+//	public CommandLineRunner demo(CustomerRepo repository) {
+//		return (args) -> {
+//			// save a couple of customers
+//			repository.save(new Customer(
+//					"Jack",
+//					"Bauer",
+//					"Bernstrasse",
+//					"48",
+//					"c",
+//					"d",
+//					"e",
+//					"mr@emxample.com"
+//			));
+//
+//			// fetch all customers
+//			log.info("Customers found with findAll():");
+//			log.info("-------------------------------");
+//			for (Customer customer : repository.findAll()) {
+//				log.info(customer.toString());
+//			}
+//			log.info("");
+//
+//			// fetch customers by last name
+//			log.info("Customer found with findByLastName('Bauer'):");
+//			log.info("--------------------------------------------");
+//			for (Customer bauer : repository.findByLastName("Bauer")) {
+//				log.info(bauer.toString());
+//			}
+//			log.info("");
+//		};
+//	}
 
 }
