@@ -30,7 +30,7 @@ public class Package {
 
 	@Override
 	public String toString() {
-		return String.format("Package – Id: %l", id)
+		return String.format("Package – Id: %l", id);
 	}
 
 }
