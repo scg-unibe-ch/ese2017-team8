@@ -5,9 +5,22 @@
 </head>
 <body>
 <h1>Hello Logistician!</h1>
+<h2>Verfügbare Bestellungen</h2>
+<table>
+	<th:block th:each="order : ${orders}">
+		<tr>
+			<td th:text="${order.product}">...</td>
+		</tr>
+	</th:block>
+</table>
+
 <h2>Neue Bestellung erfassen</h2>
 	<form action="#" th:action="@{/logistics}" th:object="${order}" method="post">
-		<p>Id: <input type="text" th:field="*{id}" /></p>
+		<p>Produkt: <input type="text" th:field="*{product}" /></p>
+		<p>Preis in CHF: <input type="number" min="0.00" step="0.05" th:field="*{price}" /></p>
+		<p>Menge: <input type="number" min="0" th:field="*{quantity}" /></p>
+		<!--<p>Bestelldatum: <input type="date" th:field="*{purchaseOrderDate}" /></p>-->
+		<!--<p>CustomerId: <input type="number" th:field="*{customerId}" /></p>-->
 		<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 	</form>
 <a th:href="@{/logout}">Logout</a>

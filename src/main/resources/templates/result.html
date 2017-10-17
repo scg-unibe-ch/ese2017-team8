@@ -6,7 +6,18 @@
 </head>
 <body>
 	<h1>Result</h1>
-    <p th:text="'id: ' + ${order.id}" />
-    <a href="/logistics">Submit another message</a>
+    <table>
+        <th:block th:each="order : ${orders}">
+            <tr>
+                <td th:text="${order.product}">...</td>
+            </tr>
+        </th:block>
+    </table>
+    <p th:text="'Produkt: ' + ${order.product}" />
+    <p th:text="'Menge: ' + ${order.quantity}" />
+    <p th:text="'Preis: ' + ${order.price}" />
+    <!--<p th:text="'Bestelldatum: ' + ${order.purchaseOrderDate}" />-->
+    <!--<p th:text="'CostumerId: ' + ${order.CostumerId}" />-->
+    <a href="/logistics">Add another order</a>
 </body>
 </html>
