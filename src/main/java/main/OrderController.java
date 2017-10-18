@@ -11,6 +11,8 @@ import java.util.List;
 
 /**
  * handles the order creation form
+ *
+ * @author samuel
  */
 
 @Controller
@@ -20,12 +22,12 @@ public class OrderController {
     public OrderRepo orderRepo;
 
     //just an example
-    Order bsp1 = new Order("Kreissäge",2,32, new Date(102,11,4),3L);
+    Order bsp1 = new Order("Kreissäge",2,32, new Date(117,11,4),3L);
+    Order bsp2 = new Order("Laubbläser",1,106, new Date(117,6,4),3L);
 
     @RequestMapping(value="/logistics", method= RequestMethod.GET)
     public String orderForm(Model model) {
         model.addAttribute("order", new Order());
-        orderRepo.save(bsp1);
         return "logistics";
     }
 
@@ -47,6 +49,9 @@ public class OrderController {
      */
     @ModelAttribute("allOrders")
     public List<Order> showAllOrders() {
+        //this part is only here to have some examples allready in the list
+        orderRepo.save(bsp1);
+        orderRepo.save(bsp2);
         return this.orderRepo.findAll();
     }
 }
