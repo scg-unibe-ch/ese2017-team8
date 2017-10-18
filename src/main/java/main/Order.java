@@ -1,5 +1,7 @@
 package main;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,8 +11,10 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "order_id")
     private Long id;
 
+    @Column(name = "product")
     private String product;
     private int quantity;
     private double price;
@@ -30,9 +34,13 @@ public class Order {
 
     @Override
     public String toString() {
-        return String.format(
-                "Order[product='%s']",
-                product);
+        return String.format("Order[id='%d', product='%s', quantity='%d', price='%e']",
+                id, product,quantity,price);
+    }
+
+    @ModelAttribute("order")
+    public Order getOrder(){
+        return new Order();
     }
 
     public Long getId(){
