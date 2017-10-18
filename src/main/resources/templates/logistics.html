@@ -33,7 +33,7 @@
 					<td th:text="${order.product}">...</td>
 					<td th:text="${order.price}">...</td>
 					<td th:text="${order.quantity}">...</td>
-					<td th:text="${order.purchaseOrderDate}">...</td>
+					<td th:text="${#dates.format(order.purchaseOrderDate, 'yyyy/MM/dd')}"></td>
 					<td th:text="${order.customerId}">...</td>
 				</tr>
 			</th:block>
