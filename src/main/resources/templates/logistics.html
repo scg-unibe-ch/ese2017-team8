@@ -12,34 +12,57 @@
 				padding: 5px;
 			}
 		</style>
+		<script>
+            function submitDriver(id){
+                var driver = document.getElementById("driverName"+id).value;
+                var row = document.getElementById(id);
+                row.parentNode.removeChild(row);
+                alert(driver);
+            }
+		</script>
 	</head>
 	<body>
 		<h1>Backend Logistik</h1>
-		<h2>Existierende Bestellungen</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Bestell ID</th>
-					<th>Produkt</th>
-					<th>Preis in CHF</th>
-					<th>Menge</th>
-					<th>Bestelldatum</th>
-					<th>Kunden ID</th>
-				</tr>
-			</thead>
-			<tbody>
-				<th:block th:each="order : ${allOrders}">
+		<h2>Erfasste Bestellungen</h2>
+		<!-- TODO: create a form that asigns packages to drivers -->
+		<form action="#" method="post">
+			<table>
+				<thead>
 					<tr>
-						<td th:text="${order.id}">...</td>
-						<td th:text="${order.product}">...</td>
-						<td th:text="${order.price}">...</td>
-						<td th:text="${order.quantity}">...</td>
-						<td th:text="${#dates.format(order.purchaseOrderDate, 'yyyy/MM/dd')}"></td>
-						<td th:text="${order.customerId}">...</td>
+						<th>Bestell ID</th>
+						<th>Produkt</th>
+						<th>Preis in CHF</th>
+						<th>Menge</th>
+						<th>Bestelldatum</th>
+						<th>Kunden ID</th>
+						<th>Fahrer</th>
 					</tr>
-				</th:block>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<th:block th:each="order, iterStat : ${allOrders}">
+						<tr th:id="${iterStat.index}">
+							<td th:text="${order.id}">...</td>
+							<td th:text="${order.product}">...</td>
+							<td th:text="${order.price}">...</td>
+							<td th:text="${order.quantity}">...</td>
+							<td th:text="${#dates.format(order.purchaseOrderDate, 'yyyy/MM/dd')}"></td>
+							<td th:text="${order.customerId}">...</td>
+							<td>
+								<!-- here every package get its driver -->
+								<select th:id="${'driverName'+iterStat.index}">
+									<option disabled="disabled" selected="selected">Fahrer wählen</option>
+									<th:block th:each="driver : ${allDrivers}">
+										<option th:text="${driver}">...</option>
+									</th:block>
+								</select>
+								<!--<input type="button" value="Fahrer zuweisen" th:attr="onclick='javascript:submitDriver(\'' + ${iterStat.index} + '\');'"/>-->
+							</td>
+						</tr>
+					</th:block>
+				</tbody>
+			</table>
+			<input type="submit" name="selectDriver" value="fahrer zuweisen" />
+		</form>
 
 		<h2>Neue Bestellung erfassen</h2>
 		<form action="#" th:action="@{/logistics}" th:object="${order}" method="post">

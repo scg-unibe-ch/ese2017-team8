@@ -1,11 +1,11 @@
 package main;
 
-import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,5 +53,18 @@ public class OrderController {
         orderRepo.save(bsp1);
         orderRepo.save(bsp2);
         return this.orderRepo.findAll();
+    }
+
+    /**
+     * TODO: implement list of real drivers
+     * @return list with all drivers
+     */
+    @ModelAttribute("allDrivers")
+    public List<String> showAllDrivers() {
+        List<String> drivers = new ArrayList<>();
+        drivers.add("Fritz Fischer");
+        drivers.add("Tayip Erdogan");
+        drivers.add("Christiane F");
+        return drivers;
     }
 }
