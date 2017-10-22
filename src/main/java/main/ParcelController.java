@@ -3,6 +3,7 @@ package main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -36,10 +37,8 @@ public class ParcelController {
      * @return direction of post output
      */
     @RequestMapping(value="/logistics", method=RequestMethod.POST)
-    public String parcelSubmit(@ModelAttribute("parcel") Parcel parcel, Model model) {
-//        repository.save(parcel);
-        System.out.println(parcel.getLength());
-        System.out.println(repository.findAll());
+    public String parcelSubmit(@ModelAttribute("parcel") Parcel parcel, BindingResult bindingResult, Model model) {
+        repository.save(parcel);
         return "result";
     }
 

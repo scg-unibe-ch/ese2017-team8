@@ -73,19 +73,19 @@
 			<table>
 				<tr>
 					<td><label for="parcel_length">Länge</label></td>
-					<td><input id="parcel_length" type="number" th:field="${parcel.length}" required="required"/></td>
+					<td><input id="parcel_length" type="text" th:field="${{parcel.length}}" required="required"/></td>
 				</tr>
 				<tr>
 					<td><label for="parcel_width">Breite</label></td>
-					<td><input id="parcel_width" type="number" th:field="${parcel.width}" required="required"/></td>
+					<td><input id="parcel_width" type="text" th:field="${{parcel.width}}" required="required"/></td>
 				</tr>
 				<tr>
 					<td><label for="parcel_height">Länge</label></td>
-					<td><input id="parcel_height" type="number" th:field="${parcel.height}" required="required"/></td>
+					<td><input id="parcel_height" type="text" th:field="${{parcel.height}}" required="required"/></td>
 				</tr>
 				<tr>
 					<td><label for="parcel_weight">Gewicht</label></td>
-					<td><input id="parcel_weight" type="number" th:field="${parcel.weight}" required="required"/></td>
+					<td><input id="parcel_weight" type="text" th:field="${{parcel.weight}}" required="required"/></td>
 				</tr>
 				<tr>
 					<td><label for="parcel_dangerous">Gefahrengut</label></td>

@@ -3,15 +3,16 @@ package main;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "parcels")
 public class Parcel {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "parcel_id")
-	private Long id;
+	@GeneratedValue
+	private long id;
+
 
 	private double length;
 	private double width;
@@ -35,7 +36,7 @@ public class Parcel {
 
 	@Override
 	public String toString() {
-		return String.format("Parcel – Id: %l", id);
+		return String.format("Parcel – Id: %d", id);
 	}
 
 	@ModelAttribute("parcel")
@@ -43,11 +44,11 @@ public class Parcel {
 		return new Parcel();
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
