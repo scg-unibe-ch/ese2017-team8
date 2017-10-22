@@ -3,10 +3,10 @@ package main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,18 +16,19 @@ import java.util.List;
  */
 
 @Controller
-public class OrderController {
+public class ParcelController {
 
     @Autowired
-    public OrderRepo orderRepo;
+    public ParcelRepo repository;
 
     //just an example
-    Order bsp1 = new Order("Kreissäge",2,32, new Date(117,11,4),3L);
-    Order bsp2 = new Order("Laubbläser",1,106, new Date(117,6,4),3L);
+    Parcel example1 = new Parcel(2.0, 10.0, 20.0, 2.0, false, false, null);
+    Parcel example2 = new Parcel(10.0, 20.0, 30.0, 5.2, true, false, "Bombe");
 
     @RequestMapping(value="/logistics", method= RequestMethod.GET)
-    public String orderForm(Model model) {
-        model.addAttribute("order", new Order());
+    @ModelAttribute("package")
+    public String parcelForm(Model model) {
+        model.addAttribute("parcel", new Parcel());
         return "logistics";
     }
 
@@ -36,10 +37,8 @@ public class OrderController {
      * @return direction of post output
      */
     @RequestMapping(value="/logistics", method=RequestMethod.POST)
-    public String orderSubmit(@ModelAttribute Order order, Model model) {
-        model.addAttribute("order", order);
-        orderRepo.save(order);
-        System.out.println(orderRepo.findAll());
+    public String parcelSubmit(@ModelAttribute("parcel") Parcel parcel, BindingResult bindingResult, Model model) {
+        repository.save(parcel);
         return "result";
     }
 
@@ -47,12 +46,12 @@ public class OrderController {
      * is neccessary for the thymeleaf table representation of the data
      * @return list with all orders
      */
-    @ModelAttribute("allOrders")
-    public List<Order> showAllOrders() {
-        //this part is only here to have some examples allready in the list
-        orderRepo.save(bsp1);
-        orderRepo.save(bsp2);
-        return this.orderRepo.findAll();
+    @ModelAttribute("allParcel")
+    public List<Parcel> showAllParcel() {
+        //this part is only here to have some examples already in the list
+        repository.save(example1);
+        repository.save(example2);
+        return this.repository.findAll();
     }
 
     /**

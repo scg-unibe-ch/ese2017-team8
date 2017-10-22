@@ -23,30 +23,34 @@
 	</head>
 	<body>
 		<h1>Backend Logistik</h1>
-		<h2>Erfasste Bestellungen</h2>
-		<!-- TODO: create a form that asigns packages to drivers -->
+		<h2>Erfasste Pakete</h2>
+		<!-- TODO: create a form that asigns parcels to drivers -->
 		<form action="#" method="post">
 			<table>
 				<thead>
 					<tr>
-						<th>Bestell ID</th>
-						<th>Produkt</th>
-						<th>Preis in CHF</th>
-						<th>Menge</th>
-						<th>Bestelldatum</th>
-						<th>Kunden ID</th>
+						<th>Paket-ID</th>
+						<th>Länge</th>
+						<th>Breite</th>
+						<th>Höhe</th>
+						<th>Gewicht</th>
+						<th>Gefahrengut</th>
+						<th>Zerbrechlich</th>
+						<th>Kommentar</th>
 						<th>Fahrer</th>
 					</tr>
 				</thead>
 				<tbody>
-					<th:block th:each="order, iterStat : ${allOrders}">
+					<th:block th:each="parcel, iterStat : ${allParcel}">
 						<tr th:id="${iterStat.index}">
-							<td th:text="${order.id}">...</td>
-							<td th:text="${order.product}">...</td>
-							<td th:text="${order.price}">...</td>
-							<td th:text="${order.quantity}">...</td>
-							<td th:text="${#dates.format(order.purchaseOrderDate, 'yyyy/MM/dd')}"></td>
-							<td th:text="${order.customerId}">...</td>
+							<td th:text="${parcel.id}">...</td>
+							<td th:text="${parcel.length}">...</td>
+							<td th:text="${parcel.width}">...</td>
+							<td th:text="${parcel.height}">...</td>
+							<td th:text="${parcel.weight}"></td>
+							<td th:text="${parcel.dangerous}">...</td>
+							<td th:text="${parcel.fragile}"></td>
+							<td th:text="${parcel.comment}"></td>
 							<td>
 								<!-- here every package get its driver -->
 								<select th:id="${'driverName'+iterStat.index}">
@@ -64,28 +68,36 @@
 			<input type="submit" name="selectDriver" value="fahrer zuweisen" />
 		</form>
 
-		<h2>Neue Bestellung erfassen</h2>
-		<form action="#" th:action="@{/logistics}" th:object="${order}" method="post">
+		<h2>Neues Paket erfassen</h2>
+		<form action="#" th:action="@{/logistics}" th:object="${parcel}" method="post">
 			<table>
 				<tr>
-					<td><label for="ordered_product_name">Produkt</label></td>
-					<td><input id="ordered_product_name" type="text" th:field="*{product}" required="required"/></td>
+					<td><label for="parcel_length">Länge</label></td>
+					<td><input id="parcel_length" type="text" th:field="${{parcel.length}}" required="required"/></td>
 				</tr>
 				<tr>
-					<td><label for="ordered_price">Preis in CHF</label></td>
-					<td><input id="ordered_price" type="number" min="0.00" step="0.05" th:field="*{price}" required="required"/></td>
+					<td><label for="parcel_width">Breite</label></td>
+					<td><input id="parcel_width" type="text" th:field="${{parcel.width}}" required="required"/></td>
 				</tr>
 				<tr>
-					<td><label for="ordered_quantity">Menge</label></td>
-					<td><input id="ordered_quantity" type="number" min="1" value="1" th:field="*{quantity}" required="required"/></td>
+					<td><label for="parcel_height">Länge</label></td>
+					<td><input id="parcel_height" type="text" th:field="${{parcel.height}}" required="required"/></td>
 				</tr>
 				<tr>
-					<td><label for="ordered_date">Bestelldatum</label></td>
-					<td><input id="ordered_date" type="text" th:field="*{purchaseOrderDate}" required="required" placeholder="YYYY/MM/DD" pattern="[0-9]{4}/(0[1-9]|1[012])/(0[1-9]|1[0-9]|2[0-9]|3[01])"/></td>
+					<td><label for="parcel_weight">Gewicht</label></td>
+					<td><input id="parcel_weight" type="text" th:field="${{parcel.weight}}" required="required"/></td>
 				</tr>
 				<tr>
-					<td><label for="ordered_cutomer">Kunden ID</label></td>
-					<td><input id="ordered_cutomer" type="number" th:field="*{customerId}" required="required" /></td>
+					<td><label for="parcel_dangerous">Gefahrengut</label></td>
+					<td><input id="parcel_dangerous" type="checkbox" th:field="${parcel.dangerous}"/></td>
+				</tr>
+				<tr>
+					<td><label for="parcel_fragile">Zerbrechlich</label></td>
+					<td><input id="parcel_fragile" type="checkbox" th:field="${parcel.fragile}"/></td>
+				</tr>
+				<tr>
+					<td><label for="parcel_comment">Kommentar</label></td>
+					<td><input id="parcel_comment" type="text" th:field="${parcel.comment}"/></td>
 				</tr>
 			</table>
 			<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
