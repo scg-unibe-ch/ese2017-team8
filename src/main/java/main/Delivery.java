@@ -40,8 +40,7 @@ public class Delivery
 	public String toString() {
 		return String.format("Delivery - Id: %d", id);
 	}
-
-<<<<<<< HEAD
+	
 	@ModelAttribute("delivery")
 	public Delivery getDelivery(){
 		return new Delivery();
