@@ -3,7 +3,6 @@ package main;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "parcels")
@@ -22,7 +21,7 @@ public class Parcel {
 	private boolean fragile;
 	private String comment;
 
-	public Parcel() {};
+	public Parcel() {}
 
 	public Parcel(double length, double width, double height, double weight, boolean dangerous, boolean fragile, String comment) {
 		this.length=length;

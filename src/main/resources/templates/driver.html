@@ -1,11 +1,50 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Hello Driver!</title>
 </head>
 <body>
-<h1>Hello Driver!</h1>
-      <a th:href="@{/logout}">Logout</a>
+    <h1>Hello Driver!</h1>
+    <p color="red">Hier sollten alle Lieferungen angezeigt werden (wird später gelöscht).</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Customer-ID</th>
+            <th>Package-ID</th>
+            <th>Status</th>
+            <th>Fahrer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="delivery : ${allDelivery}">
+            <tr>
+                <td th:text="${delivery.customerId}">...</td>
+                <td th:text="${delivery.packageId}">...</td>
+                <td th:text="${delivery.status}">...</td>
+                <td th:text="${delivery.driver}">...</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <p color="red">Hier sollten nur Lieferungen für den aktuellen Fahrer angezeigt werden. Filter nach Name klappt nicht ganz.</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Customer-ID</th>
+            <th>Package-ID</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="delivery : ${allDeliveryDriver}">
+            <tr>
+                <td th:text="${delivery.customerId}">...</td>
+                <td th:text="${delivery.packageId}">...</td>
+                <td th:text="${delivery.status}">...</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <a th:href="@{/logout}">Logout</a>
 </body>
 </html>
