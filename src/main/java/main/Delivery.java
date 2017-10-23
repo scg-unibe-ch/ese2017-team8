@@ -26,6 +26,7 @@ public class Delivery
 
 	protected Delivery() {}
 
+
 	public Delivery(Date planned, Date actual, Long customerId, Long packageId, Status status, String driver) {
 		this.plannedDate = plannedDate;
 		this.actualDate = actualDate;
@@ -40,6 +41,7 @@ public class Delivery
 		return String.format("Delivery - Id: %d", id);
 	}
 
+<<<<<<< HEAD
 	@ModelAttribute("delivery")
 	public Delivery getDelivery(){
 		return new Delivery();

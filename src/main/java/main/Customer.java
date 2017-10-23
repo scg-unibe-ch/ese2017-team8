@@ -15,20 +15,21 @@ public class Customer {
     private String streetName;
     private String streetNumber;
     private String postalCode;
-    private String domicile;
+//    private String domicile;
     private String phoneNumber;
     private String emailAddress;
     
     
     protected Customer() {}
 
-    public Customer(String firstName, String lastName, String streetName, String streetNumber, String postalCode, String domicile, String phoneNumber, String emailAddress) {
+    public Customer(String firstName, String lastName, String streetName, String streetNumber, String postalCode, String phoneNumber, String emailAddress) 
+    {
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.postalCode = postalCode;
-        this.domicile = domicile;
+//        this.domicile = domicile;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
     }
@@ -39,5 +40,11 @@ public class Customer {
                 "Customer[id=%d, firstName='%s', lastName='%s']",
                 id, firstName, lastName);
     }
+
+	public void setId(long id) 
+	{
+		this.id=id;
+		
+	}
 
 }
