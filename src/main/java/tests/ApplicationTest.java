@@ -1,14 +1,21 @@
 package tests;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-public class ApplicationTest {
+import main.Application;
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
-
+/**
+ * Tests that the application starts
+ * @author travis
+ *
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
+public class ApplicationTest
+{
+    @Test
+    public void contextLoads() { }
 }

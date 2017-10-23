@@ -11,14 +11,13 @@ public class Parcel {
 
 	@Id
 	@GeneratedValue
-	private long id;
-
+	private long id;  //not Long? TODO
 
 	private double length;
 	private double width;
 	private double height;
 	private double weight;
-	private boolean dangerous; //i.e flammable
+	private boolean dangerous; //i.e. flammable
 	private boolean fragile;
 	private String comment;
 

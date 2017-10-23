@@ -23,7 +23,8 @@ public class Delivery
 
 	protected Delivery() {};
 
-	public Delivery(Date planned, Date actual, Long customerId, Long packageId, Status status) {
+	public Delivery(Date planned, Date actual, Long customerId, Long packageId, Status status) 
+	{
 		this.plannedDate = plannedDate;
 		this.actualDate = actualDate;
 		this.customerId = customerId;
@@ -33,7 +34,13 @@ public class Delivery
 
 	@Override
 	public String toString() {
-		return String.format("Delivery - Id: %l", id);
+		return String.format("Delivery - Id: %d", id);
+	}
+
+	public void setId(long id) 
+	{
+		this.id=id;
+		
 	}
 
 }
