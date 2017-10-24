@@ -20,31 +20,38 @@
             <table>
                 <tr>
                     <td><label for="parcel_length">Länge</label></td>
-                    <td><input id="parcel_length" type="text" th:field="${{parcel.length}}" required="required"/></td>
+                    <td><input id="parcel_length" type="text"  required="required"/></td>
                 </tr>
+                <!--th:field="${{parcel.length}}"-->
                 <tr>
                     <td><label for="parcel_width">Breite</label></td>
-                    <td><input id="parcel_width" type="text" th:field="${{parcel.width}}" required="required"/></td>
+                    <td><input id="parcel_width" type="text"  required="required"/></td>
                 </tr>
+                <!--th:field="${{parcel.width}}"-->
                 <tr>
                     <td><label for="parcel_height">Länge</label></td>
-                    <td><input id="parcel_height" type="text" th:field="${{parcel.height}}" required="required"/></td>
+                    <td><input id="parcel_height" type="text"  required="required"/></td>
                 </tr>
+                <!--th:field="${{parcel.height}}"-->
                 <tr>
                     <td><label for="parcel_weight">Gewicht</label></td>
-                    <td><input id="parcel_weight" type="text" th:field="${{parcel.weight}}" required="required"/></td>
+                    <td><input id="parcel_weight" type="text"  required="required"/></td>
                 </tr>
+                <!--th:field="${{parcel.weight}}"-->
                 <tr>
                     <td><label for="parcel_dangerous">Gefahrengut</label></td>
-                    <td><input id="parcel_dangerous" type="checkbox" th:field="${parcel.dangerous}"/></td>
+                    <td><input id="parcel_dangerous" type="checkbox" /></td>
+                    <!--th:field="${parcel.dangerous}"-->
                 </tr>
                 <tr>
                     <td><label for="parcel_fragile">Zerbrechlich</label></td>
-                    <td><input id="parcel_fragile" type="checkbox" th:field="${parcel.fragile}"/></td>
+                    <td><input id="parcel_fragile" type="checkbox" /></td>
+                    <!--th:field="${parcel.fragile}"-->
                 </tr>
                 <tr>
                     <td><label for="parcel_comment">Kommentar</label></td>
-                    <td><input id="parcel_comment" type="text" th:field="${parcel.comment}"/></td>
+                    <td><input id="parcel_comment" type="text" /></td>
+                    <!--th:field="${parcel.comment}"-->
                 </tr>
             </table>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
