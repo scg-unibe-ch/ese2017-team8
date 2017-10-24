@@ -3,6 +3,14 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+/**
+ * This Class is the entity for a Delivery.
+ * This class contains all information in relation to the delivery.
+ *
+ * @author Team8
+ * @version 1.0
+ */
+
 @Entity
 @Table(name = "deliveries")
 public class Delivery
