@@ -1,4 +1,4 @@
-package tests;
+
 
 import static org.junit.Assert.*;
 import java.util.Calendar;
@@ -15,8 +15,8 @@ public class DeliveryTest
 	@Before
 	public void constructor() 
 	{
-		Delivery delivery = new Delivery(null, new Date(), (long)1, (long)2,Delivery.Status.scheduled);
-		delivery.setId(3);
+		Delivery delivery = new Delivery(null, new Date(), (long)1, (long)2,Delivery.Status.scheduled,"Judas");
+		delivery.setId((long)(3));
 	}
 
 	@Test

@@ -1,4 +1,4 @@
-package tests;
+
 /**
  * Customer unit test
  */

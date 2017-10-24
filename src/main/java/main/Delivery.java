@@ -37,7 +37,7 @@ public class Delivery
 
 	protected Delivery() {}
 
-	public Delivery(Calendar plannedDate, Date actual, Long customerId, Long packageId, Status status, String driver) {
+	public Delivery(Calendar plannedDate, Date actualDate, Long customerId, Long packageId, Status status, String driver) {
 		Calendar now = Calendar.getInstance();
 		now.add(Calendar.DAY_OF_YEAR, 1);
 		this.plannedDate = now;
