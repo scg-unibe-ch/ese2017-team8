@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * This interface is used to setup the parcel repository.
+ * This interface is used to setup the parcel parcelRepo.
  *
  * @author Team8
  * @version 1.0

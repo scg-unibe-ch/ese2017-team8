@@ -43,24 +43,21 @@
 						<td th:text="${parcel.fragile}"></td>
 						<td th:text="${parcel.comment}"></td>
 						<td>
-
-							<!--<input type="button" value="Fahrer zuweisen" th:attr="onclick='javascript:submitDriver(\'' + ${iterStat.index} + '\');'"/>-->
+							<form action="#" th:action="@{/logistics}" th:object="${delivery}" method="post">
+							<!-- here every package get its driver -->
+								<select class="form-control" onchange="this.form.submit()">
+								<option disabled="disabled" selected="selected">Fahrer wählen</option>
+								<th:block th:each="driverName : ${allDrivers}">
+									<option th:value="${driverName}" th:text="${driverName}">...</option>
+								</th:block>
+								</select>
+							</form>
 						</td>
 					</tr>
 				</th:block>
 			</tbody>
 		</table>
-		<form action="#" th:action="@{/logistics}" th:object="${delivery}" method="post">
-			<!-- here every package get its driver -->
-			<select>
-                <option disabled="disabled" selected="selected">Fahrer wählen</option>
-                <th:block th:each="driverName : ${allDrivers}">
-                    <option th:text="${driverName}">...</option>
-                </th:block>
-            </select>
-			<input type="text"  th:field="${delivery.driver}"/>
-			<input type="submit" name="selectDriver" value="fahrer zuweisen" />
-		</form>
+
 		<a th:href="@{/neworder}">Neue Bestellung Erfassen</a>
 		<a th:href="@{/logout}">Logout</a>
 	</body>
