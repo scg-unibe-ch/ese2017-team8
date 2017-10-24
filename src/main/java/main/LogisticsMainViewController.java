@@ -41,7 +41,6 @@ public class LogisticsMainViewController {
 	@RequestMapping(value="/logistics", method=RequestMethod.GET)
 	@ModelAttribute("parcelListViewModel")
 	public String deliveryForm(Model model) {
-		model.addAttribute("driverName", new String());
 		return "logistics";
 	}
 
@@ -63,7 +62,7 @@ public class LogisticsMainViewController {
 		for (Parcel parcel : allParcel) {
 			ParcelListViewModel model = new ParcelListViewModel();
 			model.parcel = parcel;
-			model.driverName = new String("Hans Nötig");
+			model.driverName = "";
 			parcelListViewModel.add(model);
 		}
 
