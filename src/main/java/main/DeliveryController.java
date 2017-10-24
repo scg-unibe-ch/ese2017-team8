@@ -55,7 +55,6 @@ public class DeliveryController {
      * handles a form with post method
      * @return direction of post output
      */
-    /*
     @RequestMapping(value="/logistics", method=RequestMethod.POST)
     public String deliverySubmit(@ModelAttribute("delivery") Delivery delivery, BindingResult bindingResult, Model model) {
         System.out.println(delivery);
@@ -70,5 +69,4 @@ public class DeliveryController {
         model.addAttribute("delivery", new Delivery());
         return "logistics";
     }
-    */
 }
