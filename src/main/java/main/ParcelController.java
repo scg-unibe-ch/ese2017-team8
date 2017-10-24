@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,9 +62,9 @@ public class ParcelController {
     @ModelAttribute("allDrivers")
     public List<String> showAllDrivers() {
         List<String> drivers = new ArrayList<>();
-        drivers.add("Fritz Fischer");
-        drivers.add("Tayip Erdogan");
-        drivers.add("Christiane F");
+        drivers.add("Hans Nötig");
+        drivers.add("Donald Duck");
+        drivers.add("Christiane T");
         return drivers;
     }
 }
