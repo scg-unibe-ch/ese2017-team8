@@ -1,6 +1,7 @@
 package main;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ public class Delivery
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	private Date plannedDate;
+	private Calendar plannedDate;
 	private Date actualDate;
 	private Long customerId;
 	private Long packageId;
@@ -26,9 +27,10 @@ public class Delivery
 
 	protected Delivery() {}
 
-
-	public Delivery(Date planned, Date actual, Long customerId, Long packageId, Status status, String driver) {
-		this.plannedDate = plannedDate;
+	public Delivery(Calendar plannedDate, Date actual, Long customerId, Long packageId, Status status, String driver) {
+		Calendar now = Calendar.getInstance();
+		now.add(Calendar.DAY_OF_YEAR, 1);
+		this.plannedDate = now;
 		this.actualDate = actualDate;
 		this.customerId = customerId;
 		this.packageId = packageId;
@@ -40,7 +42,7 @@ public class Delivery
 	public String toString() {
 		return String.format("Delivery - Id: %d", id);
 	}
-	
+
 	@ModelAttribute("delivery")
 	public Delivery getDelivery(){
 		return new Delivery();
@@ -82,5 +84,13 @@ public class Delivery
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public Calendar getPlannedDate() {
+		return plannedDate;
+	}
+
+	public void setPlannedDate(Calendar plannedDate) {
+		this.plannedDate = plannedDate;
 	}
 }

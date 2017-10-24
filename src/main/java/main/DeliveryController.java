@@ -17,29 +17,49 @@ public class DeliveryController {
     @Autowired
     public DeliveryRepo deliveryRepo;
 
+    public DeliveryRepo getDeliveryRepo() {
+        return deliveryRepo;
+    }
+
     //just an example
-    Delivery example1 = new Delivery(new Date(117,9,1),new Date(117,9,1),45L,15L, Delivery.Status.unscheduled, "Christiane T");
-    Delivery example2 = new Delivery(new Date(117,10,1),new Date(117,9,1),33L,51L, Delivery.Status.scheduled, "Donald Duck");
+    Delivery example1 = new Delivery(null, new Date(117,9,1),45L,15L, Delivery.Status.unscheduled, "Christiane T");
+    Delivery example2 = new Delivery(null, new Date(117,9,1),33L,51L, Delivery.Status.scheduled, "Donald Duck");
     
     /**
      * is neccessary for the thymeleaf table representation of the data
-     * @return list with all deliveries
+     * @return list with all deliveries for current driver
      */
-    @RequestMapping(value="/driver", method= RequestMethod.GET)
-    @ModelAttribute("allDelivery")
-    public List<Delivery> showAllDelivery() {
+    @RequestMapping(value="/driver")
+    @ModelAttribute("allDeliveryDriver")
+    public List<Delivery> showAllDeliveryDriver() {
         //this part is only here to have some examples already in the list
         deliveryRepo.save(example1);
         deliveryRepo.save(example2);
-        return this.deliveryRepo.findAll();
-    }
-
-    @ModelAttribute("allDeliveryDriver")
-    public List<Delivery> showAllDeliveryDriver() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         System.out.println(currentUserName);
-        //TODO: Get the filter working
         return this.deliveryRepo.findByDriver(currentUserName);
     }
+
+
+    /**
+     * handles a form with post method
+     * @return direction of post output
+     */
+    /*
+    @RequestMapping(value="/logistics", method=RequestMethod.POST)
+    public String deliverySubmit(@ModelAttribute("delivery") Delivery delivery, BindingResult bindingResult, Model model) {
+        System.out.println(delivery);
+        deliveryRepo.save(delivery);
+        return "result";
+    }
+
+
+    @ModelAttribute("delivery")
+    @RequestMapping(value="/logistics", method=RequestMethod.GET)
+    public String deliveryForm(Model model) {
+        model.addAttribute("delivery", new Delivery());
+        return "logistics";
+    }
+    */
 }

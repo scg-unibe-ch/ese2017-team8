@@ -12,96 +12,56 @@
 				padding: 5px;
 			}
 		</style>
-		<script>
-            function submitDriver(id){
-                var driver = document.getElementById("driverName"+id).value;
-                var row = document.getElementById(id);
-                row.parentNode.removeChild(row);
-                alert(driver);
-            }
-		</script>
 	</head>
 	<body>
 		<h1>Backend Logistik</h1>
 		<h2>Erfasste Pakete</h2>
 		<!-- TODO: create a form that asigns parcels to drivers, safe it to one delivery -->
-		<form action="#" method="post">
-			<table>
-				<thead>
-					<tr>
-						<th>Paket-ID</th>
-						<th>Länge</th>
-						<th>Breite</th>
-						<th>Höhe</th>
-						<th>Gewicht</th>
-						<th>Gefahrengut</th>
-						<th>Zerbrechlich</th>
-						<th>Kommentar</th>
-						<th>Fahrer</th>
-					</tr>
-				</thead>
-				<tbody>
-					<th:block th:each="parcel, iterStat : ${allParcel}">
-						<tr th:id="${iterStat.index}">
-							<td th:text="${parcel.id}">...</td>
-							<td th:text="${parcel.length}">...</td>
-							<td th:text="${parcel.width}">...</td>
-							<td th:text="${parcel.height}">...</td>
-							<td th:text="${parcel.weight}"></td>
-							<td th:text="${parcel.dangerous}">...</td>
-							<td th:text="${parcel.fragile}"></td>
-							<td th:text="${parcel.comment}"></td>
-							<td>
-								<!-- here every package get its driver -->
-								<select th:id="${'driverName'+iterStat.index}">
-									<option disabled="disabled" selected="selected">Fahrer wählen</option>
-									<th:block th:each="driver : ${allDrivers}">
-										<option th:text="${driver}">...</option>
-									</th:block>
-								</select>
-								<!--<input type="button" value="Fahrer zuweisen" th:attr="onclick='javascript:submitDriver(\'' + ${iterStat.index} + '\');'"/>-->
-							</td>
-						</tr>
-					</th:block>
-				</tbody>
-			</table>
-			<input type="submit" name="selectDriver" value="fahrer zuweisen" />
-		</form>
+		<table>
+			<thead>
+				<tr>
+					<th>Paket-ID</th>
+					<th>Länge</th>
+					<th>Breite</th>
+					<th>Höhe</th>
+					<th>Gewicht</th>
+					<th>Gefahrengut</th>
+					<th>Zerbrechlich</th>
+					<th>Kommentar</th>
+					<th>Fahrer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="parcel, iterStat : ${allParcel}">
+					<tr th:id="${iterStat.index}">
+						<td th:text="${parcel.id}">...</td>
+						<td th:text="${parcel.length}">...</td>
+						<td th:text="${parcel.width}">...</td>
+						<td th:text="${parcel.height}">...</td>
+						<td th:text="${parcel.weight}"></td>
+						<td th:text="${parcel.dangerous}">...</td>
+						<td th:text="${parcel.fragile}"></td>
+						<td th:text="${parcel.comment}"></td>
+						<td>
 
-		<h2>Neues Paket erfassen</h2>
-		<form action="#" th:action="@{/logistics}" th:object="${parcel}" method="post">
-			<table>
-				<tr>
-					<td><label for="parcel_length">Länge</label></td>
-					<td><input id="parcel_length" type="text" th:field="${{parcel.length}}" required="required"/></td>
-				</tr>
-				<tr>
-					<td><label for="parcel_width">Breite</label></td>
-					<td><input id="parcel_width" type="text" th:field="${{parcel.width}}" required="required"/></td>
-				</tr>
-				<tr>
-					<td><label for="parcel_height">Länge</label></td>
-					<td><input id="parcel_height" type="text" th:field="${{parcel.height}}" required="required"/></td>
-				</tr>
-				<tr>
-					<td><label for="parcel_weight">Gewicht</label></td>
-					<td><input id="parcel_weight" type="text" th:field="${{parcel.weight}}" required="required"/></td>
-				</tr>
-				<tr>
-					<td><label for="parcel_dangerous">Gefahrengut</label></td>
-					<td><input id="parcel_dangerous" type="checkbox" th:field="${parcel.dangerous}"/></td>
-				</tr>
-				<tr>
-					<td><label for="parcel_fragile">Zerbrechlich</label></td>
-					<td><input id="parcel_fragile" type="checkbox" th:field="${parcel.fragile}"/></td>
-				</tr>
-				<tr>
-					<td><label for="parcel_comment">Kommentar</label></td>
-					<td><input id="parcel_comment" type="text" th:field="${parcel.comment}"/></td>
-				</tr>
-			</table>
-			<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-		</form>
+							<!--<input type="button" value="Fahrer zuweisen" th:attr="onclick='javascript:submitDriver(\'' + ${iterStat.index} + '\');'"/>-->
+						</td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+		<!--<form action="#" th:action="@{/logistics}" th:object="${delivery}" method="post">-->
+			<!-- here every package get its driver -->
+			<!--<select th:id="${'driverName'+iterStat.index}">
+                <option disabled="disabled" selected="selected">Fahrer wählen</option>
+                <th:block th:each="driverName : ${allDrivers}">
+                    <option th:text="${driverName}">...</option>
+                </th:block>
+            </select>
+			<input type="text"  th:field="${delivery.driver}"/>
+			<input type="submit" name="selectDriver" value="fahrer zuweisen" />
+		</form>-->
+		<a th:href="@{/neworder}">Neue Bestellung Erfassen</a>
 		<a th:href="@{/logout}">Logout</a>
 	</body>
 </html>

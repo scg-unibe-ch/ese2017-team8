@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Hello Logistician!</title>
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            td, th {
+                border: 1px solid black;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Logistics Backend</h1>
+        <h2>Neues Paket erfassen</h2>
+        <form action="#" th:action="@{/neworder}" th:object="${parcel}" method="post">
+            <table>
+                <tr>
+                    <td><label for="parcel_length">Länge</label></td>
+                    <td><input id="parcel_length" type="text" th:field="${{parcel.length}}" required="required"/></td>
+                </tr>
+                <tr>
+                    <td><label for="parcel_width">Breite</label></td>
+                    <td><input id="parcel_width" type="text" th:field="${{parcel.width}}" required="required"/></td>
+                </tr>
+                <tr>
+                    <td><label for="parcel_height">Länge</label></td>
+                    <td><input id="parcel_height" type="text" th:field="${{parcel.height}}" required="required"/></td>
+                </tr>
+                <tr>
+                    <td><label for="parcel_weight">Gewicht</label></td>
+                    <td><input id="parcel_weight" type="text" th:field="${{parcel.weight}}" required="required"/></td>
+                </tr>
+                <tr>
+                    <td><label for="parcel_dangerous">Gefahrengut</label></td>
+                    <td><input id="parcel_dangerous" type="checkbox" th:field="${parcel.dangerous}"/></td>
+                </tr>
+                <tr>
+                    <td><label for="parcel_fragile">Zerbrechlich</label></td>
+                    <td><input id="parcel_fragile" type="checkbox" th:field="${parcel.fragile}"/></td>
+                </tr>
+                <tr>
+                    <td><label for="parcel_comment">Kommentar</label></td>
+                    <td><input id="parcel_comment" type="text" th:field="${parcel.comment}"/></td>
+                </tr>
+            </table>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+        <a th:href="@{/logout}">Logout</a>
+    </body>
+</html>

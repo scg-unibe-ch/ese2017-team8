@@ -15,7 +15,7 @@ public class DeliveryTest
 	@Before
 	public void constructor() 
 	{
-		delivery = new Delivery(new Date(2013, 3, 14), new Date(), (long)1, (long)2,Delivery.Status.scheduled);
+		Delivery delivery = new Delivery(null, new Date(), (long)1, (long)2,Delivery.Status.scheduled);
 		delivery.setId(3);
 	}
 
