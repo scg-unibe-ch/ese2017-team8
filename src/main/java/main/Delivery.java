@@ -7,7 +7,8 @@ import javax.persistence.*;
 
 /**
  * This Class is the entity for a Delivery.
- * This class contains all information in relation to the delivery.
+ * The entity consists of some ids and dates.
+ * This fields are private and can be accessed by invoking the getter and setter methods.
  *
  * @author Team8
  * @version 1.0
@@ -17,6 +18,7 @@ import javax.persistence.*;
 @Table(name = "deliveries")
 public class Delivery
 {
+
 	public enum Status {
 		unscheduled, scheduled, delivered, attempted;
 	}

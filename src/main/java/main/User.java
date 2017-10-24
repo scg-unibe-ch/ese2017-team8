@@ -6,6 +6,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * This class is the entity of an user.
+ * It contains the login information and the role of the user.
+ * Those fields can be accessed via invoking the getter and setter methods.
+ *
+ * @author Team8
+ * @version 1.0
+ */
+
 @Entity
 public class User implements UserDetails {
 
