@@ -38,7 +38,7 @@ public class ParcelController {
      * @return String logistics
      */
 
-    @RequestMapping(value="/logistics", method= RequestMethod.GET)
+    @RequestMapping(value="/neworder", method= RequestMethod.GET)
     @ModelAttribute("package")
     public String parcelForm(Model model) {
         model.addAttribute("parcel", new Parcel());
