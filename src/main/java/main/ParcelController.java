@@ -11,9 +11,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * handles the order creation form
+ * This class handles the delivery controlling.
+ * It handles the creating of the input blank in the @link{parcelForm} method.
+ * Then it controls the submit function with the @link{parcelSubmit} method.
+ * Additional it also handles the search for all parcels and drivers,
+ * with the @link{showAllParcel} and @link{showAllDrivers} methods.
  *
- * @author samuel
+ * @author Team8
+ * @version 1.0
  */
 
 @Controller
@@ -26,7 +31,14 @@ public class ParcelController {
     Parcel example1 = new Parcel(2.0, 10.0, 20.0, 2.0, false, false, null);
     Parcel example2 = new Parcel(10.0, 20.0, 30.0, 5.2, true, false, "Bombe");
 
-    @RequestMapping(value="/neworder", method= RequestMethod.GET)
+    /**
+     * Creates the empty form for entering the parcels specs.
+     *
+     * @param model
+     * @return String logistics
+     */
+
+    @RequestMapping(value="/logistics", method= RequestMethod.GET)
     @ModelAttribute("package")
     public String parcelForm(Model model) {
         model.addAttribute("parcel", new Parcel());
@@ -34,7 +46,8 @@ public class ParcelController {
     }
 
     /**
-     * handles a form with post method
+     * Handles a form with post method.
+     *
      * @return direction of post output
      */
     @RequestMapping(value="/neworder", method=RequestMethod.POST)
@@ -44,7 +57,8 @@ public class ParcelController {
     }
 
     /**
-     * is neccessary for the thymeleaf table representation of the data
+     * Is neccessary for the thymeleaf table representation of the data.
+     *
      * @return list with all orders
      */
     @RequestMapping("/logistics")
@@ -58,8 +72,9 @@ public class ParcelController {
     }
 
     /**
+     * At the moment is used to insert some hardcoded drivers.
      * TODO: implement list of real drivers
-     * @return list with all drivers
+     * @return List with all hardcoded drivers.
      */
     @ModelAttribute("allDrivers")
     public List<String> showAllDrivers() {

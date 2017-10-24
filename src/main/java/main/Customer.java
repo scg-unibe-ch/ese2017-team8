@@ -2,6 +2,11 @@ package main;
 
 import javax.persistence.*;
 
+/**
+ * This class is the entity for a customer.
+ * The entity consists of the casual information about a customer.
+ * Those fields are private and can be accessed by invoking the getter and setter methods.
+ */
 @Entity
 @Table(name = "customers")
 public class Customer {

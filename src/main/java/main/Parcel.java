@@ -4,6 +4,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
 
+
+/**
+ * This class is an entity for parcels.
+ * It contains its dimensions, weight and important notes.
+ * It is possible to access the properties of a parcel by invoking the getter and setter methods.
+ *
+ * @author Team8
+ * @version 1.0
+ */
 @Entity
 @Table(name = "parcels")
 public class Parcel {
