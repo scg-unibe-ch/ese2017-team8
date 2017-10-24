@@ -17,6 +17,7 @@
 		<h1>Backend Logistik</h1>
 		<h2>Erfasste Pakete</h2>
 		<!-- TODO: create a form that asigns parcels to drivers, safe it to one delivery -->
+
 		<table>
 			<thead>
 				<tr>
@@ -32,33 +33,31 @@
 				</tr>
 			</thead>
 			<tbody>
-				<th:block th:each="parcel, iterStat : ${allParcel}">
-					<tr th:id="${iterStat.index}">
-						<td th:text="${parcel.id}">...</td>
-						<td th:text="${parcel.length}">...</td>
-						<td th:text="${parcel.width}">...</td>
-						<td th:text="${parcel.height}">...</td>
-						<td th:text="${parcel.weight}"></td>
-						<td th:text="${parcel.dangerous}">...</td>
-						<td th:text="${parcel.fragile}"></td>
-						<td th:text="${parcel.comment}"></td>
-						<td>
-							<form action="#" th:action="@{/logistics}" th:object="${delivery}" method="post">
-							<!-- here every package get its driver -->
-								<select class="form-control" onchange="this.form.submit()">
-								<option disabled="disabled" selected="selected">Fahrer wählen</option>
-								<th:block th:each="driverName : ${allDrivers}">
-									<option th:value="${driverName}" th:text="${driverName}">...</option>
-								</th:block>
+					<tr th:each="parcelListViewModel, stat : ${allParcel}">
+						<form th:action="@{/logistics}" th:object="${parcelListViewModel}" th:method="post">
+							<td th:text="*{parcel.id}">...</td>
+							<td th:text="*{parcel.length}">...</td>
+							<td th:text="*{parcel.width}">...</td>
+							<td th:text="*{parcel.height}">...</td>
+							<td th:text="*{parcel.weight}"></td>
+							<td th:text="*{parcel.dangerous}">...</td>
+							<td th:text="*{parcel.fragile}"></td>
+							<td th:text="*{parcel.comment}"></td>
+							<td>
+								<select th:object="${parcelListViewModel}" th:field="*{parcel.comment}" onchange="this.form.submit()">
+									<option value="" disabled="disabled" selected="selected">Fahrer wählen</option>
+									<th:block th:each="driver : ${allDrivers}">
+										<option th:value="${driver}" th:text="${driver}">...</option>
+									</th:block>
 								</select>
-							</form>
-						</td>
+							</td>
+						</form>
 					</tr>
-				</th:block>
 			</tbody>
 		</table>
 
-		<a th:href="@{/neworder}">Neue Bestellung Erfassen</a>
+
+		<a th:href="@{/neworder}">Neues Paket erfassen</a>
 		<a th:href="@{/logout}">Logout</a>
 	</body>
 </html>

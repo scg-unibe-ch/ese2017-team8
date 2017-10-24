@@ -30,20 +30,18 @@ public class LogisticsMainViewController {
 	 * @return direction of post output
 	 */
 	@RequestMapping(value="/logistics", method=RequestMethod.POST)
-	public String deliverySubmit(@ModelAttribute("delivery") Delivery delivery, BindingResult bindingResult, Model model) {
+	public String deliverySubmit(@ModelAttribute("parcelListViewModel") ParcelListViewModel driver, BindingResult bindingResult, Model model) {
 		System.out.println("Delivery submitted");
-		System.out.println(delivery);
-		deliveryRepo.save(delivery);
+		System.out.println(driver.driverName);
+		System.out.println(driver.parcel);
 		return "result";
 	}
 
 
 	@RequestMapping(value="/logistics", method=RequestMethod.GET)
-	@ModelAttribute("delivery")
+	@ModelAttribute("parcelListViewModel")
 	public String deliveryForm(Model model) {
-		Delivery newDelivery = new Delivery();
-		newDelivery.setDriver("asdf");
-		model.addAttribute("delivery", newDelivery);
+		model.addAttribute("driverName", new String());
 		return "logistics";
 	}
 
@@ -53,11 +51,23 @@ public class LogisticsMainViewController {
 	 * @return list with all orders
 	 */
 	@ModelAttribute("allParcel")
-	public List<Parcel> showAllParcel() {
+	public List<ParcelListViewModel> showAllParcel() {
 		//this part is only here to have some examples already in the list
+
 		parcelRepo.save(example1);
 		parcelRepo.save(example2);
-		return this.parcelRepo.findAll();
+
+		List<Parcel> allParcel = this.parcelRepo.findAll();
+		List<ParcelListViewModel> parcelListViewModel = new ArrayList<ParcelListViewModel>();
+
+		for (Parcel parcel : allParcel) {
+			ParcelListViewModel model = new ParcelListViewModel();
+			model.parcel = parcel;
+			model.driverName = new String("Hans Nötig");
+			parcelListViewModel.add(model);
+		}
+
+		return parcelListViewModel;
 	}
 
 	/**
