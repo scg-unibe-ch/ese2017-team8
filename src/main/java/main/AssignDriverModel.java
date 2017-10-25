@@ -2,30 +2,21 @@ package main;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-public class ParcelListViewModel {
-	public Parcel parcel;
+public class AssignDriverModel {
 	public String driverName;
 	public Long parcelId;
 
-	public ParcelListViewModel() {
-		this.parcel = new Parcel();
+	public AssignDriverModel() {
 		this.driverName = "";
 		this.parcelId = new Long(0);
 	}
 
-	@ModelAttribute("parcelList")
-	public ParcelListViewModel getParcelListViewModel() {
-		return new ParcelListViewModel();
+	@ModelAttribute("assignDriverModel")
+	public AssignDriverModel getAssignDriverModel() {
+		return new AssignDriverModel();
 	}
 
-	public Parcel getParcel() {
-		return parcel;
-	}
-
-	public void setParcel(Parcel parcel) {
-		this.parcel = parcel;
-	}
-
+	@ModelAttribute("driverName")
 	public String getDriverName() {
 		return driverName;
 	}
@@ -34,6 +25,7 @@ public class ParcelListViewModel {
 		this.driverName = driverName;
 	}
 
+	@ModelAttribute("parcelId")
 	public Long getParcelId() {
 		return parcelId;
 	}

@@ -30,10 +30,10 @@ public class LogisticsMainViewController {
 	 * @return direction of post output
 	 */
 	@RequestMapping(value="/logistics", method=RequestMethod.POST)
-	public String deliverySubmit(@ModelAttribute("return") ParcelListViewModel viewModel, BindingResult bindingResult, Model model) {
+	public String deliverySubmit(@ModelAttribute("assignDriver") AssignDriverModel viewModel, BindingResult bindingResult, Model model) {
 		System.out.println("Delivery submitted");
-		System.out.println(bindingResult.getRawFieldValue("parcelId"));
-		System.out.println(bindingResult.getRawFieldValue("driverName"));
+		System.out.println(viewModel.driverName);
+		System.out.println(viewModel.parcelId);
 		return "result";
 	}
 
@@ -48,30 +48,19 @@ public class LogisticsMainViewController {
 	 *
 	 * @return list with all orders
 	 */
-	@ModelAttribute("parcelListViewModels")
-	public List<ParcelListViewModel> showAllParcel() {
+	@ModelAttribute("getParcelList")
+	public List<Parcel> getParcelList() {
 		//this part is only here to have some examples already in the list
 
 		parcelRepo.save(example1);
 		parcelRepo.save(example2);
 
-		List<Parcel> allParcel = this.parcelRepo.findAll();
-		List<ParcelListViewModel> parcelListViewModel = new ArrayList<ParcelListViewModel>();
-
-		for (Parcel parcel : allParcel) {
-			ParcelListViewModel model = new ParcelListViewModel();
-			model.parcel = parcel;
-			model.driverName = "";
-			parcelListViewModel.add(model);
-		}
-
-		return parcelListViewModel;
+		return this.parcelRepo.findAll();
 	}
 
-	@ModelAttribute("return")
-	public ParcelListViewModel getModel() {
-		ParcelListViewModel model = new ParcelListViewModel();
-		return model;
+	@ModelAttribute("assignDriver")
+	public AssignDriverModel getModel() {
+		return new AssignDriverModel();
 	}
 
 	/**
@@ -79,8 +68,8 @@ public class LogisticsMainViewController {
 	 * TODO: implement list of real drivers
 	 * @return List with all hardcoded drivers.
 	 */
-	@ModelAttribute("allDrivers")
-	public List<String> showAllDrivers() {
+	@ModelAttribute("getDriverList")
+	public List<String> getDriverList() {
 		List<String> drivers = new ArrayList<>();
 		drivers.add("Hans Nötig");
 		drivers.add("Donald Duck");

@@ -16,8 +16,6 @@
 	<body>
 		<h1>Backend Logistik</h1>
 		<h2>Erfasste Pakete</h2>
-		<!-- TODO: create a form that asigns parcels to drivers, safe it to one delivery -->
-
 		<table>
 			<thead>
 				<tr>
@@ -33,21 +31,22 @@
 				</tr>
 			</thead>
 			<tbody>
-					<tr th:each="vm : ${parcelListViewModels}">
+					<tr th:each="parcel : ${getParcelList}">
 						<form th:action="@{/logistics}" th:method="post">
-							<td th:value="${vm.parcel.id}" th:text="${vm.parcel.id}">...</td>
-							<td th:value="${vm.parcel.length}" 		th:text="${vm.parcel.length}">...</td>
-							<td th:value="${vm.parcel.width}" 		th:text="${vm.parcel.width}">...</td>
-							<td th:value="${vm.parcel.height}" 		th:text="${vm.parcel.height}">...</td>
-							<td th:value="${vm.parcel.weight}" 		th:text="${vm.parcel.weight}"></td>
-							<td th:value="${vm.parcel.dangerous}"	th:text="${vm.parcel.dangerous}">...</td>
-							<td th:value="${vm.parcel.fragile}"	 	th:text="${vm.parcel.fragile}"></td>
-							<td th:value="${vm.parcel.comment}"		th:text="${vm.parcel.comment}"></td>
+							<td th:value="${parcel.id}" 		th:text="${parcel.id}">...</td>
+							<td th:value="${parcel.length}" 	th:text="${parcel.length}">...</td>
+							<td th:value="${parcel.width}" 		th:text="${parcel.width}">...</td>
+							<td th:value="${parcel.height}" 	th:text="${parcel.height}">...</td>
+							<td th:value="${parcel.weight}" 	th:text="${parcel.weight}"></td>
+							<td th:value="${parcel.dangerous}"	th:text="${parcel.dangerous}">...</td>
+							<td th:value="${parcel.fragile}"	th:text="${parcel.fragile}"></td>
+							<td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>
 							<td>
-								<input th:value="${vm.parcel.id}" id="parcelId" name="parcelId" class="form-control" type="hidden"/>
-								<select id="driverName" name="driverName" class="form-control" onchange="this.form.submit()">
+								<!--We use the name property to map the following values into the model-->
+								<input th:value="${parcel.id}" name="parcelId" class="form-control" type="hidden"/>
+								<select name="driverName" class="form-control" onchange="this.form.submit()">
 									<option value="" disabled="disabled" selected="selected">Fahrer wählen</option>
-									<th:block th:each="driver : ${allDrivers}">
+									<th:block th:each="driver : ${getDriverList}">
 										<option th:value="${driver}" th:text="${driver}">...</option>
 									</th:block>
 								</select>
