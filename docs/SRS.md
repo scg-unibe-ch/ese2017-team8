@@ -66,6 +66,20 @@ Meeting Notes: https://docs.google.com/document/d/14YOSGv_hTwon7aVOoag-TymgAiYwR
 
 
 
-## Requirements
+## Requirements 25.10.2017
 ### Functional
+ - Logistician registers a new parcel via the new order site.
+ - Address, Length, height, width, weight and information about dangers and fragility, plus the ability to write a commentary are its properties.
+ - Logistician has the possibility to overview all parcels. 
+ - Logistician merges the parcels into deliveries. At the e moment by hand, later on maybe done by an algorithm.
+ - Logistician distributes the deliveries to the drivers. Also done by hand, same as above.
+ - Logistician plans the tour. Same as above. 
+ 
+
+ - Driver can modify the status of a delivery.
+ - Driver has access to the tour infos e.g. a map or description of way. Depending on the kind of tourplaning implemented. 
+ 
+ - The System should measure the time for the deliveries and track the time. 
 ### Non-Functional
+
+- Only users with the correct login information can access the system.
