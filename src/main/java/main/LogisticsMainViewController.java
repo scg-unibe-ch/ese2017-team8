@@ -39,7 +39,6 @@ public class LogisticsMainViewController {
 
 
 	@RequestMapping(value="/logistics", method=RequestMethod.GET)
-	@ModelAttribute("parcelListViewModel")
 	public String deliveryForm(Model model) {
 		return "logistics";
 	}
@@ -49,7 +48,7 @@ public class LogisticsMainViewController {
 	 *
 	 * @return list with all orders
 	 */
-	@ModelAttribute("allParcel")
+	@ModelAttribute("parcelListViewModels")
 	public List<ParcelListViewModel> showAllParcel() {
 		//this part is only here to have some examples already in the list
 
@@ -67,6 +66,12 @@ public class LogisticsMainViewController {
 		}
 
 		return parcelListViewModel;
+	}
+
+	@ModelAttribute("parcelListViewModel")
+	public ParcelListViewModel getModel() {
+		ParcelListViewModel model = new ParcelListViewModel();
+		return model;
 	}
 
 	/**

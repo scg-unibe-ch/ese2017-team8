@@ -20,7 +20,6 @@ public class LogisticsNewOrderViewController {
 	 * @param model
 	 * @return String logistics
 	 */
-
 	@RequestMapping(value="/neworder", method=RequestMethod.GET)
 	@ModelAttribute("parcel")
 	public String parcelForm(Model model) {

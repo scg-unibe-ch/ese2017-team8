@@ -1,5 +1,6 @@
 package main;
 
+import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
@@ -18,9 +19,8 @@ import javax.persistence.*;
 public class Parcel {
 
 	@Id
-	@GeneratedValue
-	private long id;  //not Long? TODO
-
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	private double length;
 	private double width;
 	private double height;
@@ -51,11 +51,11 @@ public class Parcel {
 		return new Parcel();
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

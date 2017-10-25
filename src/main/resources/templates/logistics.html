@@ -33,19 +33,19 @@
 				</tr>
 			</thead>
 			<tbody>
-					<tr th:each="parcelListViewModel : ${allParcel}">
-						<form action="#" th:action="@{/logistics}" th:object="${parcelListViewModel}" th:method="post">
-							<td th:text="*{parcel.id}">...</td>
-							<td th:text="*{parcel.length}">...</td>
-							<td th:text="*{parcel.width}">...</td>
-							<td th:text="*{parcel.height}">...</td>
-							<td th:text="*{parcel.weight}"></td>
-							<td th:text="*{parcel.dangerous}">...</td>
-							<td th:text="*{parcel.fragile}"></td>
-							<td th:text="*{parcel.comment}"></td>
+					<tr th:each="parcelListViewModel : ${parcelListViewModels}">
+						<form action="#" th:action="@{/logistics}" th:method="post">
+							<td th:text="${parcelListViewModel.parcel.id}">...</td>
+							<!--<td th:text="*{parcel.length}">...</td>-->
+							<!--<td th:text="*{parcel.width}">...</td>-->
+							<!--<td th:text="*{parcel.height}">...</td>-->
+							<!--<td th:text="*{parcel.weight}"></td>-->
+							<!--<td th:text="*{parcel.dangerous}">...</td>-->
+							<!--<td th:text="*{parcel.fragile}"></td>-->
+							<!--<td th:text="*{parcel.comment}"></td>-->
 							<td>
 								<!--th:field="*{driverName}"-->
-								<select class="form-control"  onchange="this.form.submit()">
+								<select th:field="${parcelListViewModel.driverName}" class="form-control"  onchange="this.form.submit()">
 									<option value="" disabled="disabled" selected="selected">Fahrer wählen</option>
 									<th:block th:each="driver : ${allDrivers}">
 										<option th:value="${driver}" th:text="${driver}">...</option>

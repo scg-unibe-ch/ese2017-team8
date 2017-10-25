@@ -67,7 +67,8 @@ public class Delivery
 	}
 
 	public String getDriver() {
-		return driver;
+		System.out.println("Nom");
+		return "asdf";
 	}
 
 	public void setDriver(String driver) {
