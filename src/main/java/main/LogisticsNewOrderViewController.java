@@ -14,6 +14,11 @@ public class LogisticsNewOrderViewController {
 	@Autowired
 	public ParcelRepo parcelRepo;
 
+	@ModelAttribute("parcel")
+	public Parcel getParcel(){
+		return new Parcel();
+	}
+
 	/**
 	 * Creates the empty form for entering the parcels specs.
 	 *
@@ -21,11 +26,10 @@ public class LogisticsNewOrderViewController {
 	 * @return String logistics
 	 */
 	@RequestMapping(value="/neworder", method=RequestMethod.GET)
-	@ModelAttribute("parcel")
 	public String parcelForm(Model model) {
-		model.addAttribute("parcel", new Parcel());
 		return "neworder";
 	}
+
 
 	/**
 	 * Handles a form with post method.
