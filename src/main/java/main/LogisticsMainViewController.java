@@ -30,10 +30,10 @@ public class LogisticsMainViewController {
 	 * @return direction of post output
 	 */
 	@RequestMapping(value="/logistics", method=RequestMethod.POST)
-	public String deliverySubmit(@ModelAttribute("parcelListViewModel") ParcelListViewModel driver, BindingResult bindingResult, Model model) {
+	public String deliverySubmit(@ModelAttribute("return") ParcelListViewModel viewModel, BindingResult bindingResult, Model model) {
 		System.out.println("Delivery submitted");
-		System.out.println(driver.driverName);
-		System.out.println(driver.parcel);
+		System.out.println(bindingResult.getRawFieldValue("parcelId"));
+		System.out.println(bindingResult.getRawFieldValue("driverName"));
 		return "result";
 	}
 
@@ -68,7 +68,7 @@ public class LogisticsMainViewController {
 		return parcelListViewModel;
 	}
 
-	@ModelAttribute("parcelListViewModel")
+	@ModelAttribute("return")
 	public ParcelListViewModel getModel() {
 		ParcelListViewModel model = new ParcelListViewModel();
 		return model;

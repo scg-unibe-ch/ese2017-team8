@@ -33,24 +33,25 @@
 				</tr>
 			</thead>
 			<tbody>
-					<tr th:each="parcelListViewModel : ${parcelListViewModels}">
-						<form action="#" th:action="@{/logistics}" th:method="post">
-							<td th:text="${parcelListViewModel.parcel.id}">...</td>
-							<!--<td th:text="*{parcel.length}">...</td>-->
-							<!--<td th:text="*{parcel.width}">...</td>-->
-							<!--<td th:text="*{parcel.height}">...</td>-->
-							<!--<td th:text="*{parcel.weight}"></td>-->
-							<!--<td th:text="*{parcel.dangerous}">...</td>-->
-							<!--<td th:text="*{parcel.fragile}"></td>-->
-							<!--<td th:text="*{parcel.comment}"></td>-->
+					<tr th:each="vm : ${parcelListViewModels}">
+						<form th:action="@{/logistics}" th:method="post">
+							<td th:value="${vm.parcel.id}" th:text="${vm.parcel.id}">...</td>
+							<td th:value="${vm.parcel.length}" 		th:text="${vm.parcel.length}">...</td>
+							<td th:value="${vm.parcel.width}" 		th:text="${vm.parcel.width}">...</td>
+							<td th:value="${vm.parcel.height}" 		th:text="${vm.parcel.height}">...</td>
+							<td th:value="${vm.parcel.weight}" 		th:text="${vm.parcel.weight}"></td>
+							<td th:value="${vm.parcel.dangerous}"	th:text="${vm.parcel.dangerous}">...</td>
+							<td th:value="${vm.parcel.fragile}"	 	th:text="${vm.parcel.fragile}"></td>
+							<td th:value="${vm.parcel.comment}"		th:text="${vm.parcel.comment}"></td>
 							<td>
-								<!--th:field="*{driverName}"-->
-								<select th:field="${parcelListViewModel.driverName}" class="form-control"  onchange="this.form.submit()">
+								<input th:value="${vm.parcel.id}" id="parcelId" name="parcelId" class="form-control" type="hidden"/>
+								<select id="driverName" name="driverName" class="form-control" onchange="this.form.submit()">
 									<option value="" disabled="disabled" selected="selected">Fahrer wählen</option>
 									<th:block th:each="driver : ${allDrivers}">
 										<option th:value="${driver}" th:text="${driver}">...</option>
 									</th:block>
 								</select>
+
 							</td>
 						</form>
 					</tr>
