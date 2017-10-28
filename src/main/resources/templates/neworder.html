@@ -12,20 +12,25 @@
             <table>
                 <tr>
                     <td><label for="parcel_length">Länge</label></td>
-                    <td><input id="parcel_length" type="text" th:field="*{{length}}" required="required"/></td>
+
+                    <td><input id="parcel_length" type="text"  required="required"/></td>
                 </tr>
+                <!--th:field="${{parcel.length}}"-->
                 <tr>
                     <td><label for="parcel_width">Breite</label></td>
                     <td><input id="parcel_width" type="text" th:field="*{{width}}" required="required"/></td>
                 </tr>
+                <!--th:field="${{parcel.width}}"-->
                 <tr>
                     <td><label for="parcel_height">Länge</label></td>
                     <td><input id="parcel_height" type="text" th:field="*{{height}}" required="required"/></td>
                 </tr>
+                <!--th:field="${{parcel.height}}"-->
                 <tr>
                     <td><label for="parcel_weight">Gewicht</label></td>
                     <td><input id="parcel_weight" type="text" th:field="*{{weight}}" required="required"/></td>
                 </tr>
+                <!--th:field="${{parcel.weight}}"-->
                 <tr>
                     <td><label for="parcel_dangerous">Gefahrengut</label></td>
                     <td><input id="parcel_dangerous" type="checkbox" th:field="*{dangerous}"/></td>
@@ -37,6 +42,7 @@
                 <tr>
                     <td><label for="parcel_comment">Kommentar</label></td>
                     <td><input id="parcel_comment" type="text" th:field="*{comment}"/></td>
+                    <!--th:field="${parcel.dangerous}"-->
                 </tr>
             </table>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
