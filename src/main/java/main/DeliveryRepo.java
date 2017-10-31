@@ -28,7 +28,7 @@ public interface DeliveryRepo extends CrudRepository<Delivery, Long> {
 	 */
 	public List<Delivery> findByDriverId(Long driverId);
 
-	public Delivery getDeliveryByParcelId(Long parcelId);
+	public Delivery findByParcelId(Long parcelId);
 
 	/**
 	 * Gets all deliveries which share the same actual date.

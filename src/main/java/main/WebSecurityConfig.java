@@ -76,15 +76,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		userRepo.findOne(new Long(1)).getAuthorities();
 
 		auth.authenticationProvider(authenticationProvider());
-
-		//
-//		System.out.println(userRepo.findAll().size());
-//
-//		for (User u : userRepo.findAll()) {
-//			auth.jdbcAuthentication().dataSource((javax.sql.DataSource)userRepo).withUser("logistician").password("pass").authorities(AuthorityLogistician.instance);
-////			System.out.println("User: " + u.getUsername());
-////			auth.inMemoryAuthentication().withUser(u.getUsername()).password((u.getPassword())).authorities(new ArrayList(u.getAuthorities()));
-//		}
 	}
 
 	@Bean

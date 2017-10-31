@@ -30,8 +30,6 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 		String targetUrl = "/error";
 
-		System.out.println(authentication.getAuthorities());
-
 		if (authentication.getAuthorities().contains(AuthorityLogistician.instance)) {
 			targetUrl = "/logistics";
 		} else if (authentication.getAuthorities().contains(AuthorityDriver.instance)) {
