@@ -32,17 +32,17 @@ public class Delivery
 	private LocalDate scheduledDate;
 	private LocalDate actualDate;
 	private Long customerId;
-	private Long packageId;
+	private Long parcelId;
 	private Status status;
 	private String driver;
 
 	protected Delivery() {}
 
-	public Delivery(LocalDate scheduledDate, LocalDate actualDate, Long customerId, Long packageId, Status status, String driver) {
+	public Delivery(LocalDate scheduledDate, LocalDate actualDate, Long customerId, Long parcelId, Status status, String driver) {
 		this.scheduledDate = scheduledDate;
 		this.actualDate = actualDate;
 		this.customerId = customerId;
-		this.packageId = packageId;
+		this.parcelId = parcelId;
 		this.status = status;
 		this.driver = driver;
 	}
@@ -77,12 +77,12 @@ public class Delivery
 
 	public void setCustomerId(Long customerId){}
 
-	public Long getPackageId() {
-		return packageId;
+	public Long getParcelId() {
+		return parcelId;
 	}
 
-	public void setParcelId(Long packageId) {
-		this.packageId = packageId;
+	public void setParcelId(Long parcelId) {
+		this.parcelId = parcelId;
 	}
 
 	public Status getStatus() {

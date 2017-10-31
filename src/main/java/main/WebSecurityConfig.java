@@ -21,7 +21,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	AuthSuccessHandler successHandler;
 
-
 	/**
 	 * Configures which role can access which part of the website.
 	 *

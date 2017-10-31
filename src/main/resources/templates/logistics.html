@@ -39,10 +39,9 @@
 								<select name="driverName" class="form-control" onchange="this.form.submit()">
 									<option value="" disabled="disabled" selected="selected">Fahrer wählen</option>
 									<th:block th:each="driver : ${getDriverList}">
-										<option th:value="${driver}" th:text="${driver}">...</option>
+										<option th:value="${driver}" th:text="${driver.driverName}" th:selected="(${#arrays.contains(driver.parcelIds, parcel.id)})">th:selected="${selected}" ...</option>
 									</th:block>
 								</select>
-
 							</td>
 						</form>
 					</tr>
