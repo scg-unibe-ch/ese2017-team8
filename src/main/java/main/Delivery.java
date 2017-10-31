@@ -77,6 +77,7 @@ public class Delivery
 
 	public void setCustomerId(Long customerId){}
 
+	@ModelAttribute("parcelId")
 	public Long getParcelId() {
 		return parcelId;
 	}
