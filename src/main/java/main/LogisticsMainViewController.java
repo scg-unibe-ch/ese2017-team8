@@ -3,6 +3,7 @@ package main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.sql.Driver;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class LogisticsMainViewController {
@@ -40,8 +42,11 @@ public class LogisticsMainViewController {
 	 */
 	@RequestMapping(value="/logistics", method=RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDriver") AssignDriverModel viewModel, BindingResult bindingResult, Model model) {
-		createDeliveryInteractor.createScheduledDelivery(viewModel.driverName, viewModel.parcelId);
-		return "logistics";
+		User driver = viewModel.getDriver();
+		assert(driver.getAuthorities().contains(AuthorityDriver.instance));
+
+		createDeliveryInteractor.createScheduledDelivery(driver, viewModel.getParcelId());
+		return "redirect:logistics";
 	}
 
 
@@ -73,18 +78,21 @@ public class LogisticsMainViewController {
 	 */
 	@ModelAttribute("getDriverList")
 	public List<DriverListModel> getDriverList(Model model) {
-		List<User> userList = userRepo.findAll();
+		List<User> driverList = userRepo.findAllByAuthoritiesContains(AuthorityDriver.instance);
 
-		List<DriverListModel> driverList = new ArrayList<DriverListModel>();
+		List<DriverListModel> viewModel = new ArrayList<DriverListModel>();
 
-		for (User u: userList) {
+		for (User u: driverList) {
 			DriverListModel driverListModel = new DriverListModel();
-			driverListModel.setDriverName(u.getUsername());
-			driverList.add(driverListModel);
+			driverListModel.setDriver(u);
+
+			List<Delivery> deliveriesForDriver = deliveryRepo.findByDriverId(u.getId());
+			List<Long> parcelIds = deliveriesForDriver.stream().map(Delivery::getParcelId).collect(Collectors.toList());
+			driverListModel.setParcelIds(parcelIds);
+
+			viewModel.add(driverListModel);
 		}
 
-		driverList.get(1).setParcelIds(Arrays.asList(new Long(1), new Long(3)));
-
-		return driverList;
+		return viewModel;
 	}
 }

@@ -6,13 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DriverListModel {
-	public String driverName;
+	public User driver;
 	public List<Long> parcelIds;
 
-	public DriverListModel() {
-		this.driverName = "";
-		this.parcelIds = new ArrayList<Long>();
-	}
+	public DriverListModel() { }
 
 	@ModelAttribute("driverListModel")
 	public AssignDriverModel getAssignDriverModel() {
@@ -21,11 +18,20 @@ public class DriverListModel {
 
 	@ModelAttribute("driverName")
 	public String getDriverName() {
-		return driverName;
+		return driver.getUsername();
 	}
 
-	public void setDriverName(String driverName) {
-		this.driverName = driverName;
+	@ModelAttribute("driverId")
+	public Long getDriverId() { return driver.getId(); }
+
+	@ModelAttribute("driver")
+	public User getDriver() {
+		return driver;
+	}
+
+	public void setDriver(User driver) {
+		assert(driver.getAuthorities().contains(AuthorityDriver.instance));
+		this.driver = driver;
 	}
 
 	@ModelAttribute("parcelIds")

@@ -17,9 +17,12 @@ public class DriverMainViewController {
 	@Autowired
 	public DeliveryRepo deliveryRepo;
 
+	@Autowired
+	public UserRepo userRepo;
+
 	//just an example
-	Delivery example1 = new Delivery(null, LocalDate.of(2017, 9, 1),45L,15L, Delivery.Status.unscheduled, "Christiane T");
-	Delivery example2 = new Delivery(null, LocalDate.of(2017,9,2),33L,51L, Delivery.Status.scheduled, "Donald Duck");
+	Delivery example1 = new Delivery(null, LocalDate.of(2017, 9, 1),45L,15L, Delivery.Status.unscheduled, new Long(1));
+	Delivery example2 = new Delivery(null, LocalDate.of(2017,9,2),33L,51L, Delivery.Status.scheduled, new Long(2));
 
 	/**
 	 * is neccessary for the thymeleaf table representation of the data
@@ -33,7 +36,7 @@ public class DriverMainViewController {
 		deliveryRepo.save(example2);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentUserName = authentication.getName();
-		System.out.println(currentUserName);
-		return this.deliveryRepo.findByDriver(currentUserName);
+
+		return this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
 	}
 }

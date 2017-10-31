@@ -23,16 +23,16 @@ public interface DeliveryRepo extends CrudRepository<Delivery, Long> {
 
 	/**
 	 * Finds all deliveries for the selected driver.
-	 * @param driver String which represents the drivers name.
+	 * @param driverId Long which matches the driver id.
 	 * @return List which contains deliveries of the selected driver.
 	 */
-	public List<Delivery> findByDriver(String driver);
+	public List<Delivery> findByDriverId(Long driverId);
 
 	public Delivery getDeliveryByParcelId(Long parcelId);
 
 	/**
 	 * Gets all deliveries which share the same actual date.
-	 * @param actualDate Date when the delivery was registrated.
+	 * @param actualDate Date when the delivery was registered.
 	 * @return List of deliveries with the same actual date.
 	 */
 	public List<Delivery> getDeliveriesByActualDate(Date actualDate);
@@ -43,5 +43,6 @@ public interface DeliveryRepo extends CrudRepository<Delivery, Long> {
 	 * @return	List of all deliveries for the specific id.
 	 */
 	public List<Delivery> getDeliveriesByCustomerId(Long customerId);
+
 }
 

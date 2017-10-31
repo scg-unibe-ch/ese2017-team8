@@ -36,10 +36,10 @@
 							<td>
 								<!--We use the name property to map the following values into the model-->
 								<input th:value="${parcel.id}" name="parcelId" class="form-control" type="hidden"/>
-								<select name="driverName" class="form-control" onchange="this.form.submit()">
+								<select name="driver" class="form-control" onchange="this.form.submit()">
 									<option value="" disabled="disabled" selected="selected">Fahrer wählen</option>
-									<th:block th:each="driver : ${getDriverList}">
-										<option th:value="${driver}" th:text="${driver.driverName}" th:selected="(${#arrays.contains(driver.parcelIds, parcel.id)})">th:selected="${selected}" ...</option>
+									<th:block th:each="driverListModel : ${getDriverList}">
+										<option th:value="${driverListModel.driverId}" th:text="${driverListModel.driverName}" th:selected="(${#arrays.contains(driverListModel.parcelIds, parcel.id)})">th:selected="${selected}" ...</option>
 									</th:block>
 								</select>
 							</td>

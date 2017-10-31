@@ -3,26 +3,24 @@ package main;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 public class AssignDriverModel {
-	public String driverName;
+	public User driver;
 	public Long parcelId;
 
-	public AssignDriverModel() {
-		this.driverName = "";
-		this.parcelId = new Long(0);
-	}
+	public AssignDriverModel() { }
 
 	@ModelAttribute("assignDriverModel")
 	public AssignDriverModel getAssignDriverModel() {
 		return new AssignDriverModel();
 	}
 
-	@ModelAttribute("driverName")
-	public String getDriverName() {
-		return driverName;
+	@ModelAttribute("driver")
+	public User getDriver() {
+		return driver;
 	}
 
-	public void setDriverName(String driverName) {
-		this.driverName = driverName;
+	public void setDriver(User driver) {
+		assert(driver.getAuthorities().contains(AuthorityDriver.instance));
+		this.driver = driver;
 	}
 
 	@ModelAttribute("parcelId")

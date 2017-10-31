@@ -27,4 +27,5 @@ public interface ParcelRepo extends CrudRepository<Parcel, Long> {
 	 * @return List of all parcels.
 	 */
 	public List<Parcel> findAll();
+
 }
