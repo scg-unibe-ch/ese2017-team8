@@ -21,6 +21,9 @@ public class LogisticsMainViewController {
 	@Autowired
 	public ParcelRepo parcelRepo;
 
+	@Autowired
+	private CreateDeliveryInteractor createDeliveryInteractor;
+
 	//just an example
 	Parcel example1 = new Parcel(2.0, 10.0, 20.0, 2.0, false, false, null);
 	Parcel example2 = new Parcel(10.0, 20.0, 30.0, 5.2, true, false, "Bombe");
@@ -31,10 +34,8 @@ public class LogisticsMainViewController {
 	 */
 	@RequestMapping(value="/logistics", method=RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDriver") AssignDriverModel viewModel, BindingResult bindingResult, Model model) {
-		System.out.println("Delivery submitted");
-		System.out.println(viewModel.driverName);
-		System.out.println(viewModel.parcelId);
-		return "result";
+		createDeliveryInteractor.createScheduledDelivery(viewModel.driverName, viewModel.parcelId);
+		return "logistics";
 	}
 
 

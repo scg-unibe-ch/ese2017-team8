@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,8 +18,8 @@ public class DriverMainViewController {
 	public DeliveryRepo deliveryRepo;
 
 	//just an example
-	Delivery example1 = new Delivery(null, new Date(117,9,1),45L,15L, Delivery.Status.unscheduled, "Christiane T");
-	Delivery example2 = new Delivery(null, new Date(117,9,1),33L,51L, Delivery.Status.scheduled, "Donald Duck");
+	Delivery example1 = new Delivery(null, LocalDate.of(2017, 9, 1),45L,15L, Delivery.Status.unscheduled, "Christiane T");
+	Delivery example2 = new Delivery(null, LocalDate.of(2017,9,2),33L,51L, Delivery.Status.scheduled, "Donald Duck");
 
 	/**
 	 * is neccessary for the thymeleaf table representation of the data

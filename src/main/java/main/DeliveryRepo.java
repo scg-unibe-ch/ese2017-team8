@@ -11,7 +11,7 @@ import org.springframework.data.repository.CrudRepository;
  * @author Team8
  * @version 1.0
  */
-public interface DeliveryRepo extends CrudRepository<Delivery, Date> {
+public interface DeliveryRepo extends CrudRepository<Delivery, Long> {
 
 	/**
 	 * Finds all deliveries.

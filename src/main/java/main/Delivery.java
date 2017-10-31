@@ -1,6 +1,7 @@
 package main;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,8 +29,8 @@ public class Delivery
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	private Calendar plannedDate;
-	private Date actualDate;
+	private LocalDate scheduledDate;
+	private LocalDate actualDate;
 	private Long customerId;
 	private Long packageId;
 	private Status status;
@@ -37,10 +38,8 @@ public class Delivery
 
 	protected Delivery() {}
 
-	public Delivery(Calendar plannedDate, Date actualDate, Long customerId, Long packageId, Status status, String driver) {
-		Calendar now = Calendar.getInstance();
-		now.add(Calendar.DAY_OF_YEAR, 1);
-		this.plannedDate = now;
+	public Delivery(LocalDate scheduledDate, LocalDate actualDate, Long customerId, Long packageId, Status status, String driver) {
+		this.scheduledDate = scheduledDate;
 		this.actualDate = actualDate;
 		this.customerId = customerId;
 		this.packageId = packageId;
@@ -66,10 +65,7 @@ public class Delivery
 		this.id = id;
 	}
 
-	public String getDriver() {
-		System.out.println("Nom");
-		return "asdf";
-	}
+	public String getDriver() { return driver; }
 
 	public void setDriver(String driver) {
 		this.driver = driver;
@@ -85,7 +81,7 @@ public class Delivery
 		return packageId;
 	}
 
-	public void setPackageId(Long packageId) {
+	public void setParcelId(Long packageId) {
 		this.packageId = packageId;
 	}
 
@@ -97,11 +93,7 @@ public class Delivery
 		this.status = status;
 	}
 
-	public Calendar getPlannedDate() {
-		return plannedDate;
-	}
+	public LocalDate getScheduledDate() { return scheduledDate; }
 
-	public void setPlannedDate(Calendar plannedDate) {
-		this.plannedDate = plannedDate;
-	}
+	public void setScheduledDate(LocalDate plannedDate) { this.scheduledDate = plannedDate; }
 }
