@@ -11,17 +11,29 @@
     <table>
         <thead>
         <tr>
-            <th>Customer-ID</th>
-            <th>Package-ID</th>
-            <th>Status</th>
+            <th>Gefahr?</th>
+            <th>Fragil?</th>
+            <th>Kommentar</th>
+            <th>Adresse</th>
+            <th>PLZ</th>
+            <th>Ort</th>
         </tr>
         </thead>
         <tbody>
-        <th:block th:each="delivery : ${allDeliveryDriver}">
+        <th:block th:each="delivery : ${deliveriesForDriver}">
             <tr>
-                <td th:text="${delivery.customerId}">...</td>
-                <td th:text="${delivery.packageId}">...</td>
-                <td th:text="${delivery.status}">...</td>
+                <td th:value="${delivery.dangerous}"	th:text="${delivery.dangerous}">...</td>
+                <td th:value="${delivery.fragile}"	th:text="${delivery.fragile}"></td>
+                <td th:value="${delivery.comment}"	th:text="${delivery.comment}"></td>
+                <td th:value="${delivery.address}" 	th:text="${delivery.address}">...</td>
+                <td th:value="${delivery.plz}" 		th:text="${delivery.plz}">...</td>
+                <td th:value="${delivery.city}" 		th:text="${delivery.city}">...</td>
+                <!--<td th:value="${parcel.height}" 	th:text="${parcel.height}">...</td>-->
+                <!--<td th:value="${parcel.weight}" 	th:text="${parcel.weight}"></td>-->
+                <!--<td th:value="${parcel.dangerous}"	th:text="${parcel.dangerous}">...</td>-->
+                <!--<td th:value="${parcel.fragile}"	th:text="${parcel.fragile}"></td>-->
+                <!--<td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>-->
+                <!--&lt;!&ndash;<td th:value="${parcel.city}"	th:text="${parcel.city}"></td>            -->
             </tr>
         </th:block>
         </tbody>

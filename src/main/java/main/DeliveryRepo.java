@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * This interface is used to setup the delivery parcelRepo.
@@ -11,7 +12,8 @@ import org.springframework.data.repository.CrudRepository;
  * @author Team8
  * @version 1.0
  */
-public interface DeliveryRepo extends CrudRepository<Delivery, Date> {
+@Repository
+public interface DeliveryRepo extends CrudRepository<Delivery, Long> {
 
 	/**
 	 * Finds all deliveries.
@@ -21,14 +23,16 @@ public interface DeliveryRepo extends CrudRepository<Delivery, Date> {
 
 	/**
 	 * Finds all deliveries for the selected driver.
-	 * @param driver String which represents the drivers name.
+	 * @param driverId Long which matches the driver id.
 	 * @return List which contains deliveries of the selected driver.
 	 */
-	public List<Delivery> findByDriver(String driver);
+	public List<Delivery> findByDriverId(Long driverId);
+
+	public Delivery findByParcelId(Long parcelId);
 
 	/**
 	 * Gets all deliveries which share the same actual date.
-	 * @param actualDate Date when the delivery was registrated.
+	 * @param actualDate Date when the delivery was registered.
 	 * @return List of deliveries with the same actual date.
 	 */
 	public List<Delivery> getDeliveriesByActualDate(Date actualDate);
@@ -39,5 +43,6 @@ public interface DeliveryRepo extends CrudRepository<Delivery, Date> {
 	 * @return	List of all deliveries for the specific id.
 	 */
 	public List<Delivery> getDeliveriesByCustomerId(Long customerId);
+
 }
 
