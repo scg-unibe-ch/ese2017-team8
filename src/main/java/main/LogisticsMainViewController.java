@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.sql.Driver;
 import java.util.*;
 
 @Controller
@@ -20,6 +21,9 @@ public class LogisticsMainViewController {
 
 	@Autowired
 	public ParcelRepo parcelRepo;
+
+	@Autowired
+	public UserRepo userRepo;
 
 	@Autowired
 	private CreateDeliveryInteractor createDeliveryInteractor;
@@ -69,21 +73,18 @@ public class LogisticsMainViewController {
 	 */
 	@ModelAttribute("getDriverList")
 	public List<DriverListModel> getDriverList(Model model) {
-		List<DriverListModel> driverList = new ArrayList<>();
+		List<User> userList = userRepo.findAll();
 
-		DriverListModel model1 = new DriverListModel();
-		List<Long> parcelIds1 = Arrays.asList(new Long(1), new Long(2), new Long(3));
-		model1.setDriverName("Hans Nötig");
-		model1.setParcelIds(parcelIds1);
+		List<DriverListModel> driverList = new ArrayList<DriverListModel>();
 
+		for (User u: userList) {
+			DriverListModel driverListModel = new DriverListModel();
+			driverListModel.setDriverName(u.getUsername());
+			driverList.add(driverListModel);
+		}
 
-		DriverListModel model2 = new DriverListModel();
-		List<Long> parcelIds2 = Arrays.asList(new Long(4));
-		model2.setDriverName("Timmy Tester");
-		model2.setParcelIds(parcelIds2);
+		driverList.get(1).setParcelIds(Arrays.asList(new Long(1), new Long(3)));
 
-		driverList.add(model1);
-		driverList.add(model2);
 		return driverList;
 	}
 }

@@ -1,7 +1,12 @@
 package main;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.core.GrantedAuthority;
+
+import javax.annotation.PostConstruct;
+import java.util.*;
 
 /**
  * Application is the main class, which starts the whole application by default.

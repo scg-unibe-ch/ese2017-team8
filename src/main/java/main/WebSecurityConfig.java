@@ -1,11 +1,21 @@
 package main;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.activation.DataSource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * WebSecurityConfig is used to authorize user request.
@@ -19,7 +29,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	AuthSuccessHandler successHandler;
+	private UserDetailsServiceImpl userDetailsService;
+
+	@Autowired
+	private UserRepo userRepo;
+
+	@Autowired
+	private AuthSuccessHandler successHandler;
 
 	/**
 	 * Configures which role can access which part of the website.
@@ -48,9 +64,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("logistician").password("pass").roles("LOGISTICIAN");
-		auth.inMemoryAuthentication().withUser("Christiane T").password("pass").roles("DRIVER");
-		auth.inMemoryAuthentication().withUser("Donald Duck").password("pass").roles("DRIVER");
-		auth.inMemoryAuthentication().withUser("Hans Nötig").password("pass").roles("DRIVER");
+		User user1 = new User("logistician", "$2a$11$PwMXw8qBRz06bCEFxvUNQeDgKERPB3ZQjBfGoXNZ4nsv2X4cFMrUK", Arrays.asList(AuthorityLogistician.instance));
+		User user2 = new User("Christiane T", "$2a$11$PwMXw8qBRz06bCEFxvUNQeDgKERPB3ZQjBfGoXNZ4nsv2X4cFMrUK", Arrays.asList(AuthorityDriver.instance));
+		User user3 = new User("Donald Duck", "$2a$11$PwMXw8qBRz06bCEFxvUNQeDgKERPB3ZQjBfGoXNZ4nsv2X4cFMrUK", Arrays.asList(AuthorityDriver.instance));
+		User user4 = new User("Hans Nötig", "$2a$11$PwMXw8qBRz06bCEFxvUNQeDgKERPB3ZQjBfGoXNZ4nsv2X4cFMrUK", Arrays.asList(AuthorityDriver.instance));
+
+		List<User> userList = Arrays.asList(user1, user2, user3, user4);
+
+		userRepo.save(userList);
+
+		userRepo.findOne(new Long(1)).getAuthorities();
+
+		auth.authenticationProvider(authenticationProvider());
+
+		//
+//		System.out.println(userRepo.findAll().size());
+//
+//		for (User u : userRepo.findAll()) {
+//			auth.jdbcAuthentication().dataSource((javax.sql.DataSource)userRepo).withUser("logistician").password("pass").authorities(AuthorityLogistician.instance);
+////			System.out.println("User: " + u.getUsername());
+////			auth.inMemoryAuthentication().withUser(u.getUsername()).password((u.getPassword())).authorities(new ArrayList(u.getAuthorities()));
+//		}
+	}
+
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(encoder());
+		return authProvider;
+	}
+
+	@Bean
+	public PasswordEncoder encoder() {
+		return new BCryptPasswordEncoder(11);
 	}
 }
