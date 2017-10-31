@@ -28,10 +28,13 @@ public class Parcel {
 	private boolean dangerous; //i.e. flammable
 	private boolean fragile;
 	private String comment;
+	private String city;
+	private String plz;
+	private String address;
 
 	public Parcel() {}
 
-	public Parcel(double length, double width, double height, double weight, boolean dangerous, boolean fragile, String comment) {
+	public Parcel(double length, double width, double height, double weight, boolean dangerous, boolean fragile, String comment, String city, String plz, String address) {
 		this.length=length;
 		this.width=width;
 		this.height=height;
@@ -39,6 +42,9 @@ public class Parcel {
 		this.dangerous=dangerous;
 		this.fragile=fragile;
 		this.comment=comment;
+		this.city=city;
+		this.plz=plz;
+		this.address=address;
 	}
 
 	@Override
@@ -113,5 +119,29 @@ public class Parcel {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPlz() {
+		return plz;
+	}
+
+	public void setPlz(String plz) {
+		this.plz = plz;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }
