@@ -44,8 +44,12 @@ public class DriverMainViewController {
 
 			Parcel parcel = parcelRepo.findOne(del.getParcelId());
 
-			rowModel.setLength(parcel.getLength());
-			rowModel.setWidth(parcel.getWidth());
+			rowModel.setComment(parcel.getComment());
+			rowModel.setDangerous(parcel.isDangerous());
+			rowModel.setFragile(parcel.isFragile());
+			rowModel.setAddress(parcel.getAddress());
+			rowModel.setPlz(parcel.getPlz());
+			rowModel.setCity(parcel.getCity());
 
 			viewModel.add(rowModel);
 		}
