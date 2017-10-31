@@ -17,11 +17,16 @@
         </tr>
         </thead>
         <tbody>
-        <th:block th:each="delivery : ${allDeliveryDriver}">
+        <th:block th:each="delivery : ${deliveriesForDriver}">
             <tr>
-                <td th:text="${delivery.customerId}">...</td>
-                <td th:text="${delivery.parcelId}">...</td>
-                <td th:text="${delivery.status}">...</td>
+                <td th:value="${delivery.length}" 	th:text="${delivery.length}">...</td>
+                <td th:value="${delivery.width}" 		th:text="${delivery.width}">...</td>
+                <!--<td th:value="${parcel.height}" 	th:text="${parcel.height}">...</td>-->
+                <!--<td th:value="${parcel.weight}" 	th:text="${parcel.weight}"></td>-->
+                <!--<td th:value="${parcel.dangerous}"	th:text="${parcel.dangerous}">...</td>-->
+                <!--<td th:value="${parcel.fragile}"	th:text="${parcel.fragile}"></td>-->
+                <!--<td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>-->
+                <!--&lt;!&ndash;<td th:value="${parcel.city}"	th:text="${parcel.city}"></td>            -->
             </tr>
         </th:block>
         </tbody>

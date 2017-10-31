@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class DriverMainViewController {
 	public DeliveryRepo deliveryRepo;
 
 	@Autowired
+	public ParcelRepo parcelRepo;
+
+	@Autowired
 	public UserRepo userRepo;
 
 	/**
@@ -25,11 +29,29 @@ public class DriverMainViewController {
 	 * @return list with all deliveries for current driver
 	 */
 	@RequestMapping(value="/driver")
-	@ModelAttribute("allDeliveryDriver")
-	public List<Delivery> showAllDeliveryDriver() {
+	@ModelAttribute("deliveriesForDriver")
+	public List<DriverDeliveryListModel> showAllDeliveryDriver() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentUserName = authentication.getName();
 
-		return this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
+		List<Delivery> deliveries = this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
+		List<DriverDeliveryListModel> viewModel = new ArrayList<>();
+
+		for (Delivery del : deliveries) {
+			DriverDeliveryListModel rowModel = new DriverDeliveryListModel();
+			rowModel.setDeliveryId(del.getId());
+			rowModel.setParcelId(del.getParcelId());
+
+			Parcel parcel = parcelRepo.findOne(del.getParcelId());
+
+			rowModel.setLength(parcel.getLength());
+			rowModel.setWidth(parcel.getWidth());
+
+			viewModel.add(rowModel);
+		}
+
+		return viewModel;
+
+//		return this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
 	}
 }
