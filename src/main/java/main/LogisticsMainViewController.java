@@ -31,10 +31,10 @@ public class LogisticsMainViewController {
 	private CreateDeliveryInteractor createDeliveryInteractor;
 
 	//just an example
-	Parcel example1 = new Parcel(2.0, 10.0, 20.0, 2.0, false, false, null);
-	Parcel example2 = new Parcel(10.0, 20.0, 30.0, 5.2, true, false, "Bombe");
-	Parcel example3 = new Parcel(10.0, 20.0, 30.0, 5.2, true, false, "Nukleares Material");
-	Parcel example4 = new Parcel(10.0, 20.0, 30.0, 700, false, false, "Sägemehl");
+	Parcel example1 = new Parcel(2.0, 10.0, 20.0, 2.0, false, false, null, "Bern","6122","Feldstrasse 1");
+	Parcel example2 = new Parcel(10.0, 20.0, 30.0, 5.2, true, false, "Bombe", "Wolhusen","6110","Burgring 88");
+	Parcel example3 = new Parcel(10.0, 20.0, 30.0, 5.2, true, false, "Nukleares Material", "Schwarzenburg","3120","Genossenweg 2");
+	Parcel example4 = new Parcel(10.0, 20.0, 30.0, 700, false, false, "Sägemehl", "Beromünster", "6240","Senderstrasse 3a");
 
 	/**
 	 * handles a form with post method

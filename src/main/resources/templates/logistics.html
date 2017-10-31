@@ -19,6 +19,7 @@
 					<th>Gefahrengut</th>
 					<th>Zerbrechlich</th>
 					<th>Kommentar</th>
+					<th>Zielort</th>
 					<th>Fahrer</th>
 				</tr>
 			</thead>
@@ -33,6 +34,7 @@
 							<td th:value="${parcel.dangerous}"	th:text="${parcel.dangerous}">...</td>
 							<td th:value="${parcel.fragile}"	th:text="${parcel.fragile}"></td>
 							<td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>
+							<td th:value="${parcel.city}"	th:text="${parcel.city}"></td>
 							<td>
 								<!--We use the name property to map the following values into the model-->
 								<input th:value="${parcel.id}" name="parcelId" class="form-control" type="hidden"/>
