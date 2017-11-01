@@ -48,7 +48,7 @@
                 </tr>
                 <tr>
                     <td><label for="parcel_plz">Postleitzahl</label></td>
-                    <td><input id="parcel_plz" type="text" th:field="*{plz}" required="required"/></td>
+                    <td><input id="parcel_plz" type="number" min="0" th:field="*{plz}" required="required"/></td>
                 </tr>
             </table>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
