@@ -1,5 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+
+html, body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    background: grey;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#wrapper {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    position: relative;
+    min-height: 95%;
+}
+
+.content {
+    margin-top: 50px;
+    padding: 20px;
+    background: white;
+    position: relative;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+p, td, tr {
+    font-size: 12px;
+}
+
 table {
     border-collapse: collapse;
+    width: 100%;
+}
+
+table.nogrid td, table.nogrid th {
+    border: 0px;
 }
 
 td, th {
@@ -9,4 +47,28 @@ td, th {
 
 a {
     color: green;
+}
+
+a.logout {
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    background: black;
+    padding: 8px;
+    color: white;
+    text-decoration: none;
+}
+
+a.logout:hover {
+    background: #5960b0;
+    transition: 0.6s;
+}
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    height: 2em;
+    clear: both;
 }

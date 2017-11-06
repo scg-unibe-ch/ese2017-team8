@@ -6,54 +6,61 @@
               href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
     </head>
     <body>
-        <h1>Logistics Backend</h1>
-        <h2>Neues Paket erfassen</h2>
-        <form action="#" th:action="@{/neworder}" th:object="${parcel}" method="post">
-            <table>
-                <tr>
-                    <td><label for="parcel_length">Länge</label></td>
-                    <td><input id="parcel_length" type="number" min="0" step="0.01" th:field="*{{length}}" required="required"/></td>
-                </tr>
-                <tr>
-                    <td><label for="parcel_width">Breite</label></td>
-                    <td><input id="parcel_width" type="number" min="0" step="0.01" th:field="*{{width}}" required="required"/></td>
-                </tr>
-                <tr>
-                    <td><label for="parcel_height">Länge</label></td>
-                    <td><input id="parcel_height" type="number" min="0" step="0.01" th:field="*{{height}}" required="required"/></td>
-                </tr>
-                <tr>
-                    <td><label for="parcel_weight">Gewicht</label></td>
-                    <td><input id="parcel_weight" type="number" min="0" step="0.01" th:field="*{{weight}}" required="required"/></td>
-                </tr>
-                <tr>
-                    <td><label for="parcel_dangerous">Gefahrengut</label></td>
-                    <td><input id="parcel_dangerous" type="checkbox" th:field="*{dangerous}"/></td>
-                </tr>
-                <tr>
-                    <td><label for="parcel_fragile">Zerbrechlich</label></td>
-                    <td><input id="parcel_fragile" type="checkbox" th:field="*{fragile}"/></td>
-                </tr>
-                <tr>
-                    <td><label for="parcel_comment">Kommentar</label></td>
-                    <td><input id="parcel_comment" type="text" th:field="*{comment}"/></td>
-                </tr>
-                <tr>
-                    <td><label for="parcel_address">Adresse</label></td>
-                    <td><input id="parcel_address" type="text" th:field="*{address}" required="required"/></td>
-                </tr>
-                <tr>
-                    <td><label for="parcel_city">Ort</label></td>
-                    <td><input id="parcel_city" type="text" th:field="*{city}" required="required"/></td>
-                </tr>
-                <tr>
-                    <td><label for="parcel_plz">Postleitzahl</label></td>
-                    <td><input id="parcel_plz" type="number" min="0" th:field="*{plz}" required="required"/></td>
-                </tr>
-            </table>
-            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-        </form>
-        <a th:href="@{/logout}">Logout</a>
-        <a th:href="@{/logistics}">Back</a>
+        <div id="wrapper">
+            <div class="content">
+                <h1>Logistics Backend</h1>
+                <h2>Neues Paket erfassen</h2>
+                <form action="#" th:action="@{/neworder}" th:object="${parcel}" method="post">
+                    <table>
+                        <tr>
+                            <td><label for="parcel_length">Länge</label></td>
+                            <td><input id="parcel_length" type="number" min="0" step="0.01" th:field="*{{length}}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_width">Breite</label></td>
+                            <td><input id="parcel_width" type="number" min="0" step="0.01" th:field="*{{width}}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_height">Länge</label></td>
+                            <td><input id="parcel_height" type="number" min="0" step="0.01" th:field="*{{height}}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_weight">Gewicht</label></td>
+                            <td><input id="parcel_weight" type="number" min="0" step="0.01" th:field="*{{weight}}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_dangerous">Gefahrengut</label></td>
+                            <td><input id="parcel_dangerous" type="checkbox" th:field="*{dangerous}"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_fragile">Zerbrechlich</label></td>
+                            <td><input id="parcel_fragile" type="checkbox" th:field="*{fragile}"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_comment">Kommentar</label></td>
+                            <td><input id="parcel_comment" type="text" th:field="*{comment}"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_address">Adresse</label></td>
+                            <td><input id="parcel_address" type="text" th:field="*{address}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_city">Ort</label></td>
+                            <td><input id="parcel_city" type="text" th:field="*{city}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_plz">Postleitzahl</label></td>
+                            <td><input id="parcel_plz" type="number" min="0" th:field="*{plz}" required="required"/></td>
+                        </tr>
+                    </table>
+                    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+                </form>
+                <a class="logout" th:href="@{/logout}">Logout</a>
+                <a th:href="@{/logistics}">Back</a>
+            </div>
+            <footer>
+                <span>ESE-Team8 (c)2017</span>
+            </footer>
+        </div>
     </body>
 </html>
