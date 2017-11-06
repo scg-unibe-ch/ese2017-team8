@@ -10,7 +10,7 @@
         <div class="content">
             <h1>Hello Driver!</h1>
             <p>Hier sind alle zugeordneten Lieferungen.</p>
-            <table>
+            <table class="nice">
                 <thead>
                 <tr>
                     <th>Gefahr?</th>
@@ -30,12 +30,6 @@
                         <td th:value="${delivery.address}" 	th:text="${delivery.address}">...</td>
                         <td th:value="${delivery.plz}" 		th:text="${delivery.plz}">...</td>
                         <td th:value="${delivery.city}" 		th:text="${delivery.city}">...</td>
-                        <!--<td th:value="${parcel.height}" 	th:text="${parcel.height}">...</td>-->
-                        <!--<td th:value="${parcel.weight}" 	th:text="${parcel.weight}"></td>-->
-                        <!--<td th:value="${parcel.dangerous}"	th:text="${parcel.dangerous}">...</td>-->
-                        <!--<td th:value="${parcel.fragile}"	th:text="${parcel.fragile}"></td>-->
-                        <!--<td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>-->
-                        <!--&lt;!&ndash;<td th:value="${parcel.city}"	th:text="${parcel.city}"></td>            -->
                     </tr>
                 </th:block>
                 </tbody>
