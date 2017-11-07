@@ -41,6 +41,7 @@ public class DriverMainViewController {
 			DriverDeliveryListModel rowModel = new DriverDeliveryListModel();
 			rowModel.setDeliveryId(del.getId());
 			rowModel.setParcelId(del.getParcelId());
+			rowModel.setStatus(del.getStatus());
 
 			Parcel parcel = parcelRepo.findOne(del.getParcelId());
 

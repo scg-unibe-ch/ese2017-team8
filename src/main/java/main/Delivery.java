@@ -43,7 +43,7 @@ public class Delivery
 		this.actualDate = actualDate;
 		this.customerId = customerId;
 		this.parcelId = parcelId;
-		this.status = status;
+		this.status = Status.scheduled;
 		this.driverId = driverId;
 	}
 

@@ -33,6 +33,7 @@ public class CreateDeliveryInteractor {
 		delivery.setDriverId(driver.getId());
 		delivery.setParcelId(parcelId);
 		delivery.setScheduledDate(date);
+		delivery.setStatus(Delivery.Status.scheduled);
 
 		Delivery saved = deliveryRepo.save(delivery);
 		System.out.println(deliveryRepo.findAll().size());

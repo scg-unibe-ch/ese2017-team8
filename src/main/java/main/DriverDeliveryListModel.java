@@ -18,6 +18,7 @@ public class DriverDeliveryListModel {
 	private String city;
 	private String plz;
 	private String address;
+	private Delivery.Status status;
 
 	public Long getDeliveryId() {
 		return deliveryId;
@@ -114,4 +115,13 @@ public class DriverDeliveryListModel {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	public Delivery.Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Delivery.Status status) {
+		this.status = status;
+	}
+
 }

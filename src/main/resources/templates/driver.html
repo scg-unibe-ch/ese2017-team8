@@ -19,17 +19,19 @@
                     <th>Adresse</th>
                     <th>PLZ</th>
                     <th>Ort</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 <th:block th:each="delivery : ${deliveriesForDriver}">
                     <tr>
-                        <td th:value="${delivery.dangerous}"	th:text="${delivery.dangerous}">...</td>
+                        <td th:value="${delivery.dangerous}" th:text="${delivery.dangerous}">...</td>
                         <td th:value="${delivery.fragile}"	th:text="${delivery.fragile}"></td>
                         <td th:value="${delivery.comment}"	th:text="${delivery.comment}"></td>
                         <td th:value="${delivery.address}" 	th:text="${delivery.address}">...</td>
                         <td th:value="${delivery.plz}" 		th:text="${delivery.plz}">...</td>
-                        <td th:value="${delivery.city}" 		th:text="${delivery.city}">...</td>
+                        <td th:value="${delivery.city}" 	th:text="${delivery.city}">...</td>
+                        <td th:value="${delivery.status}" 	th:text="${delivery.status}">...</td>
                     </tr>
                 </th:block>
                 </tbody>
