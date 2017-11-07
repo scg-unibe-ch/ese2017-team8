@@ -6,52 +6,57 @@
 			  href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
 	</head>
 	<body>
-		<h1>Backend Logistik</h1>
-		<h2>Erfasste Pakete</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Paket-ID</th>
-					<th>Länge</th>
-					<th>Breite</th>
-					<th>Höhe</th>
-					<th>Gewicht</th>
-					<th>Gefahrengut</th>
-					<th>Zerbrechlich</th>
-					<th>Kommentar</th>
-					<th>Zielort</th>
-					<th>Fahrer</th>
-				</tr>
-			</thead>
-			<tbody>
-					<tr th:each="parcel : ${getParcelList}">
-						<form th:action="@{/logistics}" th:method="post">
-							<td th:value="${parcel.id}" 		th:text="${parcel.id}">...</td>
-							<td th:value="${parcel.length}" 	th:text="${parcel.length}">...</td>
-							<td th:value="${parcel.width}" 		th:text="${parcel.width}">...</td>
-							<td th:value="${parcel.height}" 	th:text="${parcel.height}">...</td>
-							<td th:value="${parcel.weight}" 	th:text="${parcel.weight}"></td>
-							<td th:value="${parcel.dangerous}"	th:text="${parcel.dangerous}">...</td>
-							<td th:value="${parcel.fragile}"	th:text="${parcel.fragile}"></td>
-							<td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>
-							<td th:value="${parcel.city}"	th:text="${parcel.city}"></td>
-							<td>
-								<!--We use the name property to map the following values into the model-->
-								<input th:value="${parcel.id}" name="parcelId" class="form-control" type="hidden"/>
-								<select name="driver" class="form-control" onchange="this.form.submit()">
-									<option value="" disabled="disabled" selected="selected">Fahrer wählen</option>
-									<th:block th:each="driverListModel : ${getDriverList}">
-										<option th:value="${driverListModel.driverId}" th:text="${driverListModel.driverName}" th:selected="(${#arrays.contains(driverListModel.parcelIds, parcel.id)})">th:selected="${selected}" ...</option>
-									</th:block>
-								</select>
-							</td>
-						</form>
-					</tr>
-			</tbody>
-		</table>
-
-
-		<a th:href="@{/neworder}">Neues Paket erfassen</a>
-		<a th:href="@{/logout}">Logout</a>
+		<div id="wrapper">
+			<div class="content">
+				<h1>Backend Logistik</h1>
+				<h2>Erfasste Pakete</h2>
+				<table class="nice">
+					<thead>
+						<tr>
+							<th>Paket-ID</th>
+							<th>Länge</th>
+							<th>Breite</th>
+							<th>Höhe</th>
+							<th>Gewicht</th>
+							<th>Gefahr?</th>
+							<th>Fragil?</th>
+							<th>Kommentar</th>
+							<th>Zielort</th>
+							<th>Fahrer</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="parcel : ${getParcelList}">
+							<form th:action="@{/logistics}" th:method="post">
+								<td th:value="${parcel.id}" 		th:text="${parcel.id}">...</td>
+								<td th:value="${parcel.length}" 	th:text="${parcel.length}">...</td>
+								<td th:value="${parcel.width}" 		th:text="${parcel.width}">...</td>
+								<td th:value="${parcel.height}" 	th:text="${parcel.height}">...</td>
+								<td th:value="${parcel.weight}" 	th:text="${parcel.weight}"></td>
+								<td th:value="${parcel.dangerous}"	th:text="${parcel.dangerous}">...</td>
+								<td th:value="${parcel.fragile}"	th:text="${parcel.fragile}"></td>
+								<td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>
+								<td th:value="${parcel.city}"	th:text="${parcel.city}"></td>
+								<td>
+									<!--We use the name property to map the following values into the model-->
+									<input th:value="${parcel.id}" name="parcelId" class="form-control" type="hidden"/>
+									<select name="driver" class="form-control" onchange="this.form.submit()">
+										<option value="" disabled="disabled" selected="selected">Fahrer wählen</option>
+										<th:block th:each="driverListModel : ${getDriverList}">
+											<option th:value="${driverListModel.driverId}" th:text="${driverListModel.driverName}" th:selected="(${#arrays.contains(driverListModel.parcelIds, parcel.id)})">th:selected="${selected}" ...</option>
+										</th:block>
+									</select>
+								</td>
+							</form>
+						</tr>
+					</tbody>
+				</table>
+				<a th:href="@{/neworder}">Neues Paket erfassen</a>
+				<a class="logout" th:href="@{/logout}">Logout</a>
+			</div>
+			<footer>
+				<span>ESE-Team8 (c)2017</span>
+			</footer>
+		</div>
 	</body>
 </html>
