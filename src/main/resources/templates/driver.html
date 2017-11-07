@@ -19,7 +19,8 @@
                     <th>Adresse</th>
                     <th>PLZ</th>
                     <th>Ort</th>
-                    <th>Status</th>
+                    <th>Status A</th>
+                    <th>Status B</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,14 +32,14 @@
                         <td th:value="${delivery.address}" 	th:text="${delivery.address}">...</td>
                         <td th:value="${delivery.plz}" 		th:text="${delivery.plz}">...</td>
                         <td th:value="${delivery.city}" 	th:text="${delivery.city}">...</td>
-
-                        <form th:action="@{/driver}" th:method="post">
+                        <form th:action="@{/driver}" th:method="post" th:object="${delivery}">
+                            <td th:text="${delivery.status}"></td>
                             <td>
                                 <!--We use the name property to map the following values into the model-->
                                 <select name="deliveryStatus" class="form-control" onchange="this.form.submit()">
-                                    <option th:text="${delivery.status}" disabled="disabled" selected="selected">Fahrer wählen</option>
-                                    <option>delivered</option>
-                                    <option>attempted</option>
+                                    <option selected="selected" disabled="disabled">sheudled</option>
+                                    <option th:selected="(${delivery.status == 'delivered'})">delivered</option>
+                                    <option th:selected="(${delivery.status == 'attempted'})">attempted</option>
                                 </select>
                             </td>
                         </form>

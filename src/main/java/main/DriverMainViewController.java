@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,6 +26,12 @@ public class DriverMainViewController {
 
 	@Autowired
 	public UserRepo userRepo;
+
+	//TODO: here should the magic happen
+	@RequestMapping(value="/driver", method= RequestMethod.POST)
+	public String deliverySubmit(@ModelAttribute("assignDriver") Delivery delivery, BindingResult bindingResult, Model model) {
+		return "redirect:driver";
+	}
 
 	/**
 	 * is neccessary for the thymeleaf table representation of the data
