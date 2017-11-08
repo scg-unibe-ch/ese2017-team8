@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/", "/home", "/stylesheets/**").permitAll()
 				.antMatchers("/logistics/**").hasRole("LOGISTICIAN")
+				.antMatchers("/neworder/**").hasRole("LOGISTICIAN")
 				.antMatchers("/driver/**").hasRole("DRIVER")
 				.and()
 				.formLogin().loginPage("/home").successHandler(successHandler)
