@@ -82,4 +82,9 @@ public class DriverMainViewController {
 		all.add(Delivery.Status.attempted);
 		return all;
 	}
+
+	@ModelAttribute("attempted")
+	public Delivery.Status returnStatusAttempted(){
+		return Delivery.Status.attempted;
+	}
 }

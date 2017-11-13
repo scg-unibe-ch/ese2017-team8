@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                 <th:block th:each="del : ${deliveriesForDriver}">
-                    <tr>
+                    <tr th:style="${del.status == attempted} ? 'background: rgb(255,0,0,0.5)'" >>
                         <td th:value="${del.dangerous}" th:text="${del.dangerous}">...</td>
                         <td th:value="${del.fragile}"	th:text="${del.fragile}"></td>
                         <td th:value="${del.comment}"	th:text="${del.comment}"></td>
