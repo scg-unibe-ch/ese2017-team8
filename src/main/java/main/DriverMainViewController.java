@@ -73,18 +73,21 @@ public class DriverMainViewController {
 //		return this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
 	}
 
-	@ModelAttribute("allStatus")
-	public List<Delivery.Status> getAllStatus(){
+	@ModelAttribute("possibleParcelStatusDriver")
+	public List<Delivery.Status> possibleParcelStatusDriver(){
 		List<Delivery.Status> all = new ArrayList<>();
-		// TODO: connect with the real status list
-		all.add(Delivery.Status.scheduled);
-		all.add(Delivery.Status.unscheduled);
 		all.add(Delivery.Status.attempted);
+		all.add(Delivery.Status.delivered);
 		return all;
 	}
 
 	@ModelAttribute("attempted")
 	public Delivery.Status returnStatusAttempted(){
 		return Delivery.Status.attempted;
+	}
+
+	@ModelAttribute("delivered")
+	public Delivery.Status returnStatusDelivered(){
+		return Delivery.Status.delivered;
 	}
 }

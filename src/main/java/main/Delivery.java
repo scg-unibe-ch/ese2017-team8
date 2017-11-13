@@ -22,7 +22,7 @@ public class Delivery
 {
 
 	public enum Status {
-		unscheduled, scheduled, delivered, attempted;
+		unscheduled, scheduled, delivered, attempted, cancelled;
 	}
 
 	@Id

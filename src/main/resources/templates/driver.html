@@ -9,44 +9,53 @@
     <div id="wrapper">
         <div class="content">
             <h1>Hello Driver!</h1>
-            <p>Hier sind alle zugeordneten Lieferungen.</p>
-            <table class="nice">
-                <thead>
-                <tr>
-                    <th>Gefahr?</th>
-                    <th>Fragil?</th>
-                    <th>Kommentar</th>
-                    <th>Adresse</th>
-                    <th>PLZ</th>
-                    <th>Ort</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <th:block th:each="del : ${deliveriesForDriver}">
-                    <tr th:style="${del.status == attempted} ? 'background: rgb(255,0,0,0.5)'" >>
-                        <td th:value="${del.dangerous}" th:text="${del.dangerous}">...</td>
-                        <td th:value="${del.fragile}"	th:text="${del.fragile}"></td>
-                        <td th:value="${del.comment}"	th:text="${del.comment}"></td>
-                        <td th:value="${del.address}" 	th:text="${del.address}">...</td>
-                        <td th:value="${del.plz}" 		th:text="${del.plz}">...</td>
-                        <td th:value="${del.city}" 	th:text="${del.city}">...</td>
-                        <form th:action="@{/driver}" th:method="post" th:object="${delivery}">
-                            <td>
-                                <input th:value="${del.parcelId}" name="parcelId" class="form-control" type="hidden"/>
-                                <!--<input th:value="${delivery.status}" name="status" class="form-control" type="hidden"/>-->
-                                <!--We use the name property to map the following values into the model-->
-                                <select name="status" onchange="this.form.submit()">
-                                    <th:block th:each="stat : ${allStatus}">
-                                        <option th:text="${stat}" th:selected="${del.status == stat}"></option>
-                                    </th:block>
-                                </select>
-                            </td>
-                        </form>
+            <div th:if="${!deliveriesForDriver.empty}">
+                <p>Hier sind alle zugeordneten Lieferungen.</p>
+                <table class="nice">
+                    <thead>
+                    <tr>
+                        <th>Gefahr?</th>
+                        <th>Fragil?</th>
+                        <th>Kommentar</th>
+                        <th>Adresse</th>
+                        <th>PLZ</th>
+                        <th>Ort</th>
+                        <th>Status</th>
                     </tr>
-                </th:block>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="del : ${deliveriesForDriver}">
+                        <!-- styling over the status -->
+                        <tr th:style="${del.status == attempted} ? 'background: rgb(255,0,0,0.5)'"
+                            th:styleappend="${del.status == delivered} ? 'background: rgb(0,255,0,0.5)'">
+                            <td th:value="${del.dangerous}" th:text="${del.dangerous}">...</td>
+                            <td th:value="${del.fragile}"	th:text="${del.fragile}"></td>
+                            <td th:value="${del.comment}"	th:text="${del.comment}"></td>
+                            <td th:value="${del.address}" 	th:text="${del.address}">...</td>
+                            <td th:value="${del.plz}" 		th:text="${del.plz}">...</td>
+                            <td th:value="${del.city}" 	th:text="${del.city}">...</td>
+                            <form th:action="@{/driver}" th:method="post" th:object="${delivery}">
+                                <td>
+                                    <!-- because every delivery contains only one parcel, we can find a delivery with the parcel id -->
+                                    <input th:value="${del.parcelId}" name="parcelId" class="form-control" type="hidden"/>
+                                    <select name="status" onchange="this.form.submit()">
+                                        <!-- each package for a driver is scheduled -->
+                                        <option selected="selected" disabled="disabled">scheduled</option>
+                                        <!-- the driver changes in either delivered or attempted -->
+                                        <th:block th:each="stat : ${possibleParcelStatusDriver}">
+                                            <option th:text="${stat}" th:selected="${del.status == stat}"></option>
+                                        </th:block>
+                                    </select>
+                                </td>
+                            </form>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${deliveriesForDriver.empty}">
+                <p>Aktuell sind keine Lieferungen zugeordnet für Sie.</p>
+            </div>
             <a class="logout" th:href="@{/logout}">Logout</a>
         </div>
         <footer>
