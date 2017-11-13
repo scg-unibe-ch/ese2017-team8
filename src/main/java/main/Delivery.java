@@ -49,7 +49,7 @@ public class Delivery
 
 	@Override
 	public String toString() {
-		return String.format("Delivery - Id: %d", id);
+		return String.format("Delivery - Id: %d, ParcelId: %d", id, parcelId);
 	}
 
 	@ModelAttribute("delivery")

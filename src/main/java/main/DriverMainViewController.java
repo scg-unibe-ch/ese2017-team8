@@ -29,7 +29,12 @@ public class DriverMainViewController {
 
 	//TODO: here should the magic happen
 	@RequestMapping(value="/driver", method= RequestMethod.POST)
-	public String deliverySubmit(@ModelAttribute("assignDriver") Delivery delivery, BindingResult bindingResult, Model model) {
+	public String deliverySubmit(@ModelAttribute("assignDelivery") Delivery delivery, BindingResult bindingResult, Model model) {
+		Delivery hans = deliveryRepo.findByParcelId(delivery.getParcelId());
+		hans.setStatus(delivery.getStatus());
+		deliveryRepo.save(hans);
+		System.out.println(hans.getStatus());
+		System.out.println("hey: " + hans);
 		return "redirect:driver";
 	}
 

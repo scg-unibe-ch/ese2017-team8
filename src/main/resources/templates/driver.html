@@ -24,22 +24,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                <th:block th:each="delivery : ${deliveriesForDriver}">
+                <th:block th:each="del : ${deliveriesForDriver}">
                     <tr>
-                        <td th:value="${delivery.dangerous}" th:text="${delivery.dangerous}">...</td>
-                        <td th:value="${delivery.fragile}"	th:text="${delivery.fragile}"></td>
-                        <td th:value="${delivery.comment}"	th:text="${delivery.comment}"></td>
-                        <td th:value="${delivery.address}" 	th:text="${delivery.address}">...</td>
-                        <td th:value="${delivery.plz}" 		th:text="${delivery.plz}">...</td>
-                        <td th:value="${delivery.city}" 	th:text="${delivery.city}">...</td>
+                        <td th:value="${del.dangerous}" th:text="${del.dangerous}">...</td>
+                        <td th:value="${del.fragile}"	th:text="${del.fragile}"></td>
+                        <td th:value="${del.comment}"	th:text="${del.comment}"></td>
+                        <td th:value="${del.address}" 	th:text="${del.address}">...</td>
+                        <td th:value="${del.plz}" 		th:text="${del.plz}">...</td>
+                        <td th:value="${del.city}" 	th:text="${del.city}">...</td>
                         <form th:action="@{/driver}" th:method="post" th:object="${delivery}">
-                            <td th:text="${delivery.status}"></td>
+                            <td th:text="${del.status}"></td>
                             <td>
+                                <input th:value="${del.parcelId}" name="parcelId" class="form-control" type="hidden"/>
+                                <!--<input th:value="${delivery.status}" name="status" class="form-control" type="hidden"/>-->
                                 <!--We use the name property to map the following values into the model-->
-                                <select name="deliveryStatus" class="form-control" onchange="this.form.submit()">
-                                    <option selected="selected" disabled="disabled">sheudled</option>
-                                    <option th:selected="(${delivery.status == 'delivered'})">delivered</option>
-                                    <option th:selected="(${delivery.status == 'attempted'})">attempted</option>
+                                <select name="status" onchange="this.form.submit()">
+                                    <option>scheduled</option>
+                                    <option>unscheduled</option>
+                                    <option>attempted</option>
                                 </select>
                             </td>
                         </form>
