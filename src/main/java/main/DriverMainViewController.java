@@ -27,7 +27,6 @@ public class DriverMainViewController {
 	@Autowired
 	public UserRepo userRepo;
 
-	//TODO: here should the magic happen
 	@RequestMapping(value="/driver", method= RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDelivery") Delivery delivery, BindingResult bindingResult, Model model) {
 		Delivery hans = deliveryRepo.findByParcelId(delivery.getParcelId());
@@ -72,5 +71,15 @@ public class DriverMainViewController {
 		return viewModel;
 
 //		return this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
+	}
+
+	@ModelAttribute("allStatus")
+	public List<Delivery.Status> getAllStatus(){
+		List<Delivery.Status> all = new ArrayList<>();
+		// TODO: connect with the real status list
+		all.add(Delivery.Status.scheduled);
+		all.add(Delivery.Status.unscheduled);
+		all.add(Delivery.Status.attempted);
+		return all;
 	}
 }
