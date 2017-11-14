@@ -2,9 +2,10 @@ package main;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class DriverDeliveryListModel {
+public class DriverDeliveryListModel implements Serializable{
 	private Long deliveryId;
 	private Long parcelId;
 

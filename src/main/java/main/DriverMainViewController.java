@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class DriverMainViewController {
@@ -67,6 +65,12 @@ public class DriverMainViewController {
 
 			viewModel.add(rowModel);
 		}
+
+		Collections.sort(viewModel, new Comparator<DriverDeliveryListModel>(){
+			public int compare(DriverDeliveryListModel o1, DriverDeliveryListModel o2){
+				return o1.getSequence() - o2.getSequence();
+			}
+		});
 
 		return viewModel;
 
