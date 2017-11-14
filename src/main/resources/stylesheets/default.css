@@ -91,3 +91,7 @@ footer {
     height: 2em;
     clear: both;
 }
+
+input.small {
+    width: 50px;
+}

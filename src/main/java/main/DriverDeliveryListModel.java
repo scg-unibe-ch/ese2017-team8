@@ -19,6 +19,7 @@ public class DriverDeliveryListModel {
 	private String plz;
 	private String address;
 	private Delivery.Status status;
+	private int sequence;
 
 	public Long getDeliveryId() {
 		return deliveryId;
@@ -124,4 +125,11 @@ public class DriverDeliveryListModel {
 		this.status = status;
 	}
 
+	public int getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
+	}
 }

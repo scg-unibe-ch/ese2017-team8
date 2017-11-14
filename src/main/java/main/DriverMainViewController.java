@@ -30,10 +30,9 @@ public class DriverMainViewController {
 	@RequestMapping(value="/driver", method= RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDelivery") Delivery delivery, BindingResult bindingResult, Model model) {
 		Delivery hans = deliveryRepo.findByParcelId(delivery.getParcelId());
+		hans.setSequence(delivery.getSequence());
 		hans.setStatus(delivery.getStatus());
 		deliveryRepo.save(hans);
-		System.out.println(hans.getStatus());
-		System.out.println("hey: " + hans);
 		return "redirect:driver";
 	}
 
@@ -55,6 +54,7 @@ public class DriverMainViewController {
 			rowModel.setDeliveryId(del.getId());
 			rowModel.setParcelId(del.getParcelId());
 			rowModel.setStatus(del.getStatus());
+			rowModel.setSequence(del.getSequence());
 
 			Parcel parcel = parcelRepo.findOne(del.getParcelId());
 
@@ -75,10 +75,10 @@ public class DriverMainViewController {
 
 	@ModelAttribute("possibleParcelStatusDriver")
 	public List<Delivery.Status> possibleParcelStatusDriver(){
-		List<Delivery.Status> all = new ArrayList<>();
-		all.add(Delivery.Status.attempted);
-		all.add(Delivery.Status.delivered);
-		return all;
+		List<Delivery.Status> driverStatus = new ArrayList<>();
+		driverStatus.add(Delivery.Status.attempted);
+		driverStatus.add(Delivery.Status.delivered);
+		return driverStatus;
 	}
 
 	@ModelAttribute("attempted")

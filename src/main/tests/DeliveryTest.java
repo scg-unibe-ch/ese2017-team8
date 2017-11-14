@@ -16,7 +16,7 @@ public class DeliveryTest
 	
 	@Before
 	public void constructor() {
-		Delivery delivery = new Delivery(null, LocalDate.now(), (long)1, (long)2,Delivery.Status.scheduled,new Long(1));
+		Delivery delivery = new Delivery(null, LocalDate.now(), (long)1, (long)2,Delivery.Status.scheduled,new Long(1), 0);
 		delivery.setId((long)(3));
 	}
 

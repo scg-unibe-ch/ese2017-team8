@@ -35,16 +35,18 @@ public class Delivery
 	private Long parcelId;
 	private Status status;
 	private Long driverId;
+	private int sequence;
 
 	protected Delivery() {}
 
-	public Delivery(LocalDate scheduledDate, LocalDate actualDate, Long customerId, Long parcelId, Status status, Long driverId) {
+	public Delivery(LocalDate scheduledDate, LocalDate actualDate, Long customerId, Long parcelId, Status status, Long driverId, int sequence) {
 		this.scheduledDate = scheduledDate;
 		this.actualDate = actualDate;
 		this.customerId = customerId;
 		this.parcelId = parcelId;
 		this.status = Status.scheduled;
 		this.driverId = driverId;
+		this.sequence = sequence;
 	}
 
 	@Override
@@ -97,4 +99,12 @@ public class Delivery
 	public LocalDate getScheduledDate() { return scheduledDate; }
 
 	public void setScheduledDate(LocalDate plannedDate) { this.scheduledDate = plannedDate; }
+
+	public int getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
+	}
 }

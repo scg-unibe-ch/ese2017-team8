@@ -14,6 +14,7 @@
                 <table class="nice">
                     <thead>
                     <tr>
+                        <th>Position</th>
                         <th>Gefahr?</th>
                         <th>Fragil?</th>
                         <th>Kommentar</th>
@@ -28,13 +29,14 @@
                         <!-- styling over the status -->
                         <tr th:style="${del.status == attempted} ? 'background: rgb(255,0,0,0.5)'"
                             th:styleappend="${del.status == delivered} ? 'background: rgb(0,255,0,0.5)'">
-                            <td th:value="${del.dangerous}" th:text="${del.dangerous}">...</td>
-                            <td th:value="${del.fragile}"	th:text="${del.fragile}"></td>
-                            <td th:value="${del.comment}"	th:text="${del.comment}"></td>
-                            <td th:value="${del.address}" 	th:text="${del.address}">...</td>
-                            <td th:value="${del.plz}" 		th:text="${del.plz}">...</td>
-                            <td th:value="${del.city}" 	th:text="${del.city}">...</td>
-                            <form th:action="@{/driver}" th:method="post" th:object="${delivery}">
+                            <form  th:action="@{/driver}" th:method="post" th:object="${delivery}" id="deliveryOrder">
+                                <td><input class="small" type="number" th:value="${del.sequence}" name="sequence" onchange="this.form.submit()" /></td>
+                                <td th:value="${del.dangerous}" th:text="${del.dangerous}">...</td>
+                                <td th:value="${del.fragile}"	th:text="${del.fragile}"></td>
+                                <td th:value="${del.comment}"	th:text="${del.comment}"></td>
+                                <td th:value="${del.address}" 	th:text="${del.address}">...</td>
+                                <td th:value="${del.plz}" 		th:text="${del.plz}">...</td>
+                                <td th:value="${del.city}" 	th:text="${del.city}">...</td>
                                 <td>
                                     <!-- because every delivery contains only one parcel, we can find a delivery with the parcel id -->
                                     <input th:value="${del.parcelId}" name="parcelId" class="form-control" type="hidden"/>
