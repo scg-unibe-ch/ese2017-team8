@@ -31,10 +31,12 @@ public class Parcel {
 	private String city;
 	private String plz;
 	private String address;
+	private String zeitfenster;
 
 	public Parcel() {}
 
-	public Parcel(double length, double width, double height, double weight, boolean dangerous, boolean fragile, String comment, String city, String plz, String address) {
+	public Parcel(double length, double width, double height, double weight, boolean dangerous,
+				  boolean fragile, String comment, String city, String plz, String address, String zeitfenster) {
 		this.length=length;
 		this.width=width;
 		this.height=height;
@@ -42,6 +44,7 @@ public class Parcel {
 		this.dangerous=dangerous;
 		this.fragile=fragile;
 		this.comment=comment;
+		this.zeitfenster = zeitfenster;
 		this.city=city;
 		this.plz=plz;
 		this.address=address;
@@ -120,6 +123,12 @@ public class Parcel {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public String getZeitfenster(){
+		return zeitfenster;
+	}
+
+	public void setZeitfenster(String zeitfenster){this.zeitfenster = zeitfenster;}
 
 	public String getCity() {
 		return city;

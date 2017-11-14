@@ -16,6 +16,7 @@ public class DriverDeliveryListModel implements Serializable{
 	private boolean dangerous; //i.e. flammable
 	private boolean fragile;
 	private String comment;
+	private String zeitfenster;
 	private String city;
 	private String plz;
 	private String address;
@@ -93,6 +94,10 @@ public class DriverDeliveryListModel implements Serializable{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public String getZeitfenster(){return zeitfenster;}
+
+	public void setZeitfenster(String zeitfenster){this.zeitfenster = zeitfenster;}
 
 	public String getCity() {
 		return city;
