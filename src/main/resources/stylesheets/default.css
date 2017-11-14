@@ -95,3 +95,8 @@ footer {
 input.small {
     width: 50px;
 }
+
+img.symbol {
+    width: 25px;
+    height: auto;
+}

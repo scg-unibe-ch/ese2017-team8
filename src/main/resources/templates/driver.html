@@ -15,8 +15,7 @@
                     <thead>
                     <tr>
                         <th>Position</th>
-                        <th>Gefahr?</th>
-                        <th>Fragil?</th>
+                        <th>Hinnweis</th>
                         <th>Kommentar</th>
                         <th>Adresse</th>
                         <th>PLZ</th>
@@ -27,12 +26,18 @@
                     <tbody>
                     <th:block th:each="del : ${deliveriesForDriver}">
                         <!-- styling over the status -->
-                        <tr th:style="${del.status == attempted} ? 'background: rgb(255,0,0,0.5)'"
-                            th:styleappend="${del.status == delivered} ? 'background: rgb(0,255,0,0.5)'">
+                        <tr th:style="${del.status == attempted} ? '#bc0536'"
+                            th:styleappend="${del.status == delivered} ? 'background: #0f8202'">
                             <form  th:action="@{/driver}" th:method="post" th:object="${delivery}" id="deliveryOrder">
                                 <td><input class="small" type="number" th:value="${del.sequence}" name="sequence" onchange="this.form.submit()" /></td>
-                                <td th:value="${del.dangerous}" th:text="${del.dangerous}">...</td>
-                                <td th:value="${del.fragile}"	th:text="${del.fragile}"></td>
+                                <td style="white-space: nowrap;">
+                                    <div style="width: 30px; float: left;" th:if="${del.dangerous}">
+                                        <img class="symbol" src="../media/gefahr.jpg" />
+                                    </div>
+                                    <div style="width: 30px; float: right;" th:if="${del.fragile}">
+                                        <img class="symbol" src="../media/fragil.jpg" />
+                                    </div>
+                                </td>
                                 <td th:value="${del.comment}"	th:text="${del.comment}"></td>
                                 <td th:value="${del.address}" 	th:text="${del.address}">...</td>
                                 <td th:value="${del.plz}" 		th:text="${del.plz}">...</td>
