@@ -57,6 +57,7 @@ public class DriverMainViewController {
 			Parcel parcel = parcelRepo.findOne(del.getParcelId());
 
 			rowModel.setComment(parcel.getComment());
+			rowModel.setZeitfenster(parcel.getZeitfenster());
 			rowModel.setDangerous(parcel.isDangerous());
 			rowModel.setFragile(parcel.isFragile());
 			rowModel.setAddress(parcel.getAddress());
