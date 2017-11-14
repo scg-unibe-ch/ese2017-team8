@@ -18,8 +18,7 @@
 							<th>Breite</th>
 							<th>Höhe</th>
 							<th>Gewicht</th>
-							<th>Gefahr?</th>
-							<th>Fragil?</th>
+							<th>Hinweise</th>
 							<th>Kommentar</th>
 							<th>Zielort</th>
 							<th>Fahrer</th>
@@ -33,8 +32,14 @@
 								<td th:value="${parcel.width}" 		th:text="${parcel.width}">...</td>
 								<td th:value="${parcel.height}" 	th:text="${parcel.height}">...</td>
 								<td th:value="${parcel.weight}" 	th:text="${parcel.weight}"></td>
-								<td th:value="${parcel.dangerous}"	th:text="${parcel.dangerous}">...</td>
-								<td th:value="${parcel.fragile}"	th:text="${parcel.fragile}"></td>
+								<td style="white-space: nowrap;">
+									<div style="width: 30px; float: left;" th:if="${parcel.dangerous}">
+										<img class="symbol" src="../media/gefahr.jpg" />
+									</div>
+									<div style="width: 30px; float: right;" th:if="${parcel.fragile}">
+										<img class="symbol" src="../media/fragil.jpg" />
+									</div>
+								</td>
 								<td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>
 								<td th:value="${parcel.city}"	th:text="${parcel.city}"></td>
 								<td>
