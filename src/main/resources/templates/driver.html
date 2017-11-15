@@ -8,7 +8,7 @@
 <body>
     <div id="wrapper">
         <div class="content">
-            <h1>Hello Driver!</h1>
+            <h1 th:text="${loggedInUser}"></h1>
             <div th:if="${!deliveriesForDriver.empty}">
                 <p>Hier sind alle zugeordneten Lieferungen.</p>
                 <table class="nice">
@@ -27,7 +27,7 @@
                     <tbody>
                     <th:block th:each="del : ${deliveriesForDriver}">
                         <!-- styling over the status -->
-                        <tr th:style="${del.status == attempted} ? '#bc0536'"
+                        <tr th:style="${del.status == attempted} ? 'background: #bc0536'"
                             th:styleappend="${del.status == delivered} ? 'background: #0f8202'">
                             <form  th:action="@{/driver}" th:method="post" th:object="${delivery}" id="deliveryOrder">
                                 <td><input class="small" type="number" th:value="${del.sequence}" name="sequence" onchange="this.form.submit()" /></td>

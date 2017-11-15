@@ -86,6 +86,12 @@ public class DriverMainViewController {
 		return driverStatus;
 	}
 
+	@ModelAttribute("loggedInUser")
+	public String returnLoggedInName() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return authentication.getName();
+	}
+
 	@ModelAttribute("attempted")
 	public Delivery.Status returnStatusAttempted(){
 		return Delivery.Status.attempted;
