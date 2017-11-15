@@ -31,12 +31,13 @@ public class Parcel {
 	private String city;
 	private String plz;
 	private String address;
+	private String recipient;
 	private String zeitfenster;
 
 	public Parcel() {}
 
 	public Parcel(double length, double width, double height, double weight, boolean dangerous,
-				  boolean fragile, String comment, String city, String plz, String address, String zeitfenster) {
+				  boolean fragile, String comment, String city, String plz, String address, String recipient, String zeitfenster) {
 		this.length=length;
 		this.width=width;
 		this.height=height;
@@ -47,6 +48,7 @@ public class Parcel {
 		this.zeitfenster = zeitfenster;
 		this.city=city;
 		this.plz=plz;
+		this.recipient=recipient;
 		this.address=address;
 	}
 
@@ -152,5 +154,13 @@ public class Parcel {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
 	}
 }

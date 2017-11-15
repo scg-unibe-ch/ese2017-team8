@@ -20,6 +20,7 @@ public class DriverDeliveryListModel implements Serializable{
 	private String city;
 	private String plz;
 	private String address;
+	private String recipient;
 	private Delivery.Status status;
 	private int sequence;
 
@@ -137,5 +138,13 @@ public class DriverDeliveryListModel implements Serializable{
 
 	public void setSequence(int sequence) {
 		this.sequence = sequence;
+	}
+
+	public String getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
 	}
 }

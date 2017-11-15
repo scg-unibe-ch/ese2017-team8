@@ -60,6 +60,7 @@ public class DriverMainViewController {
 			rowModel.setZeitfenster(parcel.getZeitfenster());
 			rowModel.setDangerous(parcel.isDangerous());
 			rowModel.setFragile(parcel.isFragile());
+			rowModel.setRecipient(parcel.getRecipient());
 			rowModel.setAddress(parcel.getAddress());
 			rowModel.setPlz(parcel.getPlz());
 			rowModel.setCity(parcel.getCity());
