@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Bestellung Bearbeiten</title>
+        <link rel="stylesheet" type="text/css" media="all"
+              href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
+    </head>
+    <body>
+        <div id="wrapper">
+            <div class="content">
+                <h1>Logistics Backend</h1>
+                <h2>Paket Bearbeiten</h2>
+                <div th:text="${param.id[0]}"></div>
+                <form action="#" th:action="@{/changeorder}" th:object="${parcelById}" method="post">
+                    <table class="nogrid">
+                        <tr>
+                            <td><label for="parcel_length">Länge (in cm)</label></td>
+                            <td><input id="parcel_length" name="length" type="number" min="0" th:value="*{{length}}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_width">Breite (in cm)</label></td>
+                            <td><input id="parcel_width" name="width" type="number" min="0" th:value="*{{width}}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_height">Höhe (in cm)</label></td>
+                            <td><input id="parcel_height" name="height" type="number" min="0" th:value="*{{height}}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_weight">Gewicht (in kg)</label></td>
+                            <td><input id="parcel_weight" name="weight" type="number" min="0" step="0.01" th:value="*{{weight}}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_dangerous">Gefahrengut</label></td>
+                            <td><input id="parcel_dangerous" name="dangerous" type="checkbox" th:checked="*{dangerous}"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_fragile">Zerbrechlich</label></td>
+                            <td><input id="parcel_fragile" name="fragile" type="checkbox" th:checked="*{fragile}"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_comment">Kommentar</label></td>
+                            <td><input id="parcel_comment" name="comment" type="text" maxlength="100" th:value="*{comment}"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_time">Zeitfenster</label></td>
+                            <td><input id="parcel_time" name="zeitfenster" type="text" maxlength="100" th:value="*{zeitfenster}"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_recipient">Empfänger</label></td>
+                            <td><input id="parcel_recipient" name="recipient" type="text" th:value="*{recipient}" maxlength="100" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_address">Adresse</label></td>
+                            <td><input id="parcel_address" name="address" type="text" th:value="*{address}" maxlength="100" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_plz">Postleitzahl</label></td>
+                            <td><input id="parcel_plz" name="plz" type="number" min="1000" max="9999" value="5000" th:value="*{plz}" required="required"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="parcel_city">Ort</label></td>
+                            <td><input id="parcel_city" type="text" name="city" maxlength="100" required="required" th:value="*{city}"/></td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="id" th:value="*{id}" />
+                    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+                </form>
+                <a class="logout" th:href="@{/logout}">Logout</a>
+                <a th:href="@{/logistics}">Back</a>
+            </div>
+            <footer>
+                <span>ESE-Team8 (c)2017</span>
+            </footer>
+        </div>
+    </body>
 </html>
