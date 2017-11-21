@@ -56,16 +56,19 @@ public class DriverMainViewController {
 
 			Parcel parcel = parcelRepo.findOne(del.getParcelId());
 
-			rowModel.setComment(parcel.getComment());
-			rowModel.setZeitfenster(parcel.getZeitfenster());
-			rowModel.setDangerous(parcel.isDangerous());
-			rowModel.setFragile(parcel.isFragile());
-			rowModel.setRecipient(parcel.getRecipient());
-			rowModel.setAddress(parcel.getAddress());
-			rowModel.setPlz(parcel.getPlz());
-			rowModel.setCity(parcel.getCity());
+			// es kann sein, dass Paket gelöscht wurde
+			if (parcel != null) {
+				rowModel.setComment(parcel.getComment());
+				rowModel.setZeitfenster(parcel.getZeitfenster());
+				rowModel.setDangerous(parcel.isDangerous());
+				rowModel.setFragile(parcel.isFragile());
+				rowModel.setRecipient(parcel.getRecipient());
+				rowModel.setAddress(parcel.getAddress());
+				rowModel.setPlz(parcel.getPlz());
+				rowModel.setCity(parcel.getCity());
 
-			viewModel.add(rowModel);
+				viewModel.add(rowModel);
+			}
 		}
 
 		Collections.sort(viewModel, new Comparator<DriverDeliveryListModel>(){
