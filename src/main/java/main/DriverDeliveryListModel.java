@@ -1,26 +1,14 @@
 package main;
 
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
+public class DriverDeliveryListModel implements Serializable{
+	private Long deliveryId;
+	private Long parcelId;
 
-/**
- * This class is an entity for parcels.
- * It contains its dimensions, weight and important notes.
- * It is possible to access the properties of a parcel by invoking the getter and setter methods.
- *
- * @author Team8
- * @version 1.0
- */
-@Entity
-@Table(name = "parcels")
-public class Parcel {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
 	private double length;
 	private double width;
 	private double height;
@@ -28,47 +16,28 @@ public class Parcel {
 	private boolean dangerous; //i.e. flammable
 	private boolean fragile;
 	private String comment;
+	private String zeitfenster;
 	private String city;
 	private String plz;
 	private String address;
 	private String recipient;
-	private String zeitfenster;
-	private String idString;
+	private Delivery.Status status;
+	private int sequence;
 
-	public Parcel() {}
-
-	public Parcel(double length, double width, double height, double weight, boolean dangerous,
-				  boolean fragile, String comment, String city, String plz, String address, String recipient, String zeitfenster) {
-		this.length=length;
-		this.width=width;
-		this.height=height;
-		this.weight=weight;
-		this.dangerous=dangerous;
-		this.fragile=fragile;
-		this.comment=comment;
-		this.zeitfenster = zeitfenster;
-		this.city=city;
-		this.plz=plz;
-		this.recipient=recipient;
-		this.address=address;
+	public Long getDeliveryId() {
+		return deliveryId;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("Parcel – Id: %d", id);
+	public void setDeliveryId(Long deliveryId) {
+		this.deliveryId = deliveryId;
 	}
 
-	@ModelAttribute("parcel")
-	public Parcel getParcel(){
-		return new Parcel();
+	public Long getParcelId() {
+		return parcelId;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setParcelId(Long parcelId) {
+		this.parcelId = parcelId;
 	}
 
 	public double getLength() {
@@ -127,9 +96,7 @@ public class Parcel {
 		this.comment = comment;
 	}
 
-	public String getZeitfenster(){
-		return zeitfenster;
-	}
+	public String getZeitfenster(){return zeitfenster;}
 
 	public void setZeitfenster(String zeitfenster){this.zeitfenster = zeitfenster;}
 
@@ -157,18 +124,27 @@ public class Parcel {
 		this.address = address;
 	}
 
+	public Delivery.Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Delivery.Status status) {
+		this.status = status;
+	}
+
+	public int getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
+	}
+
 	public String getRecipient() {
 		return recipient;
 	}
 
 	public void setRecipient(String recipient) {
 		this.recipient = recipient;
-	}
-
-	/**
-	 * method is necessary to compare the parcelId over the url like: changeorder?id=3
-	 */
-	public String getIdString() {
-		return id.toString();
 	}
 }

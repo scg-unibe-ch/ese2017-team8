@@ -4,28 +4,75 @@
     <title>Hello Driver!</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
+    <META HTTP-EQUIV="refresh" CONTENT="15"/>
 </head>
 <body>
-    <h1>Hello Driver!</h1>
-    <p>Hier sind alle zugeordneten Lieferungen.</p>
-    <table>
-        <thead>
-        <tr>
-            <th>Customer-ID</th>
-            <th>Package-ID</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="delivery : ${allDeliveryDriver}">
-            <tr>
-                <td th:text="${delivery.customerId}">...</td>
-                <td th:text="${delivery.packageId}">...</td>
-                <td th:text="${delivery.status}">...</td>
-            </tr>
-        </th:block>
-        </tbody>
-    </table>
-    <a th:href="@{/logout}">Logout</a>
+    <div id="wrapper">
+        <div class="content">
+            <h1 th:text="${loggedInUser}"></h1>
+            <div th:if="${!deliveriesForDriver.empty}">
+                <p>Hier sind alle zugeordneten Lieferungen.</p>
+                <table class="nice">
+                    <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Hinweis</th>
+                        <th>Kommentar</th>
+                        <th>Annahmefenster</th>
+                        <th>Empfänger</th>
+                        <th>Adresse</th>
+                        <th>PLZ</th>
+                        <th>Ort</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="del : ${deliveriesForDriver}">
+                        <!-- styling over the status -->
+                        <tr th:style="${del.status == attempted} ? 'background: #bc0536'"
+                            th:styleappend="${del.status == delivered} ? 'background: #0f8202'">
+                            <form  th:action="@{/driver}" th:method="post" th:object="${delivery}" id="deliveryOrder">
+                                <td><input class="small" type="number" th:value="${del.sequence}" name="sequence" onchange="this.form.submit()" /></td>
+                                <td style="white-space: nowrap;">
+                                    <div style="width: 30px; float: left;" th:if="${del.dangerous}">
+                                        <img class="symbol" src="../media/gefahr.jpg" />
+                                    </div>
+                                    <div style="width: 30px; float: right;" th:if="${del.fragile}">
+                                        <img class="symbol" src="../media/fragil.jpg" />
+                                    </div>
+                                </td>
+                                <td th:value="${del.comment}"	th:text="${del.comment}"></td>
+                                <td th:value="${del.zeitfenster}" 	th:text="${del.zeitfenster}"></td>
+                                <td th:value="${del.recipient}" 	th:text="${del.recipient}">...</td>
+                                <td th:value="${del.address}" 	th:text="${del.address}">...</td>
+                                <td th:value="${del.plz}" 		th:text="${del.plz}">...</td>
+                                <td th:value="${del.city}" 	th:text="${del.city}">...</td>
+                                <td>
+                                    <!-- because every delivery contains only one parcel, we can find a delivery with the parcel id -->
+                                    <input th:value="${del.parcelId}" name="parcelId" class="form-control" type="hidden"/>
+                                    <select name="status" onchange="this.form.submit()">
+                                        <!-- each package for a driver is scheduled -->
+                                        <option selected="selected" disabled="disabled">scheduled</option>
+                                        <!-- the driver changes in either delivered or attempted -->
+                                        <th:block th:each="stat : ${possibleParcelStatusDriver}">
+                                            <option th:text="${stat}" th:selected="${del.status == stat}"></option>
+                                        </th:block>
+                                    </select>
+                                </td>
+                            </form>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${deliveriesForDriver.empty}">
+                <p>Aktuell sind keine Lieferungen zugeordnet für Sie.</p>
+            </div>
+            <a class="logout" th:href="@{/logout}">Logout</a>
+        </div>
+        <footer>
+            <span>ESE-Team8 (c)2017</span>
+        </footer>
+    </div>
 </body>
 </html>

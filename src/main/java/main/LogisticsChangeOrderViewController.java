@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-public class LogisticsNewOrderViewController {
+public class LogisticsChangeOrderViewController {
 
 	@Autowired
 	public ParcelRepo parcelRepo;
@@ -21,15 +21,20 @@ public class LogisticsNewOrderViewController {
 		return new Parcel();
 	}
 
+	@ModelAttribute("getAllParcels")
+	public List<Parcel> getAllParcels() {
+		return parcelRepo.findAll();
+	}
+
 	/**
 	 * Creates the empty form for entering the parcels specs.
 	 *
 	 * @param model
 	 * @return String logistics
 	 */
-	@RequestMapping(value="/neworder", method=RequestMethod.GET)
+	@RequestMapping(value="/changeorder", method=RequestMethod.GET)
 	public String parcelForm(Model model) {
-		return "neworder";
+		return "changeorder";
 	}
 
 
@@ -38,9 +43,15 @@ public class LogisticsNewOrderViewController {
 	 *
 	 * @return direction of post output
 	 */
-	@RequestMapping(value="/neworder", method=RequestMethod.POST)
-	public String parcelSubmit(@ModelAttribute("parcel") Parcel parcel, BindingResult bindingResult, Model model) {
+	@RequestMapping(value="/change", method=RequestMethod.POST)
+	public String parcelChange(@ModelAttribute("changeParcel") Parcel parcel, BindingResult bindingResult, Model model) {
 		parcelRepo.save(parcel);
+		return "redirect:/logistics";
+	}
+
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String parcelDelete(@ModelAttribute("deleteParcel") Parcel parcel, BindingResult bindingResult, Model model) {
+		System.out.println(parcelRepo.deleteById(parcel.getId()));
 		return "redirect:/logistics";
 	}
 }

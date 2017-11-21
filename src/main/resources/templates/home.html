@@ -6,19 +6,26 @@
           href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
 </head>
 <body>
-<h1>Welcome!</h1>
-
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-
-<form th:action="@{/home}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+    <div id="wrapper" style="width: 400px">
+        <div class="content">
+            <h1>Welcome!</h1>
+            <div th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <form th:action="@{/home}" method="post">
+                <table class="nogrid">
+                    <tr><td><label>User Name:</label></td><td><input type="text" name="username"/></td></tr>
+                    <tr><td><label>Password:</label></td><td><input type="password" name="password"/></td></tr>
+                </table>
+                <div><input type="submit" value="Sign In"/></div>
+            </form>
+        </div>
+        <footer>
+            <span>ESE-Team8 (c)2017</span>
+        </footer>
+    </div>
 </body>
 </html>

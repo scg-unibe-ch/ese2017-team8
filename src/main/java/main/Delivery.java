@@ -1,6 +1,7 @@
 package main;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,36 +22,36 @@ public class Delivery
 {
 
 	public enum Status {
-		unscheduled, scheduled, delivered, attempted;
+		unscheduled, scheduled, delivered, attempted, cancelled;
 	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	private Calendar plannedDate;
-	private Date actualDate;
+	private LocalDate scheduledDate;
+	private LocalDate actualDate;
 	private Long customerId;
-	private Long packageId;
+	private Long parcelId;
 	private Status status;
-	private String driver;
+	private Long driverId;
+	private int sequence;
 
 	protected Delivery() {}
 
-	public Delivery(Calendar plannedDate, Date actualDate, Long customerId, Long packageId, Status status, String driver) {
-		Calendar now = Calendar.getInstance();
-		now.add(Calendar.DAY_OF_YEAR, 1);
-		this.plannedDate = now;
+	public Delivery(LocalDate scheduledDate, LocalDate actualDate, Long customerId, Long parcelId, Status status, Long driverId, int sequence) {
+		this.scheduledDate = scheduledDate;
 		this.actualDate = actualDate;
 		this.customerId = customerId;
-		this.packageId = packageId;
-		this.status = status;
-		this.driver = driver;
+		this.parcelId = parcelId;
+		this.status = Status.scheduled;
+		this.driverId = driverId;
+		this.sequence = sequence;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Delivery - Id: %d", id);
+		return String.format("Delivery - Id: %d, ParcelId: %d", id, parcelId);
 	}
 
 	@ModelAttribute("delivery")
@@ -66,13 +67,10 @@ public class Delivery
 		this.id = id;
 	}
 
-	public String getDriver() {
-		System.out.println("Nom");
-		return "asdf";
-	}
+	public Long getDriverId() { return driverId; }
 
-	public void setDriver(String driver) {
-		this.driver = driver;
+	public void setDriverId(Long driverId) {
+		this.driverId = driverId;
 	}
 
 	public Long getCustomerId() {
@@ -81,12 +79,13 @@ public class Delivery
 
 	public void setCustomerId(Long customerId){}
 
-	public Long getPackageId() {
-		return packageId;
+	@ModelAttribute("parcelId")
+	public Long getParcelId() {
+		return parcelId;
 	}
 
-	public void setPackageId(Long packageId) {
-		this.packageId = packageId;
+	public void setParcelId(Long parcelId) {
+		this.parcelId = parcelId;
 	}
 
 	public Status getStatus() {
@@ -97,11 +96,15 @@ public class Delivery
 		this.status = status;
 	}
 
-	public Calendar getPlannedDate() {
-		return plannedDate;
+	public LocalDate getScheduledDate() { return scheduledDate; }
+
+	public void setScheduledDate(LocalDate plannedDate) { this.scheduledDate = plannedDate; }
+
+	public int getSequence() {
+		return sequence;
 	}
 
-	public void setPlannedDate(Calendar plannedDate) {
-		this.plannedDate = plannedDate;
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
 	}
 }
