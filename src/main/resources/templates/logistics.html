@@ -22,6 +22,7 @@
 							<th>Kommentar</th>
 							<th>Zielort</th>
 							<th>Fahrer</th>
+							<th>Edit</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -52,12 +53,14 @@
 										</th:block>
 									</select>
 								</td>
+								<td>
+									<a th:href="@{/changeorder(id=${parcel.id})}">edit</a>
+								</td>
 							</form>
 						</tr>
 					</tbody>
 				</table>
 				<a th:href="@{/neworder}">Neues Paket erfassen</a>
-				<a th:href="@{/changeorder(id=3)}">Packet bearbeiten</a>
 				<a class="logout" th:href="@{/logout}">Logout</a>
 			</div>
 			<footer>

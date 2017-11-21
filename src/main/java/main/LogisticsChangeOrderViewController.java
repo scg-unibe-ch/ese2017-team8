@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 public class LogisticsChangeOrderViewController {
 
@@ -19,9 +21,10 @@ public class LogisticsChangeOrderViewController {
 		return new Parcel();
 	}
 
-	@ModelAttribute("parcelById")
-	public Parcel getParcelById(){
-		return parcelRepo.getParcelById(3L);
+	@ModelAttribute("getAllParcels")
+	public List<Parcel> getAllParcels() {
+		System.out.println("Call on MEEEEE");
+		return parcelRepo.findAll();
 	}
 
 	/**

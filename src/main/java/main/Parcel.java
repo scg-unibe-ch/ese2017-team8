@@ -33,6 +33,7 @@ public class Parcel {
 	private String address;
 	private String recipient;
 	private String zeitfenster;
+	private String idString;
 
 	public Parcel() {}
 
@@ -162,5 +163,12 @@ public class Parcel {
 
 	public void setRecipient(String recipient) {
 		this.recipient = recipient;
+	}
+
+	/**
+	 * method is necessary to compare the parcelId over the url like: changeorder?id=3
+	 */
+	public String getIdString() {
+		return id.toString();
 	}
 }
