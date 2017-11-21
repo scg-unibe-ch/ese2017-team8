@@ -63,13 +63,14 @@ public class LogisticsMainViewController {
 	@ModelAttribute("getParcelList")
 	public List<Parcel> getParcelList() {
 		//this part is only here to have some examples already in the list
-		if(parcelRepo.getParcelById(1L) == null) {
+		if(parcelRepo.count() < 1) {
+			System.out.println("Zum Start werden vier Pakete eingelesen.");
 			parcelRepo.save(example1);
 			parcelRepo.save(example2);
 			parcelRepo.save(example3);
 			parcelRepo.save(example4);
 		}
-		return this.parcelRepo.findAll();
+		return parcelRepo.findAll();
 	}
 
 	/**

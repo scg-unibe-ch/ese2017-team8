@@ -23,7 +23,6 @@ public class LogisticsChangeOrderViewController {
 
 	@ModelAttribute("getAllParcels")
 	public List<Parcel> getAllParcels() {
-		System.out.println("Call on MEEEEE");
 		return parcelRepo.findAll();
 	}
 
@@ -44,9 +43,15 @@ public class LogisticsChangeOrderViewController {
 	 *
 	 * @return direction of post output
 	 */
-	@RequestMapping(value="/changeorder", method=RequestMethod.POST)
-	public String parcelChange(@ModelAttribute("assignParcel") Parcel parcel, BindingResult bindingResult, Model model) {
+	@RequestMapping(value="/change", method=RequestMethod.POST)
+	public String parcelChange(@ModelAttribute("changeParcel") Parcel parcel, BindingResult bindingResult, Model model) {
 		parcelRepo.save(parcel);
+		return "redirect:/logistics";
+	}
+
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String parcelDelete(@ModelAttribute("deleteParcel") Parcel parcel, BindingResult bindingResult, Model model) {
+		System.out.println(parcelRepo.deleteById(parcel.getId()));
 		return "redirect:/logistics";
 	}
 }

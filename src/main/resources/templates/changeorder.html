@@ -14,7 +14,7 @@
                 <!-- works like that: takes the list of all parcels, then compares with the id parameter in the url -->
                 <div th:each="paket : ${getAllParcels}">
                     <div th:if="${paket.idString == param.id[0]}">
-                        <form action="#" th:action="@{/changeorder}" th:object="${paket}" method="post">
+                        <form action="#" th:action="@{/change}" th:object="${paket}" method="post">
                             <table class="nogrid">
                                 <tr>
                                     <td><label for="parcel_length">Länge (in cm)</label></td>
@@ -67,6 +67,10 @@
                             </table>
                             <input type="hidden" name="id" th:value="*{id}" />
                             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+                        </form>
+                        <form action="#" th:action="@{/delete}" th:object="${paket}" method="post">
+                            <input type="hidden" name="id" th:value="*{id}" />
+                            <input type="submit" class="delete" value="Paket löschen" />
                         </form>
                     </div>
                 </div>
