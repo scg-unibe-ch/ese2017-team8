@@ -21,7 +21,6 @@ public class CreateDeliveryInteractor {
 		return createScheduledDeliveryWithDate(driver, parcelId, scheduledDate);
 	}
 
-	// TODO: Ensure only one delivery can be created for a package
 	public Long createScheduledDeliveryWithDate(User driver, Long parcelId, LocalDate date) {
 		// If delivery already exists we simply update its values
 		Delivery delivery = deliveryRepo.findByParcelId(parcelId);

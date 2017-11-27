@@ -3,8 +3,12 @@ package main;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.NamedQuery;
 
 /**
  * This interface is used to setup the delivery parcelRepo.
@@ -21,12 +25,12 @@ public interface DeliveryRepo extends CrudRepository<Delivery, Long> {
 	 */
 	public List<Delivery> findAll();
 
-	/**
-	 * Finds all deliveries for the selected driver.
-	 * @param driverId Long which matches the driver id.
-	 * @return List which contains deliveries of the selected driver.
-	 */
-	public List<Delivery> findByDriverId(Long driverId);
+
+	@Query("SELECT d FROM Delivery d WHERE d.driverId = :driverId AND NOT d.status = 5")
+	public List<Delivery> findByDriverId(@Param("driverId") Long driverId);
+
+	@Query("SELECT d FROM Delivery d WHERE NOT d.status = 5")
+	public List<Delivery> findAllNotArchived();
 
 	public Delivery findByParcelId(Long parcelId);
 

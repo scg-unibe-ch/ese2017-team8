@@ -83,6 +83,18 @@ a.logout:hover {
     transition: 0.6s;
 }
 
+a.finishtour {
+    background: #000000;
+    padding: 8px;
+    color: white;
+    text-decoration: none;
+}
+
+a.finishtour:hover {
+    background: #60af59;
+    transition: 0.6s;
+}
+
 footer {
     position: absolute;
     bottom: 0px;

@@ -22,7 +22,7 @@ public class Delivery
 {
 
 	public enum Status {
-		unscheduled, scheduled, delivered, attempted, cancelled;
+		unscheduled, scheduled, delivered, attempted, cancelled, archived;
 	}
 
 	@Id
@@ -99,6 +99,14 @@ public class Delivery
 	public LocalDate getScheduledDate() { return scheduledDate; }
 
 	public void setScheduledDate(LocalDate plannedDate) { this.scheduledDate = plannedDate; }
+
+	public LocalDate getActualDate() {
+		return actualDate;
+	}
+
+	public void setActualDate(LocalDate actualDate) {
+		this.actualDate = actualDate;
+	}
 
 	public int getSequence() {
 		return sequence;

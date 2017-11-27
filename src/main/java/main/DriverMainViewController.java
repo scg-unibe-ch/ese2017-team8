@@ -1,5 +1,6 @@
 package main;
 
+import com.sun.xml.internal.xsom.impl.scd.Iterators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,13 +26,29 @@ public class DriverMainViewController {
 	@Autowired
 	public UserRepo userRepo;
 
-	@RequestMapping(value="/driver", method= RequestMethod.POST)
+	@Autowired
+	private FinishTourInteractor finishTourInteractor;
+
+	public static Boolean shouldGenerateExample = true;
+
+	@RequestMapping(value="/driver/delivery", method= RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDelivery") Delivery delivery, BindingResult bindingResult, Model model) {
-		Delivery hans = deliveryRepo.findByParcelId(delivery.getParcelId());
-		hans.setSequence(delivery.getSequence());
-		hans.setStatus(delivery.getStatus());
-		deliveryRepo.save(hans);
-		return "redirect:driver";
+		Delivery submittedDelivery = deliveryRepo.findByParcelId(delivery.getParcelId());
+		submittedDelivery.setSequence(delivery.getSequence());
+		submittedDelivery.setStatus(delivery.getStatus());
+		deliveryRepo.save(submittedDelivery);
+		return "redirect:/driver";
+	}
+
+	@RequestMapping(value="/driver/finishTour", method= RequestMethod.GET)
+	public String finishTour() {
+		System.out.println("Finished Tour");
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentUserName = authentication.getName();
+
+		finishTourInteractor.finishTourForDriver(this.userRepo.findByUsername(currentUserName));
+		return "redirect:/driver";
 	}
 
 	/**
@@ -44,7 +61,12 @@ public class DriverMainViewController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentUserName = authentication.getName();
 
+		this.generateExamples();
+
+//		List<Delivery> deliveries = this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
 		List<Delivery> deliveries = this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
+//		List<Delivery> deliveries = new ArrayList<Delivery>();
+
 		List<DriverDeliveryListModel> viewModel = new ArrayList<>();
 
 		for (Delivery del : deliveries) {
@@ -75,8 +97,32 @@ public class DriverMainViewController {
 		});
 
 		return viewModel;
+	}
 
-//		return this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
+	public void generateExamples() {
+		if (!shouldGenerateExample) { return; }
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentUserName = authentication.getName();
+
+		Parcel example1 = new Parcel(2.0, 10.0, 20.0, 2.0, false, false, null, "Bern","6122","Feldstrasse 1", "Fenaco AG","");
+		Parcel example2 = new Parcel(10.0, 20.0, 30.0, 5.2, true, true, "Bombe", "Wolhusen","6110","Burgring 88", "Max Muster","ab 17:00");
+		Parcel example3 = new Parcel(10.0, 20.0, 30.0, 5.2, true, false, "Nukleares Material", "Schwarzenburg","3120","Genossenweg 2", "Helmut Schmied" ,"");
+		Parcel example4 = new Parcel(10.0, 20.0, 30.0, 700, false, false, "Sägemehl", "Beromünster", "6240","Senderstrasse 3a", "Homer Simpson","");
+
+		List<Parcel> parcels = Arrays.asList(example1, example2, example3, example4);
+		this.parcelRepo.save(parcels);
+
+		for (Parcel p : parcels) {
+			Delivery delivery = new Delivery();
+			delivery.setDriverId(this.userRepo.findByUsername(currentUserName).getId());
+			delivery.setScheduledDate(LocalDate.now());
+			delivery.setParcelId(p.getId());
+			delivery.setStatus(Delivery.Status.scheduled);
+			this.deliveryRepo.save(delivery);
+		}
+
+		shouldGenerateExample = false;
 	}
 
 	@ModelAttribute("possibleParcelStatusDriver")
