@@ -25,5 +25,4 @@ public class CustomerTest
 	{
 		assertEquals(customer.toString(),"Customer[id=0, firstName='Ben', lastName='Musterman']");
 	}
-
 }
