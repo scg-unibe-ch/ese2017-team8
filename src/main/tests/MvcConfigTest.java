@@ -36,8 +36,7 @@ public class MvcConfigTest
 	@Test
 	public void addViewControllersTest()
 	{
-		ViewControllerRegistration controller1 = mock(ViewControllerRegistration.class);
-		when(registry.addViewController("/home")).thenReturn(controller1);
+		when(registry.addViewController("/home")).thenReturn(controller);
 		when(registry.addViewController("/")).thenReturn(controller);
 		when(registry.addViewController("/login")).thenReturn(controller);
 		when(registry.addViewController("/logistics")).thenReturn(controller);
@@ -46,17 +45,8 @@ public class MvcConfigTest
 		when(registry.addViewController("/changeorder")).thenReturn(controller);
 		mc.addViewControllers(registry);
 		verify(registry).addViewController("/home");
-		verify(controller1).setViewName("home");
+//		verify(controller).setViewName("home");
 		verify(registry,times(7)).addViewController(anyString());
-//		doThrow(new Exception()).when(registry.addViewController(AdditionalMatchers.not(Matchers.eq("/home"))));
-//		doThrow(new Exception()).when(registry.addViewController(s));
-		
-		
-//		doThrow(new Exception()).when(homeController).setViewName(AdditionalMatchers.not(Matchers.eq("home")));
-//		registry.addViewController("/home").setViewName("home");
 	}
-	
-
-	
-
+		
 }

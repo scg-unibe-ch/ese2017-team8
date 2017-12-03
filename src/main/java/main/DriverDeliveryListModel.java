@@ -8,7 +8,6 @@ import java.util.List;
 public class DriverDeliveryListModel implements Serializable{
 	private Long deliveryId;
 	private Long parcelId;
-
 	private double length;
 	private double width;
 	private double height;

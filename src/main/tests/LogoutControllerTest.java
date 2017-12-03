@@ -39,8 +39,8 @@ public class LogoutControllerTest
 	public void logoutTest() throws Exception 
 	{
 	 int status = mockMvc.perform(MockMvcRequestBuilders.get("/logout")).andReturn().getResponse().getStatus();
-		assertEquals(HttpStatus.FOUND.value(),status);
-	 assertEquals(lc.logout(sRequest,sResponse), "redirect:/home?logout");
+	 assertEquals(HttpStatus.FOUND.value(),status);
+	 assertEquals(lc.logout(sRequest,sResponse), "redirect:/home?logout"); //trivial
 	}
 
 }
