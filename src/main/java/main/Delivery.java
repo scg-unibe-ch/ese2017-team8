@@ -98,10 +98,12 @@ public class Delivery
 	 * change status and safe changement
 	 */
 	public void setStatus(Status status) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentUserName = authentication.getName();
-		new ParcelStat(parcelId, id, status, currentUserName);
 		this.status = status;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentUserName = "kein User";
+		if (authentication != null) {
+			currentUserName = authentication.getName();
+		}
 	}
 
 	public LocalDate getScheduledDate() { return scheduledDate; }
