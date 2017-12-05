@@ -93,6 +93,7 @@ public class Delivery
 	}
 
 	public void setStatus(Status status) {
+		new ParcelStat(parcelId, id, status);
 		this.status = status;
 	}
 
