@@ -11,7 +11,6 @@ import main.Application;
  * @author travis
  *
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class ApplicationTest
 {
