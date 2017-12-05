@@ -20,6 +20,9 @@ import java.util.List;
 @Table(name = "parcelStats")
 public class ParcelStat {
 
+    /**
+     * für die Ausgabe aller Änderungen
+     */
     private static List instances = new ArrayList();
 
     @Id
@@ -29,22 +32,31 @@ public class ParcelStat {
     private Long deliveryId;
     private LocalDate changeTime;
     private Delivery.Status newStatus;
+    private String user;
 
     public ParcelStat() {
     }
 
-    public ParcelStat(Long parcelId, Long deliveryId, Delivery.Status newStatus){
+    public ParcelStat(Long parcelId, Long deliveryId, Delivery.Status newStatus, String user){
         this.parcelId = parcelId;
         this.deliveryId = deliveryId;
         this.newStatus = newStatus;
         this.changeTime = LocalDate.now();
+        this.user = user;
         instances.add(this);
-
-        System.out.println(Arrays.toString(instances.toArray()));
+        System.out.println(this);
     }
 
     @Override
     public String toString() {
-        return String.format("Parcel Stats – Id: %d, Parcel: %d, Status: %s", id, parcelId, newStatus);
+        return String.format("user %s changes parcel %d status to %s", user, parcelId, newStatus);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void printAll(){
+        System.out.println(Arrays.toString(instances.toArray()));
     }
 }
