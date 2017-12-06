@@ -104,6 +104,7 @@ public class Delivery
 		if (authentication != null) {
 			currentUserName = authentication.getName();
 		}
+		new ParcelStat(parcelId, id, status, currentUserName);
 	}
 
 	public LocalDate getScheduledDate() { return scheduledDate; }

@@ -17,7 +17,7 @@ import java.util.List;
  * @version 1.0
  */
 @Entity
-@Table(name = "parcelStats")
+@Table(name = "parcel_stats")
 public class ParcelStat {
 
     /**
@@ -52,8 +52,53 @@ public class ParcelStat {
         return String.format("user %s changes parcel %d status to %s", user, parcelId, newStatus);
     }
 
+    @ModelAttribute("parcelStat")
+    public ParcelStat getParcelStat(){
+        return new ParcelStat();
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public Long getDeliveryId() {
+        return deliveryId;
+    }
+
+    public void setDeliveryId(Long deliveryId) {
+        this.deliveryId = deliveryId;
+    }
+
+    public Long getParcelId() {
+        return parcelId;
+    }
+
+    public void setParcelId(Long parcelId) {
+        this.parcelId = parcelId;
+    }
+
+    public Delivery.Status getNewStatus() {
+        return newStatus;
+    }
+
+    public void setNewStatus(Delivery.Status newStatus) {
+        this.newStatus = newStatus;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public LocalDate getChangeTime() {
+        return changeTime;
+    }
+
+    public void setChangeTime(LocalDate changeTime) {
+        this.changeTime = changeTime;
     }
 
     public void printAll(){
