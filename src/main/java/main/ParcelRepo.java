@@ -3,6 +3,7 @@ package main;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0
  */
 
+@Repository
 public interface ParcelRepo extends CrudRepository<Parcel, Long> {
 
 	/**

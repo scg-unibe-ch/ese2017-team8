@@ -1,4 +1,5 @@
 package main;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +23,7 @@ import javax.persistence.*;
 @Table(name = "deliveries")
 public class Delivery
 {
+
 
 	public enum Status {
 		unscheduled, scheduled, delivered, attempted, cancelled;
@@ -104,7 +106,9 @@ public class Delivery
 		if (authentication != null) {
 			currentUserName = authentication.getName();
 		}
-		new ParcelStat(parcelId, id, status, currentUserName);
+		ParcelStat hugo = new ParcelStat(parcelId, id, status, currentUserName);
+
+		//parcelStatRepo.save(hugo);
 	}
 
 	public LocalDate getScheduledDate() { return scheduledDate; }

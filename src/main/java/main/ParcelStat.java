@@ -1,5 +1,6 @@
 package main;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
@@ -17,22 +18,22 @@ import java.util.List;
  * @version 1.0
  */
 @Entity
-@Table(name = "parcel_stats")
+@Table(name = "parcelStats")
 public class ParcelStat {
 
-    /**
-     * für die Ausgabe aller Änderungen
-     */
-    private static List instances = new ArrayList();
-
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private Long parcelId;
     private Long deliveryId;
     private LocalDate changeTime;
     private Delivery.Status newStatus;
     private String user;
+
+    /**
+     * für die Ausgabe aller Änderungen
+     */
+    private static List instances = new ArrayList();
 
     public ParcelStat() {
     }
@@ -59,6 +60,10 @@ public class ParcelStat {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getDeliveryId() {
