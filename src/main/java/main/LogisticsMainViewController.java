@@ -27,6 +27,9 @@ public class LogisticsMainViewController {
 	@Autowired
 	public UserRepo userRepo;
 
+    @Autowired
+    public ParcelStatRepo parcelStatRepo;
+
 	@Autowired
 	private CreateDeliveryInteractor createDeliveryInteractor;
 
@@ -44,6 +47,10 @@ public class LogisticsMainViewController {
 	public String deliverySubmit(@ModelAttribute("assignDriver") AssignDriverModel viewModel, BindingResult bindingResult, Model model) {
 		User driver = viewModel.getDriver();
 		assert(driver.getAuthorities().contains(AuthorityDriver.instance));
+
+        //TODO: strange solution but works
+        ParcelStat hugo = new ParcelStat(viewModel.getParcelId(), null, Delivery.Status.scheduled, "logistican");
+        parcelStatRepo.save(hugo);
 
 		createDeliveryInteractor.createScheduledDelivery(driver, viewModel.getParcelId());
 		return "redirect:logistics";

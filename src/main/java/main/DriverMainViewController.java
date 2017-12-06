@@ -25,11 +25,23 @@ public class DriverMainViewController {
 	@Autowired
 	public UserRepo userRepo;
 
+	@Autowired
+	public ParcelStatRepo parcelStatRepo;
+
 	@RequestMapping(value="/driver", method= RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDelivery") Delivery delivery, BindingResult bindingResult, Model model) {
 		Delivery hans = deliveryRepo.findByParcelId(delivery.getParcelId());
 		hans.setSequence(delivery.getSequence());
 		hans.setStatus(delivery.getStatus());
+
+		//TODO: strange solution but works
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentUserName = "kein User";
+		if (authentication != null) {
+			currentUserName = authentication.getName();
+		}
+		ParcelStat hugo = new ParcelStat(hans.getParcelId(), hans.getId(), hans.getStatus(), currentUserName);
+		parcelStatRepo.save(hugo);
 		deliveryRepo.save(hans);
 		return "redirect:driver";
 	}

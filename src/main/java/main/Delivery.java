@@ -2,6 +2,7 @@ package main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.time.LocalDate;
@@ -18,13 +19,10 @@ import javax.persistence.*;
  * @author Team8
  * @version 1.0
  */
-
 @Entity
 @Table(name = "deliveries")
 public class Delivery
 {
-
-
 	public enum Status {
 		unscheduled, scheduled, delivered, attempted, cancelled;
 	}
@@ -101,14 +99,6 @@ public class Delivery
 	 */
 	public void setStatus(Status status) {
 		this.status = status;
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentUserName = "kein User";
-		if (authentication != null) {
-			currentUserName = authentication.getName();
-		}
-		ParcelStat hugo = new ParcelStat(parcelId, id, status, currentUserName);
-
-		//parcelStatRepo.save(hugo);
 	}
 
 	public LocalDate getScheduledDate() { return scheduledDate; }
