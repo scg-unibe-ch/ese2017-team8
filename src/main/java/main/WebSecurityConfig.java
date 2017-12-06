@@ -76,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		userRepo.save(userList);
 
-		userRepo.findOne(new Long(1)).getAuthorities();
+		// userRepo.findOne(new Long(1)).getAuthorities();
 
 		auth.authenticationProvider(authenticationProvider());
 	}
