@@ -80,6 +80,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		//userRepo.findOne(new Long(1)).getAuthorities();
 
+		// userRepo.findOne(new Long(1)).getAuthorities();
+
 		auth.authenticationProvider(authenticationProvider());
 	}
 
