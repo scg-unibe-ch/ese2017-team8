@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" media="all"
               href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
     </head>
+    <script src="stylesheets/script.js"></script>
     <body>
         <div id="wrapper">
             <div class="content">
@@ -14,13 +15,13 @@
                 <!-- works like that: takes the list of all parcels, then compares with the id parameter in the url -->
                 <div th:each="paket : ${getAllParcels}">
                     <div th:if="${paket.idString == param.id[0]}">
-                        <table class="nice">
+                        <table class="nice" id="parcelStats">
                             <thead>
                                 <tr>
-                                    <th>Zeit</th>
-                                    <th>Status</th>
-                                    <th>Fahrer</th>
-                                    <th>Geändert von</th>
+                                    <th onclick="sortTable('parcelStats', 0)">Zeit</th>
+                                    <th onclick="sortTable('parcelStats', 1)">Status</th>
+                                    <th onclick="sortTable('parcelStats', 2)">Fahrer</th>
+                                    <th onclick="sortTable('parcelStats', 3)">Geändert von</th>
                                 </tr>
                             </thead>
                             <tbody>

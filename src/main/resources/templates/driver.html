@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" media="all"
           href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
     <META HTTP-EQUIV="refresh" CONTENT="15"/>
+    <script src="stylesheets/script.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -12,18 +13,18 @@
             <h1 th:text="${loggedInUser}"></h1>
             <div th:if="${!deliveriesForDriver.empty}">
                 <p>Hier sind alle zugeordneten Lieferungen.</p>
-                <table class="nice">
+                <table class="nice" id="driverOverview">
                     <thead>
                     <tr>
-                        <th>Position</th>
-                        <th>Hinweis</th>
-                        <th>Kommentar</th>
-                        <th>Annahmefenster</th>
-                        <th>Empfänger</th>
-                        <th>Adresse</th>
-                        <th>PLZ</th>
-                        <th>Ort</th>
-                        <th>Status</th>
+                        <th onclick="sortTable('driverOverview', 0)">Position</th>
+                        <th onclick="sortTable('driverOverview', 1)">Hinweis</th>
+                        <th onclick="sortTable('driverOverview', 2)">Kommentar</th>
+                        <th onclick="sortTable('driverOverview', 3)">Annahmefenster</th>
+                        <th onclick="sortTable('driverOverview', 4)">Empfänger</th>
+                        <th onclick="sortTable('driverOverview', 5)">Adresse</th>
+                        <th onclick="sortTable('driverOverview', 6)">PLZ</th>
+                        <th onclick="sortTable('driverOverview', 7)">Ort</th>
+                        <th onclick="sortTable('driverOverview', 8)">Status</th>
                     </tr>
                     </thead>
                     <tbody>
