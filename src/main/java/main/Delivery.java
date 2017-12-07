@@ -61,6 +61,15 @@ public class Delivery
 		return new Delivery();
 	}
 
+	@Override
+	public boolean equals(Object passedObject) 
+	{
+		Delivery obj = (Delivery) passedObject;
+		if(id==obj.getId() && getParcelId()==obj.getParcelId() && status == obj.getStatus() && sequence == obj.getSequence() )
+			return true;
+		return false;
+	}
+	
 	public Long getId() {
 		return id;
 	}

@@ -4,8 +4,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 
-
-
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -57,31 +56,43 @@ public class DriverMainViewControllerTest
 	
 	private Delivery submitTestDelivery;
 	private User user;
-//	private BindingResult r;
 	
 	@Before 
 	public void constructor()
 	{
 //		driver = new DriverMainViewController();
-		delivery = new Delivery(LocalDate.now(), LocalDate.now(), 1l, 1l, null, null, 1);
+		delivery = new Delivery(LocalDate.now(), LocalDate.now(), 1l, 1l, Status.cancelled, null, 1);
 		submitTestDelivery = new Delivery(LocalDate.now(), LocalDate.now(), 1l, 1l, Status.attempted, null, 2);
+		delivery.setId(1l);
+		submitTestDelivery.setId(1l);
 		user = new User("Christiane T", "$2a$11$PwMXw8qBRz06bCEFxvUNQeDgKERPB3ZQjBfGoXNZ4nsv2X4cFMrUK", Arrays.asList(AuthorityDriver.instance));
 		user.setId(1l);
 		given(deliveryRepo.findByParcelId(delivery.getParcelId())).willReturn(delivery);
 		given(userRepo.findByUsername("Christiane T")).willReturn(user);
 		
-		given(deliveryRepo.save(submitTestDelivery));
+	//	given(deliveryRepo.save(submitTestDelivery));
 	}
 	@Test
+	@WithMockUser(username="Christiane T", password="$2a$11$PwMXw8qBRz06bCEFxvUNQeDgKERPB3ZQjBfGoXNZ4nsv2X4cFMrUK", roles="DRIVER")
 	public void deliverySubmitTest() throws Exception 
 	{
-//		driver.deliverySubmit(delivery, , model)
-//		driver.perform(post("/driver").param("assignDelivery", submitTestDelivery)).andExpect(status().isOk());
+		String c = submitTestDelivery.getStatus().toString();
+		String c2 = String.valueOf(submitTestDelivery.getStatus());
+
+		driver.perform(
+				post("/driver").with(csrf())
+				.param("parcelId", String.valueOf(submitTestDelivery.getId()))
+				.param("sequence",  String.valueOf(submitTestDelivery.getSequence()))
+				.param("status", String.valueOf(submitTestDelivery.getStatus()))
+				)
 		
 		
+		.andExpect(status().is(302));
+		
+		verify(deliveryRepo, times(1)).save(submitTestDelivery);
 		
 //		when(delivery.getParcelId()).thenReturn(10L);
-		verify(deliveryRepo.findByParcelId(delivery.getParcelId()));
+		//verify(deliveryRepo.findByParcelId(delivery.getParcelId()));
 	}
 	
 	@Test
@@ -92,8 +103,6 @@ public class DriverMainViewControllerTest
 		.andExpect(status().isOk())
 		.andExpect(model().attributeExists("deliveriesForDriver"))
 		.andExpect(model().attribute("deliveriesForDriver", hasSize(0)));
-		//...
-		// driver.showAllDeliveryDriver();
 	}
 	
 	@Test
@@ -105,12 +114,12 @@ public class DriverMainViewControllerTest
 		//assertEquals(driverStatus, driver.possibleParcelStatusDriver());
 	}
 	
-	@Test
-	public void returnLoggedInNameTest()
-	{
-		//driver.returnLoggedInName();
-		verify(SecurityContextHolder.getContext().getAuthentication());
-	}
+//	@Test
+//	public void returnLoggedInNameTest()
+//	{
+//		//driver.returnLoggedInName();
+//		verify(SecurityContextHolder.getContext().getAuthentication());
+//	}
 
 	
 }
