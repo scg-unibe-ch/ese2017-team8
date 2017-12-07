@@ -28,7 +28,10 @@ public class DriverMainViewController {
 	@Autowired
 	public ParcelStatRepo parcelStatRepo;
 
-	@RequestMapping(value="/driver", method= RequestMethod.POST)
+	@Autowired
+	public FinishTourInteractor finishTourInteractor;
+
+	@RequestMapping(value="/driver/delivery", method= RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDelivery") Delivery delivery, BindingResult bindingResult, Model model) {
 		Delivery del = deliveryRepo.findByParcelId(delivery.getParcelId());
 		del.setSequence(delivery.getSequence());
@@ -46,7 +49,17 @@ public class DriverMainViewController {
 		ParcelStat newParcelStat = new ParcelStat(del.getParcelId(), del.getStatus(), currentUserName, currentUserName);
 		parcelStatRepo.save(newParcelStat);
 		deliveryRepo.save(del);
-		return "redirect:driver";
+		return "redirect:/driver";
+	}
+
+	@RequestMapping(value="/driver/finishTour", method= RequestMethod.GET)
+	public String deliverySubmit() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		assert(authentication != null);
+		String currentUserName = authentication.getName();
+		User currentUser = userRepo.findByUsername(currentUserName);
+		finishTourInteractor.finishTourForDriver(currentUser);
+		return "redirect:/driver";
 	}
 
 	/**
@@ -93,8 +106,6 @@ public class DriverMainViewController {
 		});
 
 		return viewModel;
-
-//		return this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
 	}
 
 	@ModelAttribute("possibleParcelStatusDriver")
