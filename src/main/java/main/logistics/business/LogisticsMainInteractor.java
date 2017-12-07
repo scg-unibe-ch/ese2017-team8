@@ -1,8 +1,10 @@
 package main.logistics.business;
 
 import main.AuthorityDriver;
+import main.common.business.getcurrentuser.GetCurrentUserUseCases;
 import main.logistics.presentation.viewmodels.DriverListModel;
 import main.common.data.models.ParcelStat;
+import main.common.business.getcurrentuser.GetCurrentUserWorker;
 import main.common.business.createdelivery.CreateDeliveryUseCases;
 import main.common.data.repositories.DeliveryRepo;
 import main.common.data.repositories.ParcelRepo;
@@ -37,6 +39,9 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 
 	@Autowired
 	private CreateDeliveryUseCases createDeliveryWorker;
+
+	@Autowired
+	private GetCurrentUserUseCases getCurrentUserUseCases;
 
 	/**
 	 * Gets all parcels that do not have an associated delivery with status "Archived".
@@ -82,7 +87,7 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 	public void didSubmitDelivery(User driver, Long parcelId) {
 		assert(driver.getAuthorities().contains(AuthorityDriver.instance));
 
-		User currentUser = this.getCurrentUser();
+		User currentUser = getCurrentUserUseCases.getCurrentUser();
 		assert(currentUser != null);
 		String currentUserName = currentUser.getUsername();
 
@@ -90,20 +95,11 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 		this.createScheduledDelivery(driver, parcelId);
 	}
 
-	private User getCurrentUser() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication == null) {
-			return null;
-		}
-		return userRepo.findByUsername(authentication.getName());
-	}
-
 	private Long createScheduledDelivery(User driver, Long parcelId) {
 		return createDeliveryWorker.createScheduledDelivery(driver, parcelId);
 	}
 
 	private void logParcelEvent(Long parcelId, String currentUserName, String driverUserName) {
-		ParcelStat newParcelStat = new ParcelStat(parcelId, Delivery.Status.scheduled, currentUserName, driverUserName);
-		parcelStatRepo.save(newParcelStat);
+
 	}
 }

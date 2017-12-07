@@ -31,7 +31,7 @@ public class ParcelStat {
     public ParcelStat() {
     }
 
-    public ParcelStat(Long parcelId, Delivery.Status newStatus, String user, String driver){
+    public ParcelStat(Long parcelId, Delivery.Status newStatus, String user, String driver) {
         this.parcelId = parcelId;
         this.newStatus = newStatus;
         this.changeTime = now();

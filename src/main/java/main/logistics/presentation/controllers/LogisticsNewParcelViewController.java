@@ -5,6 +5,7 @@ import main.common.data.repositories.ParcelRepo;
 import main.common.data.repositories.ParcelStatRepo;
 import main.common.data.models.Delivery;
 import main.common.data.models.Parcel;
+import main.logistics.business.LogisticsNewParcelUseCases;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,13 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class LogisticsNewOrderViewController {
+public class LogisticsNewParcelViewController {
 
 	@Autowired
-	public ParcelRepo parcelRepo;
-
-	@Autowired
-	public ParcelStatRepo parcelStatRepo;
+	LogisticsNewParcelUseCases interactor;
 
 	@ModelAttribute("parcel")
 	public Parcel getParcel(){
@@ -40,7 +38,6 @@ public class LogisticsNewOrderViewController {
 		return "neworder";
 	}
 
-
 	/**
 	 * Handles a form with post method.
 	 *
@@ -48,17 +45,7 @@ public class LogisticsNewOrderViewController {
 	 */
 	@RequestMapping(value="/neworder", method=RequestMethod.POST)
 	public String parcelSubmit(@ModelAttribute("parcel") Parcel parcel, BindingResult bindingResult, Model model) {
-		parcelRepo.save(parcel);
-
-		//status change
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		//if no user is authenticated
-		String currentUserName = "kein User";
-		if (authentication != null) {
-			currentUserName = authentication.getName();
-		}
-		ParcelStat newParcelStat = new ParcelStat(parcel.getId(), Delivery.Status.unscheduled, currentUserName, null);
-		parcelStatRepo.save(newParcelStat);
+		interactor.didSubmitParcel(parcel);
 		return "redirect:/logistics";
 	}
 }

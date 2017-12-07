@@ -17,8 +17,6 @@ import java.util.*;
 @Controller
 public class LogisticsMainViewController {
 
-//	public static int num = 0;
-
 	@Autowired
 	public LogisticsMainUseCases interactor;
 
