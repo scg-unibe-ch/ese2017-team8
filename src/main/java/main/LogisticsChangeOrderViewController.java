@@ -32,7 +32,7 @@ public class LogisticsChangeOrderViewController {
 	 * Creates the empty form for entering the parcels specs.
 	 *
 	 * @param model
-	 * @return String logistics
+	 * @return String changeorder
 	 */
 	@RequestMapping(value="/changeorder", method=RequestMethod.GET)
 	public String parcelForm(Model model) {

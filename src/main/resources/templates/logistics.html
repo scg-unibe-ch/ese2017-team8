@@ -23,6 +23,7 @@
 							<th>Zielort</th>
 							<th>Fahrer</th>
 							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -55,6 +56,9 @@
 								</td>
 								<td>
 									<a class="button" th:href="@{/changeorder(id=${parcel.id})}">edit</a>
+								</td>
+								<td>
+									<a class="button" th:href="@{/parcelstats(id=${parcel.id})}">stat</a>
 								</td>
 							</form>
 						</tr>

@@ -16,5 +16,7 @@ public interface ParcelStatRepo extends CrudRepository<ParcelStat, Long> {
 
 	public List<ParcelStat> findAll();
 
+	public List<ParcelStat> findByParcelId(Long parcelId);
+
 }
 
