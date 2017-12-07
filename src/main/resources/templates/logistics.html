@@ -4,24 +4,25 @@
 		<title>Hello Logistician!</title>
 		<link rel="stylesheet" type="text/css" media="all"
 			  href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
+		<script src="stylesheets/script.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">
 			<div class="content">
 				<h1>Backend Logistik</h1>
 				<h2>Erfasste Pakete</h2>
-				<table class="nice">
+				<table class="nice" id="logisticsOverview">
 					<thead>
 						<tr>
-							<th>Paket-ID</th>
-							<th>Länge</th>
-							<th>Breite</th>
-							<th>Höhe</th>
-							<th>Gewicht</th>
-							<th>Hinweise</th>
-							<th>Kommentar</th>
-							<th>Zielort</th>
-							<th>Fahrer</th>
+							<th onclick="sortTable('logisticsOverview', 0)">Paket-ID</th>
+							<th onclick="sortTable('logisticsOverview', 1)">Länge</th>
+							<th onclick="sortTable('logisticsOverview', 2)">Breite</th>
+							<th onclick="sortTable('logisticsOverview', 3)">Höhe</th>
+							<th onclick="sortTable('logisticsOverview', 4)">Gewicht</th>
+							<th onclick="sortTable('logisticsOverview', 5)">Hinweise</th>
+							<th onclick="sortTable('logisticsOverview', 6)">Kommentar</th>
+							<th onclick="sortTable('logisticsOverview', 7)">Zielort</th>
+							<th onclick="sortTable('logisticsOverview', 8)">Fahrer</th>
 							<th></th>
 							<th></th>
 						</tr>

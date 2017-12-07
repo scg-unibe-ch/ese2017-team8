@@ -56,7 +56,7 @@ td, th {
 }
 
 .nice tr:nth-child(even) {
-    background: #aaaaaa;
+    background: #dddddd;
 }
 
 a {
