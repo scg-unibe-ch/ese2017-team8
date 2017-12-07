@@ -25,27 +25,20 @@ public class ParcelStat {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private Long parcelId;
-    private Long deliveryId;
     private LocalDate changeTime;
     private Delivery.Status newStatus;
     private String user;
-
-    /**
-     * für die Ausgabe aller Änderungen
-     */
-    private static List instances = new ArrayList();
+    private String driver;
 
     public ParcelStat() {
     }
 
-    public ParcelStat(Long parcelId, Long deliveryId, Delivery.Status newStatus, String user){
+    public ParcelStat(Long parcelId, Delivery.Status newStatus, String user, String driver){
         this.parcelId = parcelId;
-        this.deliveryId = deliveryId;
         this.newStatus = newStatus;
         this.changeTime = LocalDate.now();
         this.user = user;
-        instances.add(this);
-        System.out.println(this);
+        this.driver = driver;
     }
 
     @Override
@@ -64,14 +57,6 @@ public class ParcelStat {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getDeliveryId() {
-        return deliveryId;
-    }
-
-    public void setDeliveryId(Long deliveryId) {
-        this.deliveryId = deliveryId;
     }
 
     public Long getParcelId() {
@@ -106,7 +91,11 @@ public class ParcelStat {
         this.changeTime = changeTime;
     }
 
-    public void printAll(){
-        System.out.println(Arrays.toString(instances.toArray()));
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
     }
 }

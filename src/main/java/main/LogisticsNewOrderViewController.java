@@ -1,6 +1,8 @@
 package main;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +17,9 @@ public class LogisticsNewOrderViewController {
 
 	@Autowired
 	public ParcelRepo parcelRepo;
+
+	@Autowired
+	public ParcelStatRepo parcelStatRepo;
 
 	@ModelAttribute("parcel")
 	public Parcel getParcel(){
@@ -40,6 +45,15 @@ public class LogisticsNewOrderViewController {
 	 */
 	@RequestMapping(value="/neworder", method=RequestMethod.POST)
 	public String parcelSubmit(@ModelAttribute("parcel") Parcel parcel, BindingResult bindingResult, Model model) {
+		//status change
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//if no user is authenticated
+		String currentUserName = "kein User";
+		if (authentication != null) {
+			currentUserName = authentication.getName();
+		}
+		ParcelStat newParcelStat = new ParcelStat(parcel.getId(), Delivery.Status.unscheduled, currentUserName, null);
+		parcelStatRepo.save(newParcelStat);
 		parcelRepo.save(parcel);
 		return "redirect:/logistics";
 	}

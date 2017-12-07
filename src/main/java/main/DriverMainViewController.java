@@ -30,19 +30,22 @@ public class DriverMainViewController {
 
 	@RequestMapping(value="/driver", method= RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDelivery") Delivery delivery, BindingResult bindingResult, Model model) {
-		Delivery hans = deliveryRepo.findByParcelId(delivery.getParcelId());
-		hans.setSequence(delivery.getSequence());
-		hans.setStatus(delivery.getStatus());
+		Delivery del = deliveryRepo.findByParcelId(delivery.getParcelId());
+		del.setSequence(delivery.getSequence());
+		del.setStatus(delivery.getStatus());
 
-		//TODO: strange solution but works
+		/**
+		 * saves changement of status into parcelStat
+		 */
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//if no user is authenticated
 		String currentUserName = "kein User";
 		if (authentication != null) {
 			currentUserName = authentication.getName();
 		}
-		ParcelStat hugo = new ParcelStat(hans.getParcelId(), hans.getId(), hans.getStatus(), currentUserName);
-		parcelStatRepo.save(hugo);
-		deliveryRepo.save(hans);
+		ParcelStat newParcelStat = new ParcelStat(del.getParcelId(), del.getStatus(), currentUserName, currentUserName);
+		parcelStatRepo.save(newParcelStat);
+		deliveryRepo.save(del);
 		return "redirect:driver";
 	}
 
