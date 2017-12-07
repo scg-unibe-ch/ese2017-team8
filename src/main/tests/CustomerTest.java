@@ -4,10 +4,9 @@
  */
 import static org.junit.Assert.*;
 
+import main.common.data.models.Customer;
 import org.junit.Before;
 import org.junit.Test;
-
-import main.*;
 
 public class CustomerTest 
 {

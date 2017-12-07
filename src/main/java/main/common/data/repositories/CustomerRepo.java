@@ -1,7 +1,8 @@
-package main;
+package main.common.data.repositories;
 
 import java.util.List;
 
+import main.common.data.models.Customer;
 import org.springframework.data.repository.CrudRepository;
 
 /**

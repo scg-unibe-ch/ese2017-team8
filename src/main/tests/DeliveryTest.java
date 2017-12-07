@@ -3,12 +3,10 @@
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
+
+import main.common.data.models.Delivery;
 import org.junit.Before;
 import org.junit.Test;
-import main.*;
-import main.Delivery.Status;
 
 public class DeliveryTest 
 {

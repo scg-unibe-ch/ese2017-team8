@@ -1,5 +1,10 @@
-package main;
+package main.logistics.presentation.controllers;
 
+import main.common.data.models.ParcelStat;
+import main.common.data.repositories.ParcelRepo;
+import main.common.data.repositories.ParcelStatRepo;
+import main.common.data.models.Delivery;
+import main.common.data.models.Parcel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,8 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.List;
 
 @Controller
 public class LogisticsNewOrderViewController {

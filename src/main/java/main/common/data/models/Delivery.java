@@ -1,13 +1,7 @@
-package main;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
+package main.common.data.models;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.*;
 
@@ -39,7 +33,7 @@ public class Delivery
 	private Long driverId;
 	private int sequence;
 
-	protected Delivery() {}
+	public Delivery() {}
 
 	public Delivery(LocalDate scheduledDate, LocalDate actualDate, Long customerId, Long parcelId, Status status, Long driverId, int sequence) {
 		this.scheduledDate = scheduledDate;

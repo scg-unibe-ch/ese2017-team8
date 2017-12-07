@@ -3,7 +3,7 @@
 //import org.junit.Before;
 //import org.junit.Test;
 //
-//import main.AssignDriverModel;
+//import main.logistics.presentation.viewmodels.AssignDriverModel;
 //
 //public class AssignDriverModelTest 
 //{

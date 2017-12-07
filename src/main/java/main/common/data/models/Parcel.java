@@ -1,7 +1,5 @@
-package main;
+package main.common.data.models;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;

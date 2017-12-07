@@ -1,7 +1,6 @@
 package main;
 
 import org.springframework.security.core.GrantedAuthority;
-import sun.security.provider.PolicyParser;
 
 public class AuthorityDriver implements GrantedAuthority {
 

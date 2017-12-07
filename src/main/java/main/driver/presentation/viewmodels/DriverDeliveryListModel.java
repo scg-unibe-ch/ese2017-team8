@@ -1,11 +1,10 @@
-package main;
+package main.driver.presentation.viewmodels;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
+import main.common.data.models.Delivery;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class DriverDeliveryListModel implements Serializable{
+public class DriverDeliveryListModel implements Serializable {
 	private Long deliveryId;
 	private Long parcelId;
 	private double length;

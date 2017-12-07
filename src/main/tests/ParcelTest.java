@@ -2,10 +2,9 @@
 
 import static org.junit.Assert.*;
 
+import main.common.data.models.Parcel;
 import org.junit.Before;
 import org.junit.Test;
-
-import main.*;
 
 public class ParcelTest 
 {

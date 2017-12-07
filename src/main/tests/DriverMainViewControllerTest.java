@@ -1,7 +1,6 @@
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+
 import java.time.LocalDate;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -13,11 +12,16 @@ import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.BDDMockito.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import main.AuthorityDriver;
+import main.common.data.repositories.DeliveryRepo;
+import main.common.data.repositories.ParcelRepo;
+import main.common.data.repositories.UserRepo;
+import main.common.data.models.Delivery;
+import main.common.data.models.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,15 +29,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.validation.BindingResult;
 
 import main.*;
-import main.Delivery.Status;
+import main.common.data.models.Delivery.Status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=Application.class)

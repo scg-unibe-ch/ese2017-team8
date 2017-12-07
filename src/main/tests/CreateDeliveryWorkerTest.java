@@ -1,6 +1,13 @@
 import main.*;
-import main.Delivery.Status;
 
+import main.AuthorityDriver;
+import main.common.business.createdelivery.CreateDeliveryWorker;
+import main.common.data.repositories.DeliveryRepo;
+import main.common.data.repositories.ParcelRepo;
+import main.common.data.repositories.UserRepo;
+import main.common.data.models.Delivery;
+import main.common.data.models.Parcel;
+import main.common.data.models.User;
 import org.junit.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,9 +16,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.validation.constraints.AssertTrue;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
@@ -19,17 +23,15 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest(classes = Application.class)
-public class CreateDeliveryInteractorTest {
+public class CreateDeliveryWorkerTest {
 
 	@Autowired
 	@InjectMocks
-	CreateDeliveryInteractor createDeliveryInteractor;
+	CreateDeliveryWorker createDeliveryWorker;
 
 	
 	@Mock
@@ -59,7 +61,7 @@ public class CreateDeliveryInteractorTest {
 		parcelRepo.save(parcel);
 
 		//WHEN
-		Long createdDeliveryId = createDeliveryInteractor.createScheduledDelivery(testUser, parcel.getId());
+		Long createdDeliveryId = createDeliveryWorker.createScheduledDelivery(testUser, parcel.getId());
 		
 		//THEN
 		Assert.assertTrue(deliveryRepo.findAll().size() > 0);

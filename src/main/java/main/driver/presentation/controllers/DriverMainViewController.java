@@ -1,5 +1,15 @@
-package main;
+package main.driver.presentation.controllers;
 
+import main.common.business.finishtour.FinishTourUseCases;
+import main.common.data.models.ParcelStat;
+import main.common.data.repositories.DeliveryRepo;
+import main.common.data.repositories.ParcelRepo;
+import main.common.data.repositories.ParcelStatRepo;
+import main.common.data.repositories.UserRepo;
+import main.common.data.models.Delivery;
+import main.common.data.models.Parcel;
+import main.common.data.models.User;
+import main.driver.presentation.viewmodels.DriverDeliveryListModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.time.LocalDate;
 import java.util.*;
 
 @Controller
@@ -29,7 +38,7 @@ public class DriverMainViewController {
 	public ParcelStatRepo parcelStatRepo;
 
 	@Autowired
-	public FinishTourInteractor finishTourInteractor;
+	public FinishTourUseCases finishTourWorker;
 
 	@RequestMapping(value="/driver/delivery", method= RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDelivery") Delivery delivery, BindingResult bindingResult, Model model) {
@@ -58,7 +67,7 @@ public class DriverMainViewController {
 		assert(authentication != null);
 		String currentUserName = authentication.getName();
 		User currentUser = userRepo.findByUsername(currentUserName);
-		finishTourInteractor.finishTourForDriver(currentUser);
+		finishTourWorker.finishTourForDriver(currentUser);
 		return "redirect:/driver";
 	}
 

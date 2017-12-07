@@ -1,14 +1,13 @@
-package main;
+package main.common.data.repositories;
 
 import java.util.Date;
 import java.util.List;
 
+import main.common.data.models.Delivery;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.NamedQuery;
 
 /**
  * This interface is used to setup the delivery parcelRepo.

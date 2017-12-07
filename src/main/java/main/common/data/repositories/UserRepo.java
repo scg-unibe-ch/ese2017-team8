@@ -1,5 +1,6 @@
-package main;
+package main.common.data.repositories;
 
+import main.common.data.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Repository;

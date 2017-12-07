@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * This class is used to setup the web view.
- * It maps the controller to the paths.
+ * It maps the controllers to the paths.
  *
  * @author team8
  * @version 1.0

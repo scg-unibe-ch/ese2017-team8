@@ -1,14 +1,16 @@
-package main;
+package main.common.business.createdelivery;
 
+import main.common.data.repositories.DeliveryRepo;
+import main.common.data.repositories.ParcelRepo;
+import main.common.data.models.Delivery;
+import main.common.data.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 @Component
-public class CreateDeliveryInteractor {
+public class CreateDeliveryWorker implements CreateDeliveryUseCases {
 	@Autowired
 	DeliveryRepo deliveryRepo;
 

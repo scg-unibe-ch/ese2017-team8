@@ -1,4 +1,4 @@
-package main;
+package main.common.presentation;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

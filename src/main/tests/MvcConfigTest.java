@@ -45,7 +45,7 @@ public class MvcConfigTest
 		when(registry.addViewController("/changeorder")).thenReturn(controller);
 		mc.addViewControllers(registry);
 		verify(registry).addViewController("/home");
-//		verify(controller).setViewName("home");
+//		verify(controllers).setViewName("home");
 		verify(registry,times(7)).addViewController(anyString());
 	}
 		

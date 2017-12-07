@@ -1,8 +1,9 @@
-package main;
+package main.logistics.presentation.viewmodels;
 
+import main.AuthorityDriver;
+import main.common.data.models.User;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DriverListModel {

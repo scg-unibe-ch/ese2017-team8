@@ -1,5 +1,10 @@
-package main;
+package main.common.business.finishtour;
 
+import main.common.data.repositories.DeliveryRepo;
+import main.common.data.repositories.ParcelRepo;
+import main.common.data.repositories.UserRepo;
+import main.common.data.models.Delivery;
+import main.common.data.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -7,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Component
-public class FinishTourInteractor {
+public class FinishTourWorker implements FinishTourUseCases {
 	@Autowired
 	DeliveryRepo deliveryRepo;
 
