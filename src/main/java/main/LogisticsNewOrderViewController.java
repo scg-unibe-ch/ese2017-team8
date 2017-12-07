@@ -45,6 +45,8 @@ public class LogisticsNewOrderViewController {
 	 */
 	@RequestMapping(value="/neworder", method=RequestMethod.POST)
 	public String parcelSubmit(@ModelAttribute("parcel") Parcel parcel, BindingResult bindingResult, Model model) {
+		parcelRepo.save(parcel);
+
 		//status change
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		//if no user is authenticated
@@ -54,7 +56,6 @@ public class LogisticsNewOrderViewController {
 		}
 		ParcelStat newParcelStat = new ParcelStat(parcel.getId(), Delivery.Status.unscheduled, currentUserName, null);
 		parcelStatRepo.save(newParcelStat);
-		parcelRepo.save(parcel);
 		return "redirect:/logistics";
 	}
 }

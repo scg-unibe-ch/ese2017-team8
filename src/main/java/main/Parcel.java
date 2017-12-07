@@ -34,7 +34,6 @@ public class Parcel {
 	private String address;
 	private String recipient;
 	private String zeitfenster;
-	private String idString;
 
 	public Parcel() {}
 
