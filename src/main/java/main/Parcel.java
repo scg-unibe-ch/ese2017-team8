@@ -1,5 +1,6 @@
 package main;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -162,5 +163,12 @@ public class Parcel {
 
 	public void setRecipient(String recipient) {
 		this.recipient = recipient;
+	}
+
+	/**
+	 * method is necessary to compare the parcelId over the url like: changeorder?id=3
+	 */
+	public String getIdString() {
+		return id.toString();
 	}
 }

@@ -22,6 +22,8 @@
 							<th>Kommentar</th>
 							<th>Zielort</th>
 							<th>Fahrer</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -51,6 +53,12 @@
 											<option th:value="${driverListModel.driverId}" th:text="${driverListModel.driverName}" th:selected="(${#arrays.contains(driverListModel.parcelIds, parcel.id)})">th:selected="${selected}" ...</option>
 										</th:block>
 									</select>
+								</td>
+								<td>
+									<a class="button" th:href="@{/changeorder(id=${parcel.id})}">edit</a>
+								</td>
+								<td>
+									<a class="button" th:href="@{/parcelstats(id=${parcel.id})}">stat</a>
 								</td>
 							</form>
 						</tr>

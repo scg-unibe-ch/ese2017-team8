@@ -1,6 +1,5 @@
 package main;
 
-import com.sun.xml.internal.xsom.impl.scd.Iterators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,28 +26,27 @@ public class DriverMainViewController {
 	public UserRepo userRepo;
 
 	@Autowired
-	private FinishTourInteractor finishTourInteractor;
+	public ParcelStatRepo parcelStatRepo;
 
-	public static Boolean shouldGenerateExample = true;
-
-	@RequestMapping(value="/driver/delivery", method= RequestMethod.POST)
+	@RequestMapping(value="/driver", method= RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDelivery") Delivery delivery, BindingResult bindingResult, Model model) {
-		Delivery submittedDelivery = deliveryRepo.findByParcelId(delivery.getParcelId());
-		submittedDelivery.setSequence(delivery.getSequence());
-		submittedDelivery.setStatus(delivery.getStatus());
-		deliveryRepo.save(submittedDelivery);
-		return "redirect:/driver";
-	}
+		Delivery del = deliveryRepo.findByParcelId(delivery.getParcelId());
+		del.setSequence(delivery.getSequence());
+		del.setStatus(delivery.getStatus());
 
-	@RequestMapping(value="/driver/finishTour", method= RequestMethod.GET)
-	public String finishTour() {
-		System.out.println("Finished Tour");
-
+		/**
+		 * saves changement of status into parcelStat
+		 */
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentUserName = authentication.getName();
-
-		finishTourInteractor.finishTourForDriver(this.userRepo.findByUsername(currentUserName));
-		return "redirect:/driver";
+		//if no user is authenticated
+		String currentUserName = "kein User";
+		if (authentication != null) {
+			currentUserName = authentication.getName();
+		}
+		ParcelStat newParcelStat = new ParcelStat(del.getParcelId(), del.getStatus(), currentUserName, currentUserName);
+		parcelStatRepo.save(newParcelStat);
+		deliveryRepo.save(del);
+		return "redirect:driver";
 	}
 
 	/**
@@ -61,12 +59,7 @@ public class DriverMainViewController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentUserName = authentication.getName();
 
-		this.generateExamples();
-
-//		List<Delivery> deliveries = this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
 		List<Delivery> deliveries = this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
-//		List<Delivery> deliveries = new ArrayList<Delivery>();
-
 		List<DriverDeliveryListModel> viewModel = new ArrayList<>();
 
 		for (Delivery del : deliveries) {
@@ -78,16 +71,19 @@ public class DriverMainViewController {
 
 			Parcel parcel = parcelRepo.findOne(del.getParcelId());
 
-			rowModel.setComment(parcel.getComment());
-			rowModel.setZeitfenster(parcel.getZeitfenster());
-			rowModel.setDangerous(parcel.isDangerous());
-			rowModel.setFragile(parcel.isFragile());
-			rowModel.setRecipient(parcel.getRecipient());
-			rowModel.setAddress(parcel.getAddress());
-			rowModel.setPlz(parcel.getPlz());
-			rowModel.setCity(parcel.getCity());
+			// es kann sein, dass Paket gelöscht wurde
+			if (parcel != null) {
+				rowModel.setComment(parcel.getComment());
+				rowModel.setZeitfenster(parcel.getZeitfenster());
+				rowModel.setDangerous(parcel.isDangerous());
+				rowModel.setFragile(parcel.isFragile());
+				rowModel.setRecipient(parcel.getRecipient());
+				rowModel.setAddress(parcel.getAddress());
+				rowModel.setPlz(parcel.getPlz());
+				rowModel.setCity(parcel.getCity());
 
-			viewModel.add(rowModel);
+				viewModel.add(rowModel);
+			}
 		}
 
 		Collections.sort(viewModel, new Comparator<DriverDeliveryListModel>(){
@@ -97,32 +93,8 @@ public class DriverMainViewController {
 		});
 
 		return viewModel;
-	}
 
-	public void generateExamples() {
-		if (!shouldGenerateExample) { return; }
-
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentUserName = authentication.getName();
-
-		Parcel example1 = new Parcel(2.0, 10.0, 20.0, 2.0, false, false, null, "Bern","6122","Feldstrasse 1", "Fenaco AG","");
-		Parcel example2 = new Parcel(10.0, 20.0, 30.0, 5.2, true, true, "Bombe", "Wolhusen","6110","Burgring 88", "Max Muster","ab 17:00");
-		Parcel example3 = new Parcel(10.0, 20.0, 30.0, 5.2, true, false, "Nukleares Material", "Schwarzenburg","3120","Genossenweg 2", "Helmut Schmied" ,"");
-		Parcel example4 = new Parcel(10.0, 20.0, 30.0, 700, false, false, "Sägemehl", "Beromünster", "6240","Senderstrasse 3a", "Homer Simpson","");
-
-		List<Parcel> parcels = Arrays.asList(example1, example2, example3, example4);
-		this.parcelRepo.save(parcels);
-
-		for (Parcel p : parcels) {
-			Delivery delivery = new Delivery();
-			delivery.setDriverId(this.userRepo.findByUsername(currentUserName).getId());
-			delivery.setScheduledDate(LocalDate.now());
-			delivery.setParcelId(p.getId());
-			delivery.setStatus(Delivery.Status.scheduled);
-			this.deliveryRepo.save(delivery);
-		}
-
-		shouldGenerateExample = false;
+//		return this.deliveryRepo.findByDriverId(userRepo.findByUsername(currentUserName).getId());
 	}
 
 	@ModelAttribute("possibleParcelStatusDriver")

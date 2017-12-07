@@ -1,4 +1,8 @@
 package main;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.time.LocalDate;
@@ -15,12 +19,10 @@ import javax.persistence.*;
  * @author Team8
  * @version 1.0
  */
-
 @Entity
 @Table(name = "deliveries")
 public class Delivery
 {
-
 	public enum Status {
 		unscheduled, scheduled, delivered, attempted, cancelled, archived;
 	}
@@ -59,6 +61,15 @@ public class Delivery
 		return new Delivery();
 	}
 
+	@Override
+	public boolean equals(Object passedObject) 
+	{
+		Delivery obj = (Delivery) passedObject;
+		if(id==obj.getId() && getParcelId()==obj.getParcelId() && status == obj.getStatus() && sequence == obj.getSequence() )
+			return true;
+		return false;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -92,6 +103,9 @@ public class Delivery
 		return status;
 	}
 
+	/**
+	 * change status and safe changement
+	 */
 	public void setStatus(Status status) {
 		this.status = status;
 	}

@@ -16,14 +16,14 @@ public class DeliveryTest
 	
 	@Before
 	public void constructor() {
-		Delivery delivery = new Delivery(null, LocalDate.now(), (long)1, (long)2,Delivery.Status.scheduled,new Long(1), 0);
+		delivery = new Delivery(null, LocalDate.now(), (long)1, (long)2,Delivery.Status.scheduled,new Long(1), 0);
 		delivery.setId((long)(3));
 	}
 
 	@Test
 	public void toStringTest()
 	{
-		assertEquals(delivery.toString(), "Delivery - Id: 3");
+		assertEquals(delivery.toString(), "Delivery - Id: 3, ParcelId: 2");
 	}
 
 }

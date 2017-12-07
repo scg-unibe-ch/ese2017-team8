@@ -1,6 +1,8 @@
 package main;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -27,31 +29,37 @@ public class LogisticsMainViewController {
 	@Autowired
 	public UserRepo userRepo;
 
+    @Autowired
+    public ParcelStatRepo parcelStatRepo;
+
 	@Autowired
 	private CreateDeliveryInteractor createDeliveryInteractor;
 
-	//just an example
-	Parcel example1 = new Parcel(2.0, 10.0, 20.0, 2.0, false, false, null, "Bern", "6122", "Feldstrasse 1", "Fenaco AG", "");
-	Parcel example2 = new Parcel(10.0, 20.0, 30.0, 5.2, true, true, "Bombe", "Wolhusen", "6110", "Burgring 88", "Max Muster", "ab 17:00");
-	Parcel example3 = new Parcel(10.0, 20.0, 30.0, 5.2, true, false, "Nukleares Material", "Schwarzenburg", "3120", "Genossenweg 2", "Helmut Schmied", "");
-	Parcel example4 = new Parcel(10.0, 20.0, 30.0, 700, false, false, "Sägemehl", "Beromünster", "6240", "Senderstrasse 3a", "Homer Simpson", "");
-
 	/**
 	 * handles a form with post method
-	 *
 	 * @return direction of post output
 	 */
-	@RequestMapping(value = "/logistics", method = RequestMethod.POST)
+	@RequestMapping(value="/logistics", method=RequestMethod.POST)
 	public String deliverySubmit(@ModelAttribute("assignDriver") AssignDriverModel viewModel, BindingResult bindingResult, Model model) {
 		User driver = viewModel.getDriver();
-		assert (driver.getAuthorities().contains(AuthorityDriver.instance));
+		assert(driver.getAuthorities().contains(AuthorityDriver.instance));
+
+		//status change
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//if no user is authenticated
+		String currentUserName = "kein User";
+		if (authentication != null) {
+			currentUserName = authentication.getName();
+		}
+        ParcelStat newParcelStat = new ParcelStat(viewModel.getParcelId(), Delivery.Status.scheduled, currentUserName, driver.getUsername());
+        parcelStatRepo.save(newParcelStat);
 
 		createDeliveryInteractor.createScheduledDelivery(driver, viewModel.getParcelId());
 		return "redirect:logistics";
 	}
 
 
-	@RequestMapping(value = "/logistics", method = RequestMethod.GET)
+	@RequestMapping(value="/logistics", method=RequestMethod.GET)
 	public String deliveryForm(Model model) {
 		return "logistics";
 	}
@@ -63,18 +71,12 @@ public class LogisticsMainViewController {
 	 */
 	@ModelAttribute("getParcelList")
 	public List<Parcel> getParcelList() {
-		//this part is only here to have some examples already in the list
-
-//		parcelRepo.save(example1);
-//		parcelRepo.save(example2);
-//		parcelRepo.save(example3);
-//		parcelRepo.save(example4);
-		return this.parcelRepo.findAll();
+		return parcelRepo.findAll();
 	}
 
 	/**
 	 * At the moment is used to insert some hardcoded drivers.
-	 *
+	 * TODO: implement list of real drivers
 	 * @return List with all hardcoded drivers.
 	 */
 	@ModelAttribute("getDriverList")
@@ -83,7 +85,7 @@ public class LogisticsMainViewController {
 
 		List<DriverListModel> viewModel = new ArrayList<DriverListModel>();
 
-		for (User u : driverList) {
+		for (User u: driverList) {
 			DriverListModel driverListModel = new DriverListModel();
 			driverListModel.setDriver(u);
 
@@ -96,5 +98,4 @@ public class LogisticsMainViewController {
 
 		return viewModel;
 	}
-
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Statistik</title>
+        <link rel="stylesheet" type="text/css" media="all"
+              href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
+    </head>
+    <body>
+        <div id="wrapper">
+            <div class="content">
+                <h1>Logistics Backend</h1>
+                <h2>Paket Statistik</h2>
+                <!-- works like that: takes the list of all parcels, then compares with the id parameter in the url -->
+                <div th:each="paket : ${getAllParcels}">
+                    <div th:if="${paket.idString == param.id[0]}">
+                        <table class="nice">
+                            <thead>
+                                <tr>
+                                    <th>Zeit</th>
+                                    <th>Status</th>
+                                    <th>Fahrer</th>
+                                    <th>Geändert von</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="paketStat : ${getAllStatsForParcel}">
+                                    <td th:text="${#temporals.format(paketStat.changeTime, 'dd.MM.yyyy HH:mm')}"></td>
+                                    <td th:text="${paketStat.newStatus}"></td>
+                                    <td th:text="${paketStat.driver}"></td>
+                                    <td th:text="${paketStat.user}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a class="logout" th:href="@{/logout}">Logout</a>
+                <a th:href="@{/logistics}">Back</a>
+            </div>
+            <footer>
+                <span>ESE-Team8 (c)2017</span>
+            </footer>
+        </div>
+    </body>
+</html>

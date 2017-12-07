@@ -3,6 +3,8 @@ package main;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * This interface is used to setup the parcel parcelRepo.
@@ -11,15 +13,14 @@ import org.springframework.data.repository.CrudRepository;
  * @version 1.0
  */
 
+@Repository
 public interface ParcelRepo extends CrudRepository<Parcel, Long> {
 
 	/**
-	 * Gets parcels with the same id.
-	 *
-	 * @param packageId Long value of the id.
-	 * @return List of the parcels.
+	 * @param packageId
+	 * @return Parcel with certain ID
 	 */
-	public List<Parcel> getParcelsById(Long packageId);
+	public Parcel getParcelById(Long packageId);
 
 	/**
 	 * Gets all parcels.
@@ -27,5 +28,8 @@ public interface ParcelRepo extends CrudRepository<Parcel, Long> {
 	 * @return List of all parcels.
 	 */
 	public List<Parcel> findAll();
+
+	@Transactional
+	Long deleteById(Long packageId);
 
 }
