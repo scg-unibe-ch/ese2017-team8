@@ -31,7 +31,6 @@ public class LogisticsParcelStatsViewController {
 		return parcelStatRepo.findByParcelId(Long.parseLong(id, 10));
 	}
 
-
 	@RequestMapping
 	public String handleEmployeeRequestByArea () {
 		return "parcelstats";

@@ -40,7 +40,7 @@ public class Delivery
 		this.actualDate = actualDate;
 		this.customerId = customerId;
 		this.parcelId = parcelId;
-		this.status = Status.scheduled;
+		this.status = status;
 		this.driverId = driverId;
 		this.sequence = sequence;
 	}

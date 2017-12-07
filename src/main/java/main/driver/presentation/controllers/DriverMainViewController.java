@@ -44,7 +44,9 @@ public class DriverMainViewController {
 	public String deliverySubmit(@ModelAttribute("assignDelivery") Delivery delivery, BindingResult bindingResult, Model model) {
 		Delivery del = deliveryRepo.findByParcelId(delivery.getParcelId());
 		del.setSequence(delivery.getSequence());
-		del.setStatus(delivery.getStatus());
+		if (delivery.getStatus() != null) {
+			del.setStatus(delivery.getStatus());
+		}
 
 		/**
 		 * saves changement of status into parcelStat

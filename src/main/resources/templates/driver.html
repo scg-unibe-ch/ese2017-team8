@@ -49,12 +49,12 @@
                                 <td th:value="${del.plz}" 		th:text="${del.plz}">...</td>
                                 <td th:value="${del.city}" 	th:text="${del.city}">...</td>
                                 <td>
-                                    <!-- because every delivery contains only one parcel, we can find a delivery with the parcel id -->
+                                     <!--because every delivery contains only one parcel, we can find a delivery with the parcel id-->
                                     <input th:value="${del.parcelId}" name="parcelId" class="form-control" type="hidden"/>
                                     <select name="status" onchange="this.form.submit()">
-                                        <!-- each package for a driver is scheduled -->
+                                         <!--each package for a driver is scheduled-->
                                         <option selected="selected" disabled="disabled">scheduled</option>
-                                        <!-- the driver changes in either delivered or attempted -->
+                                         <!--the driver changes in either delivered or attempted-->
                                         <th:block th:each="stat : ${possibleParcelStatusDriver}">
                                             <option th:text="${stat}" th:selected="${del.status == stat}"></option>
                                         </th:block>

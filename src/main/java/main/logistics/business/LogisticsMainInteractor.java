@@ -57,7 +57,7 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 
 			if (del == null) { continue; }
 
-			if (!(del.getStatus().equals(Delivery.Status.archived))) {
+			if (del.getStatus() == null || !(del.getStatus().equals(Delivery.Status.archived))) {
 				filteredParcels.add(parcel);
 			}
 		}

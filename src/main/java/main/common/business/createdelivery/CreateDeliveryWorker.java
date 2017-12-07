@@ -24,6 +24,7 @@ public class CreateDeliveryWorker implements CreateDeliveryUseCases {
 	}
 
 	public Long createScheduledDeliveryWithDate(User driver, Long parcelId, LocalDate date) {
+		assert parcelId != null;
 		// If delivery already exists we simply update its values
 		Delivery delivery = deliveryRepo.findByParcelId(parcelId);
 
