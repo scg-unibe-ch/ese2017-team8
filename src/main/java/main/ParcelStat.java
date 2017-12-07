@@ -5,9 +5,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+
+import static java.time.LocalDateTime.now;
 
 /**
  * This class is an entity for parcels.
@@ -25,9 +29,9 @@ public class ParcelStat {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private Long parcelId;
-    private LocalDate changeTime;
     private Delivery.Status newStatus;
     private String user;
+    private LocalDateTime changeTime;
     private String driver;
 
     public ParcelStat() {
@@ -36,7 +40,7 @@ public class ParcelStat {
     public ParcelStat(Long parcelId, Delivery.Status newStatus, String user, String driver){
         this.parcelId = parcelId;
         this.newStatus = newStatus;
-        this.changeTime = LocalDate.now();
+        this.changeTime = now();
         this.user = user;
         this.driver = driver;
     }
@@ -83,11 +87,11 @@ public class ParcelStat {
         return user;
     }
 
-    public LocalDate getChangeTime() {
+    public LocalDateTime getChangeTime() {
         return changeTime;
     }
 
-    public void setChangeTime(LocalDate changeTime) {
+    public void setChangeTime(LocalDateTime changeTime) {
         this.changeTime = changeTime;
     }
 

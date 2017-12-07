@@ -4,13 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("parcelstats")
 public class LogisticsParcelStatsViewController {
 
 	@Autowired
@@ -25,13 +24,13 @@ public class LogisticsParcelStatsViewController {
 	}
 
 	@ModelAttribute("getAllStatsForParcel")
-	public List<ParcelStat> getAllStatsForParcel() {
-		return parcelStatRepo.findByParcelId(10L);
+	public List<ParcelStat> getAllStatsForParcel(@RequestParam String id, Model map) {
+		return parcelStatRepo.findByParcelId(Long.parseLong(id, 10));
 	}
 
-	//necessary to get the parcelstats page
-	@RequestMapping(value="/parcelstats", method=RequestMethod.GET)
-	public String parcelForm(Model model) {
+
+	@RequestMapping
+	public String handleEmployeeRequestByArea () {
 		return "parcelstats";
 	}
 }
