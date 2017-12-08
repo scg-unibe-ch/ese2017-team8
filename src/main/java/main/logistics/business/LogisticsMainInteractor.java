@@ -90,7 +90,7 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 		assert(currentUser != null);
 		String currentUserName = currentUser.getUsername();
 
-		logParcelEventWorker.logParcelEvent(parcelId, null, currentUserName, driver.getUsername());
+		logParcelEventWorker.logParcelEvent(parcelId, Delivery.Status.scheduled, currentUserName, driver.getUsername());
 		createDeliveryWorker.createScheduledDelivery(driver, parcelId);
 	}
 }

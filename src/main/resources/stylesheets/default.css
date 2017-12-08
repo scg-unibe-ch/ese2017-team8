@@ -87,7 +87,9 @@ a.finishtour {
     background: #000000;
     padding: 8px;
     color: white;
+    text-align: center;
     text-decoration: none;
+    display: block;
 }
 
 a.finishtour:hover {
