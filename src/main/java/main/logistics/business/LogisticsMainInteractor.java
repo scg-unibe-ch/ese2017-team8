@@ -55,9 +55,7 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 		for (Parcel parcel : allParcels) {
 			Delivery del = deliveryRepo.findByParcelId(parcel.getId());
 
-			if (del == null) { continue; }
-
-			if (del.getStatus() == null || !(del.getStatus().equals(Delivery.Status.archived))) {
+			if (del == null || del.getStatus() == null || !(del.getStatus().equals(Delivery.Status.archived))) {
 				filteredParcels.add(parcel);
 			}
 		}
