@@ -2,6 +2,7 @@ package main.logistics.business;
 
 import main.AuthorityDriver;
 import main.common.business.getcurrentuser.GetCurrentUserUseCases;
+import main.common.business.logging.parcel.LogParcelEventUseCases;
 import main.logistics.presentation.viewmodels.DriverListModel;
 import main.common.data.models.ParcelStat;
 import main.common.business.getcurrentuser.GetCurrentUserWorker;
@@ -42,6 +43,9 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 
 	@Autowired
 	private GetCurrentUserUseCases getCurrentUserUseCases;
+
+	@Autowired
+	private LogParcelEventUseCases logParcelEventWorker;
 
 	/**
 	 * Gets all parcels that do not have an associated delivery with status "Archived".
@@ -89,15 +93,11 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 		assert(currentUser != null);
 		String currentUserName = currentUser.getUsername();
 
-		this.logParcelEvent(parcelId, currentUserName, driver.getUsername());
+		this.logParcelEventWorker.logParcelEvent(parcelId, null, currentUserName, driver.getUsername());
 		this.createScheduledDelivery(driver, parcelId);
 	}
 
 	private Long createScheduledDelivery(User driver, Long parcelId) {
 		return createDeliveryWorker.createScheduledDelivery(driver, parcelId);
-	}
-
-	private void logParcelEvent(Long parcelId, String currentUserName, String driverUserName) {
-
 	}
 }
