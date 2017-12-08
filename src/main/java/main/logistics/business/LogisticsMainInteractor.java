@@ -33,9 +33,6 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 	private ParcelRepo parcelRepo;
 
 	@Autowired
-	private ParcelStatRepo parcelStatRepo;
-
-	@Autowired
 	private UserRepo userRepo;
 
 	@Autowired
@@ -93,11 +90,7 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 		assert(currentUser != null);
 		String currentUserName = currentUser.getUsername();
 
-		this.logParcelEventWorker.logParcelEvent(parcelId, null, currentUserName, driver.getUsername());
-		this.createScheduledDelivery(driver, parcelId);
-	}
-
-	private Long createScheduledDelivery(User driver, Long parcelId) {
-		return createDeliveryWorker.createScheduledDelivery(driver, parcelId);
+		logParcelEventWorker.logParcelEvent(parcelId, null, currentUserName, driver.getUsername());
+		createDeliveryWorker.createScheduledDelivery(driver, parcelId);
 	}
 }
