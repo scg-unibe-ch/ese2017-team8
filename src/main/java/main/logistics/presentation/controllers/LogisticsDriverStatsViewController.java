@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -31,11 +32,14 @@ public class LogisticsDriverStatsViewController {
         return interactor.getDriversList();
     }
 
-
     @ModelAttribute("parcelCount")
-    public int parcelCount(){
-        //SQL STUFF
-        return 0;
+    public Long parcelCount(@RequestParam String driverName, Model map){
+        return parcelStatRepo.countAttemptedParcelsForDriver(driverName);
+    }
+
+    @ModelAttribute("archivedParcelCount")
+    public Long parcelArchivedCount(@RequestParam String driverName, Model map){
+        return parcelStatRepo.countDeliveredParcelsForDriver(driverName);
     }
 
     @RequestMapping

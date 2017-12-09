@@ -13,7 +13,7 @@
         <h1>Logistics Backend</h1>
         <!-- works like that: takes the list of all parcels, then compares with the id parameter in the url -->
         <div th:each="driver : ${getDriverList}">
-            <div th:if="${driver.driverName == param.id[0]}">
+            <div th:if="${driver.driverName == param.driverName[0]}">
                 <h2>Driver Statistik für <span th:text="${driver.driverName}"></span></h2>
                 <table class="nice" id="parcelStats">
                     <thead>
@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
                         <td th:text="${parcelCount}"></td>
-                        <td></td>
+                        <td th:text="${archivedParcelCount}"></td>
                         <td></td>
                         <td></td>
                     </tbody>
