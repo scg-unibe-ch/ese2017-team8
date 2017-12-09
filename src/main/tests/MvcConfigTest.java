@@ -43,10 +43,18 @@ public class MvcConfigTest
 		when(registry.addViewController("/driver")).thenReturn(controller);
 		when(registry.addViewController("/neworder")).thenReturn(controller);
 		when(registry.addViewController("/changeorder")).thenReturn(controller);
+		when(registry.addViewController("/parcelstats")).thenReturn(controller);
+		when(registry.addViewController("/driverstatsoverview")).thenReturn(controller);
+		when(registry.addViewController("/driverstats")).thenReturn(controller);
+		when(registry.addViewController("/logistics")).thenReturn(controller);
+		when(registry.addViewController("/archive")).thenReturn(controller);
+		when(registry.addViewController("/driver")).thenReturn(controller);
+		
 		mc.addViewControllers(registry);
 		verify(registry).addViewController("/home");
 //		verify(controllers).setViewName("home");
-		verify(registry,times(7)).addViewController(anyString());
+		verify(registry,times(12)).addViewController(anyString());
+
 	}
 		
 }

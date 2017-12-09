@@ -57,6 +57,7 @@ public class CreateDeliveryWorkerTest {
 		userRepo.save(testUser);
 
 		Parcel parcel = new Parcel();
+		parcel.setId(10L);
 		parcel.setComment("testobject");
 		parcelRepo.save(parcel);
 
