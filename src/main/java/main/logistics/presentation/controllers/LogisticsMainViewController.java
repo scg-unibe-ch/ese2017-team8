@@ -46,6 +46,11 @@ public class LogisticsMainViewController {
 		return interactor.getActiveParcels();
 	}
 
+	@ModelAttribute("getArchivedParcelList")
+	public List<Parcel> getArchivedParcelList() {
+		return interactor.getArchivedParcels();
+	}
+
 	/**
 	 * At the moment is used to insert some hardcoded drivers.
 	 * @return List with all hardcoded drivers.

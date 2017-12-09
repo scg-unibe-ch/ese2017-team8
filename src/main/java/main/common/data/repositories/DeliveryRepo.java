@@ -31,6 +31,9 @@ public interface DeliveryRepo extends CrudRepository<Delivery, Long> {
 	@Query("SELECT d FROM Delivery d WHERE NOT d.status = 5")
 	public List<Delivery> findAllNotArchived();
 
+	@Query("SELECT d FROM Delivery d WHERE d.status = 5")
+	public List<Delivery> findAllArchived();
+
 	public Delivery findByParcelId(Long parcelId);
 
 	/**
