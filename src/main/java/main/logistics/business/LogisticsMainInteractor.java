@@ -113,7 +113,7 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 	public void didReactivateParcel(Long parcelId, Long deliveryId) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		assert(authentication != null);
-		User customUser = (User)authentication.getPrincipal();
+		UserDetailsImpl customUser = (UserDetailsImpl)authentication.getPrincipal();
 		Long currentUserId = customUser.getId();
 
 		deliveryRepo.delete(deliveryId);
