@@ -25,6 +25,11 @@ public class DriverListModel {
 	@ModelAttribute("driverId")
 	public Long getDriverId() { return driver.getId(); }
 
+	@ModelAttribute("driverStringId")
+	public String getDriverStringId() {
+		return driver.getId().toString();
+	}
+
 	@ModelAttribute("driver")
 	public User getDriver() {
 		return driver;

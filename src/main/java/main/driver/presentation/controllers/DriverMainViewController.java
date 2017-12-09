@@ -1,5 +1,6 @@
 package main.driver.presentation.controllers;
 
+import main.UserDetailsImpl;
 import main.common.business.finishtour.FinishTourUseCases;
 import main.common.data.models.ParcelStat;
 import main.common.data.repositories.DeliveryRepo;
@@ -53,8 +54,8 @@ public class DriverMainViewController {
 		 */
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		assert(authentication != null);
-		User customUser = (User)authentication.getPrincipal();
-		Long currentUserId = customUser.getId();
+		UserDetailsImpl currentUser = (UserDetailsImpl)authentication.getPrincipal();
+		Long currentUserId = currentUser.getId();
 		ParcelStat newParcelStat = new ParcelStat(del.getParcelId(), del.getStatus(), currentUserId, currentUserId);
 		parcelStatRepo.save(newParcelStat);
 		deliveryRepo.save(del);
