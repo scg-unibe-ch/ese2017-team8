@@ -85,6 +85,7 @@
 							<th onclick="sortTable('logisticsArchive', 4)">Zielort</th>
 							<th></th>
 							<th></th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -104,6 +105,9 @@
 								<td th:value="${parcel.city}"	th:text="${parcel.city}"></td>
 								<td>
 									<a class="button" th:href="@{/changeorder(id=${parcel.id})}">edit</a>
+								</td>
+								<td>
+									<a class="button" th:href="@{/reactivate(id=${parcel.id})}">reactivate</a>
 								</td>
 								<td>
 									<a class="button" th:href="@{/parcelstats(id=${parcel.id})}">stat</a>

@@ -21,7 +21,7 @@ public interface ParcelRepo extends CrudRepository<Parcel, Long> {
 	 * @param packageId
 	 * @return Parcel with certain ID
 	 */
-	public Parcel getParcelById(Long packageId);
+	public Parcel findById(Long packageId);
 
 	/**
 	 * Gets all parcels.

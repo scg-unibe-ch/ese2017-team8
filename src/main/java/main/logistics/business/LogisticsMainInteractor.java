@@ -107,4 +107,14 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 		logParcelEventWorker.logParcelEvent(parcelId, Delivery.Status.scheduled, currentUserName, driver.getUsername());
 		createDeliveryWorker.createScheduledDelivery(driver, parcelId);
 	}
+
+	public void didReactivateParcel(Long parcelId, Long deliveryId) {
+		User currentUser = getCurrentUserUseCases.getCurrentUser();
+		assert(currentUser != null);
+		String currentUserName = currentUser.getUsername();
+
+		deliveryRepo.delete(deliveryId);
+
+		logParcelEventWorker.logParcelEvent(parcelId, Delivery.Status.unscheduled, currentUserName, null);
+	}
 }

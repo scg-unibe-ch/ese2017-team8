@@ -28,11 +28,12 @@ public class LogisticsParcelStatsViewController {
 
 	@ModelAttribute("getAllStatsForParcel")
 	public List<ParcelStat> getAllStatsForParcel(@RequestParam String id, Model map) {
+		//convert string from url into Long
 		return parcelStatRepo.findByParcelId(Long.parseLong(id, 10));
 	}
 
 	@RequestMapping
-	public String handleEmployeeRequestByArea () {
+	public String handleEmployeeRequestByArea() {
 		return "parcelstats";
 	}
 }
