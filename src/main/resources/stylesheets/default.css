@@ -68,17 +68,29 @@ a:hover {
     transition: 0.6s;
 }
 
-a.logout {
+a.top-button {
     position: absolute;
     top: 60px;
-    right: 20px;
+    width: 100px;
     background: #000000;
     padding: 8px;
     color: white;
     text-decoration: none;
 }
 
-a.logout:hover {
+a.logout {
+    right: 20px;
+}
+
+a.archive {
+    right: 150px;
+}
+
+a.driverstat {
+    right: 270px;
+}
+
+a.top-button:hover {
     background: #5960b0;
     transition: 0.6s;
 }
