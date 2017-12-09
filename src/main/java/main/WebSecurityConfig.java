@@ -47,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/neworder/**").hasRole("LOGISTICIAN")
 				.antMatchers("/changeorder/**").hasRole("LOGISTICIAN")
 				.antMatchers("/parcelstats/**").hasRole("LOGISTICIAN")
+				.antMatchers("/driverstatsoverview/**").hasRole("LOGISTICIAN")
 				.antMatchers("/driverstats/**").hasRole("LOGISTICIAN")
 				.antMatchers("/archive/**").hasRole("LOGISTICIAN")
 				.antMatchers("/driver/**").hasRole("DRIVER")

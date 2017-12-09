@@ -56,25 +56,6 @@
                 <div th:if="${getArchivedParcelList.empty}">
                     <p>Bisher sind keine Pakete fertig verarbeitet worden.</p>
                 </div>
-                <h2>Statistiken für Fahrer</h2>
-                <table class="nice" id="driverList">
-                    <thead>
-                    <tr>
-                        <th onclick="sortTable('driverList', 0)">Fahrer-ID</th>
-                        <th onclick="sortTable('driverList', 1)">Fahrer</th>
-                        <th onclick="sortTable('driverList', 1)"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="driverListModel : ${getDriverList}">
-                        <td th:text="${driverListModel.driverId}"></td>
-                        <td th:text="${driverListModel.driverName}"></td>
-                        <td>
-                            <a class="button" th:href="@{/driverstats(driverId=${driverListModel.driverId})}">stat</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
                 <a class="logout" th:href="@{/logout}">Logout</a>
                 <a th:href="@{/logistics}">Back</a>
             </div>
