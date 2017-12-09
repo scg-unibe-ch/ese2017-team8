@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="UTF-8" />
+    <title>Statistik</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
 </head>
+<script src="stylesheets/script.js"></script>
 <body>
-$END$
+<div id="wrapper">
+    <div class="content">
+        <h1>Logistics Backend</h1>
+        <!-- works like that: takes the list of all parcels, then compares with the id parameter in the url -->
+        <div th:each="driver : ${getDriverList}">
+            <div th:if="${driver.driverName == param.id[0]}">
+                <h2>Driver Statistik für <span th:text="${driver.driverName}"></span></h2>
+                <table class="nice" id="parcelStats">
+                    <thead>
+                    <tr>
+                        <th onclick="sortTable('parcelStats', 0)">Anzahl Pakete</th>
+                        <th onclick="sortTable('parcelStats', 1)">geliefert</th>
+                        <th onclick="sortTable('parcelStats', 2)">attempted</th>
+                        <th onclick="sortTable('parcelStats', 3)">zeit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <td th:text="${parcelCount}"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a class="logout" th:href="@{/logout}">Logout</a>
+        <a th:href="@{/logistics}">Back</a>
+    </div>
+    <footer>
+        <span>ESE-Team8 (c)2017</span>
+    </footer>
+</div>
 </body>
 </html>
