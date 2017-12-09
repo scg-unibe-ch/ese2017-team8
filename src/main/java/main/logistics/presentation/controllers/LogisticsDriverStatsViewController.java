@@ -5,7 +5,6 @@ import main.common.data.repositories.UserRepo;
 import main.logistics.business.LogisticsMainUseCases;
 import main.logistics.presentation.viewmodels.DriverListModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,14 +31,14 @@ public class LogisticsDriverStatsViewController {
         return interactor.getDriversList();
     }
 
-    @ModelAttribute("parcelCount")
-    public Long parcelCount(@RequestParam String driverName, Model map){
-        return parcelStatRepo.countAttemptedParcelsForDriver(driverName);
+    @ModelAttribute("attemptedParcelCount")
+    public Long attemptedParcelCount(@RequestParam Long driverId, Model map){
+        return parcelStatRepo.countAttemptedParcelsForDriver(driverId);
     }
 
-    @ModelAttribute("archivedParcelCount")
-    public Long parcelArchivedCount(@RequestParam String driverName, Model map){
-        return parcelStatRepo.countDeliveredParcelsForDriver(driverName);
+    @ModelAttribute("deliveredParcelCount")
+    public Long deliveredParcelCount(@RequestParam Long driverId, Model map){
+        return parcelStatRepo.countDeliveredParcelsForDriver(driverId);
     }
 
     @RequestMapping

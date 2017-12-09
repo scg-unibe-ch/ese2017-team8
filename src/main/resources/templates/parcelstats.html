@@ -28,8 +28,8 @@
                                 <tr th:each="paketStat : ${getAllStatsForParcel}">
                                     <td th:text="${#temporals.format(paketStat.changeTime, 'dd.MM.yyyy HH:mm')}"></td>
                                     <td th:text="${paketStat.newStatus}"></td>
-                                    <td th:text="${paketStat.driver}"></td>
-                                    <td th:text="${paketStat.user}"></td>
+                                    <td th:text="${paketStat.driverId}"></td>
+                                    <td th:text="${paketStat.userId}"></td>
                                 </tr>
                             </tbody>
                         </table>

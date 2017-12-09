@@ -24,24 +24,24 @@ public class ParcelStat {
     private Long id;
     private Long parcelId;
     private Delivery.Status newStatus;
-    private String user;
+    private Long userId;
     private LocalDateTime changeTime;
-    private String driver;
+    private Long driverId;
 
     public ParcelStat() {
     }
 
-    public ParcelStat(Long parcelId, Delivery.Status newStatus, String user, String driver) {
+    public ParcelStat(Long parcelId, Delivery.Status newStatus, Long userId, Long driverId) {
         this.parcelId = parcelId;
         this.newStatus = newStatus;
         this.changeTime = now();
-        this.user = user;
-        this.driver = driver;
+        this.userId = userId;
+        this.driverId = driverId;
     }
 
     @Override
     public String toString() {
-        return String.format("user %s changes parcel %d status to %s", user, parcelId, newStatus);
+        return String.format("user %s changes parcel %d status to %s", userId, parcelId, newStatus);
     }
 
     @ModelAttribute("parcelStat")
@@ -73,12 +73,20 @@ public class ParcelStat {
         this.newStatus = newStatus;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public String getUser() {
-        return user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(Long driverId) {
+        this.driverId = driverId;
     }
 
     public LocalDateTime getChangeTime() {
@@ -87,13 +95,5 @@ public class ParcelStat {
 
     public void setChangeTime(LocalDateTime changeTime) {
         this.changeTime = changeTime;
-    }
-
-    public String getDriver() {
-        return driver;
-    }
-
-    public void setDriver(String driver) {
-        this.driver = driver;
     }
 }

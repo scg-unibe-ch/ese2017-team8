@@ -1,6 +1,7 @@
 package main.logistics.business;
 
 import main.AuthorityDriver;
+import main.UserDetailsImpl;
 import main.common.business.getcurrentuser.GetCurrentUserUseCases;
 import main.common.business.logging.parcel.LogParcelEventUseCases;
 import main.logistics.presentation.viewmodels.DriverListModel;
@@ -100,21 +101,23 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 	public void didSubmitDelivery(User driver, Long parcelId) {
 		assert(driver.getAuthorities().contains(AuthorityDriver.instance));
 
-		User currentUser = getCurrentUserUseCases.getCurrentUser();
-		assert(currentUser != null);
-		String currentUserName = currentUser.getUsername();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		assert(authentication != null);
+		UserDetailsImpl customUser = (UserDetailsImpl) authentication.getPrincipal();
+		Long currentUserId = customUser.getId();
 
-		logParcelEventWorker.logParcelEvent(parcelId, Delivery.Status.scheduled, currentUserName, driver.getUsername());
+		logParcelEventWorker.logParcelEvent(parcelId, Delivery.Status.scheduled, currentUserId, driver.getId());
 		createDeliveryWorker.createScheduledDelivery(driver, parcelId);
 	}
 
 	public void didReactivateParcel(Long parcelId, Long deliveryId) {
-		User currentUser = getCurrentUserUseCases.getCurrentUser();
-		assert(currentUser != null);
-		String currentUserName = currentUser.getUsername();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		assert(authentication != null);
+		User customUser = (User)authentication.getPrincipal();
+		Long currentUserId = customUser.getId();
 
 		deliveryRepo.delete(deliveryId);
 
-		logParcelEventWorker.logParcelEvent(parcelId, Delivery.Status.unscheduled, currentUserName, null);
+		logParcelEventWorker.logParcelEvent(parcelId, Delivery.Status.unscheduled, currentUserId, null);
 	}
 }

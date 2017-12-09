@@ -4,5 +4,5 @@ import main.common.data.models.Delivery;
 import main.common.data.models.Parcel;
 
 public interface LogParcelEventUseCases {
-	public void logParcelEvent(Long parcelId, Delivery.Status newStatus, String currentUserName, String driverUserName);
+	public void logParcelEvent(Long parcelId, Delivery.Status newStatus, Long currentUserId, Long driverId);
 }

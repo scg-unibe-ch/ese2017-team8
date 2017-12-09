@@ -1,5 +1,6 @@
 package main.logistics.business;
 
+import main.UserDetailsImpl;
 import main.common.business.getcurrentuser.GetCurrentUserUseCases;
 import main.common.business.logging.parcel.LogParcelEventUseCases;
 import main.common.business.logging.parcel.LogParcelEventWorker;
@@ -31,10 +32,11 @@ public class LogisticsNewParcelInteractor implements LogisticsNewParcelUseCases 
 	public void didSubmitParcel(Parcel parcel) {
 		parcelRepo.save(parcel);
 
-		User currentUser = getCurrentUserWorker.getCurrentUser();
-		assert(currentUser != null);
-		String currentUserName = currentUser.getUsername();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		assert(authentication != null);
+		UserDetailsImpl customUser = (UserDetailsImpl)authentication.getPrincipal();
+		Long currentUserId = customUser.getId();
 
-		logParcelEventWorker.logParcelEvent(parcel.getId(), Delivery.Status.unscheduled, currentUserName, null);
+		logParcelEventWorker.logParcelEvent(parcel.getId(), Delivery.Status.unscheduled, currentUserId, null);
 	}
 }

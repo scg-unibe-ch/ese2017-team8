@@ -15,4 +15,5 @@ public interface UserRepo extends CrudRepository<User, Long> {
 	public List<User> findAllByAuthoritiesContains(GrantedAuthority authority);
 
 	public User findByUsername(String username);
+
 }

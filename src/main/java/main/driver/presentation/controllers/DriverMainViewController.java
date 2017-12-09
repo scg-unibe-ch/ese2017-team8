@@ -52,12 +52,10 @@ public class DriverMainViewController {
 		 * saves changement of status into parcelStat
 		 */
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		//if no user is authenticated
-		String currentUserName = "kein User";
-		if (authentication != null) {
-			currentUserName = authentication.getName();
-		}
-		ParcelStat newParcelStat = new ParcelStat(del.getParcelId(), del.getStatus(), currentUserName, currentUserName);
+		assert(authentication != null);
+		User customUser = (User)authentication.getPrincipal();
+		Long currentUserId = customUser.getId();
+		ParcelStat newParcelStat = new ParcelStat(del.getParcelId(), del.getStatus(), currentUserId, currentUserId);
 		parcelStatRepo.save(newParcelStat);
 		deliveryRepo.save(del);
 		return "redirect:/driver";

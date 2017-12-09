@@ -13,8 +13,8 @@ public class LogParcelEventWorker implements LogParcelEventUseCases {
 	@Autowired
 	ParcelStatRepo parcelStatRepo;
 
-	public void logParcelEvent(Long parcelId, Delivery.Status deliveryStatus, String currentUserName, String driverUserName) {
-		ParcelStat newParcelStat = new ParcelStat(parcelId, deliveryStatus, currentUserName, driverUserName);
+	public void logParcelEvent(Long parcelId, Delivery.Status deliveryStatus, Long currentUserId, Long driverId) {
+		ParcelStat newParcelStat = new ParcelStat(parcelId, deliveryStatus, currentUserId, driverId);
 		parcelStatRepo.save(newParcelStat);
 	}
 }
