@@ -2,11 +2,9 @@ package main.logistics.presentation.controllers;
 
 import main.common.business.logging.parcel.LogParcelEventUseCases;
 import main.common.data.models.Delivery;
-import main.common.data.models.ParcelStat;
-import main.common.data.repositories.DeliveryRepo;
-import main.common.data.repositories.ParcelRepo;
-import main.logistics.business.LogisticsMainUseCases;
 import main.common.data.models.Parcel;
+import main.common.data.repositories.DeliveryRepo;
+import main.logistics.business.LogisticsMainUseCases;
 import main.logistics.presentation.viewmodels.AssignDriverModel;
 import main.logistics.presentation.viewmodels.DriverListModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.*;
+import java.util.List;
 
 @Controller
-public class LogisticsMainViewController {
+public class LogisticsArchiveViewController {
 
 	@Autowired
 	public LogisticsMainUseCases interactor;
@@ -29,32 +27,15 @@ public class LogisticsMainViewController {
 	@Autowired
 	public DeliveryRepo deliveryRepo;
 
-	@Autowired
-	private LogParcelEventUseCases logParcelEventWorker;
 
-	/**
-	 * handles a form with post method
-	 * @return direction of post output
-	 */
-	@RequestMapping(value="/logistics", method=RequestMethod.POST)
-	public String deliverySubmit(@ModelAttribute("assignDriver") AssignDriverModel viewModel, BindingResult bindingResult, Model model) {
-		interactor.didSubmitDelivery(viewModel.getDriver(), viewModel.getParcelId());
-		return "redirect:logistics";
-	}
-
-
-	@RequestMapping(value="/logistics", method=RequestMethod.GET)
+	@RequestMapping(value="/archive", method=RequestMethod.GET)
 	public String deliveryForm(Model model) {
-		return "logistics";
+		return "archive";
 	}
 
-	/**
-	 * Is necessary for the thymeleaf table representation of the data.
-	 * @return list with all orders
-	 */
-	@ModelAttribute("getParcelList")
-	public List<Parcel> getParcelList() {
-		return interactor.getActiveParcels();
+	@ModelAttribute("getArchivedParcelList")
+	public List<Parcel> getArchivedParcelList() {
+		return interactor.getArchivedParcels();
 	}
 
 	/**
@@ -64,5 +45,20 @@ public class LogisticsMainViewController {
 	@ModelAttribute("getDriverList")
 	public List<DriverListModel> getDriverList(Model model) {
 		return interactor.getDriversList();
+	}
+
+	/**
+	 * reactivates parcel, changes status to unscheudled and save stat
+	 * @param id of parcel over url
+	 * @return redirects to logistics and reloads the page
+	 */
+	@RequestMapping(value="/reactivate", method=RequestMethod.GET)
+	public String reactivateParcel(@RequestParam String id, Model map) {
+		Long parcelId = Long.parseLong(id, 10);
+		Delivery del = deliveryRepo.findByParcelId(parcelId);
+		interactor.didReactivateParcel(parcelId, del.getId());
+
+		del.setStatus(Delivery.Status.unscheduled);
+		return "redirect:logistics";
 	}
 }

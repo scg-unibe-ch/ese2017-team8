@@ -41,6 +41,11 @@ public class LogisticsDriverStatsViewController {
         return parcelStatRepo.countDeliveredParcelsForDriver(driverId);
     }
 
+    @ModelAttribute("scheduledParcelCount")
+    public Long scheduledParcelCount(@RequestParam Long driverId, Model map){
+        return parcelStatRepo.countScheduledParcelsForDriver(driverId);
+    }
+
     @RequestMapping
     public String handleEmployeeRequestByArea() {
         return "driverstats";

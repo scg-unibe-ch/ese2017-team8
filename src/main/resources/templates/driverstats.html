@@ -18,11 +18,13 @@
                 <table class="nice" id="parcelStats">
                     <thead>
                     <tr>
-                        <th onclick="sortTable('parcelStats', 0)">attempted</th>
-                        <th onclick="sortTable('parcelStats', 1)">delivered</th>
+                        <th onclick="sortTable('parcelStats', 0)">Geplant</th>
+                        <th onclick="sortTable('parcelStats', 1)">Versucht</th>
+                        <th onclick="sortTable('parcelStats', 2)">Geliefert</th>
                     </tr>
                     </thead>
                     <tbody>
+                        <td th:text="${scheduledParcelCount}"></td>
                         <td th:text="${attemptedParcelCount}"></td>
                         <td th:text="${deliveredParcelCount}"></td>
                     </tbody>
