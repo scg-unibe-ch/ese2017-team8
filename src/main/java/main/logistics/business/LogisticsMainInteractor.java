@@ -15,6 +15,7 @@ import main.common.data.repositories.UserRepo;
 import main.common.data.models.Delivery;
 import main.common.data.models.Parcel;
 import main.common.data.models.User;
+import main.logistics.presentation.viewmodels.ParcelStatListModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,6 +33,9 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 
 	@Autowired
 	private ParcelRepo parcelRepo;
+
+	@Autowired
+	private ParcelStatRepo parcelStatRepo;
 
 	@Autowired
 	private UserRepo userRepo;
@@ -93,6 +97,31 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 
 
 			viewModel.add(driverListModel);
+		}
+
+		return viewModel;
+	}
+
+	/**
+	 * is necessary to show names instead of ids
+	 *
+	 * @param parcelId
+	 * @return viewModel for parcelstats.html
+	 */
+	public List<ParcelStatListModel> getParcelStatListById(Long parcelId){
+		List<ParcelStat> parcelStatList = parcelStatRepo.findByParcelId(parcelId);
+		List <ParcelStatListModel> viewModel = new ArrayList<ParcelStatListModel>();
+
+		for (ParcelStat p: parcelStatList){
+			ParcelStatListModel parcelStatListModel = new ParcelStatListModel();
+			parcelStatListModel.setParcelStat(p);
+
+			User driverForDelivery = userRepo.findById(p.getDriverId());
+			User userForDelivery = userRepo.findById(p.getUserId());
+			parcelStatListModel.setUser(userForDelivery);
+			parcelStatListModel.setDriver(driverForDelivery);
+
+			viewModel.add(parcelStatListModel);
 		}
 
 		return viewModel;

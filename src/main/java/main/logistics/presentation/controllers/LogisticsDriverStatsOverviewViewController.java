@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class LogisticsParcelStatsOverviewViewController {
+public class LogisticsDriverStatsOverviewViewController {
 
 	@Autowired
 	public LogisticsMainUseCases interactor;
