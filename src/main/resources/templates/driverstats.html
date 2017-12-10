@@ -7,6 +7,7 @@
           href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
 </head>
 <script src="stylesheets/script.js"></script>
+<script src="stylesheets/Chart.bundle.min.js"></script>
 <body>
 <div id="wrapper">
     <div class="content">
@@ -15,20 +16,43 @@
         <div th:each="driver : ${getDriverList}">
             <div th:if="${driver.driverStringId == param.driverId[0]}">
                 <h2>Driver Statistik für <span th:text="${driver.driverName}"></span></h2>
-                <table class="nice" id="parcelStats">
-                    <thead>
-                    <tr>
-                        <th onclick="sortTable('parcelStats', 0)">Geplant</th>
-                        <th onclick="sortTable('parcelStats', 1)">Versucht</th>
-                        <th onclick="sortTable('parcelStats', 2)">Geliefert</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <td th:text="${scheduledParcelCount}"></td>
-                        <td th:text="${attemptedParcelCount}"></td>
-                        <td th:text="${deliveredParcelCount}"></td>
-                    </tbody>
-                </table>
+                <canvas id="deliveryStat" width="200" height="75"></canvas>
+                <script th:inline="javascript">
+                    var ctx = document.getElementById("deliveryStat").getContext('2d');
+                    var scheduled = [[${scheduledParcelCount}]];
+                    var attempted = [[${attemptedParcelCount}]];
+                    var delivered = [[${deliveredParcelCount}]];
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ["Geplant", "Versucht", "Geliefert"],
+                            datasets: [{
+                                label: 'Anzahl Pakete',
+                                data: [scheduled, attempted, delivered],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                ],
+                                borderColor: [
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
             </div>
         </div>
         <a class="top-button logout" th:href="@{/logout}">Logout</a>
