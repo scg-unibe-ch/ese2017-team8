@@ -5,6 +5,9 @@
         <title>Bestellung Bearbeiten</title>
         <link rel="stylesheet" type="text/css" media="all"
               href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
+        <link rel="stylesheet" type="text/css" media="all"
+              href="stylesheets/popup.css" th:src="@{../stylesheets/popup.css}" />
+        <script src="stylesheets/script.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -66,16 +69,28 @@
                                 </tr>
                             </table>
                             <input type="hidden" name="id" th:value="*{id}" />
-                            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+                            <p>
+                                <input class="button" type="submit" value="Paket ändern" />
+                                <a href="javascript:void(0)" class="button info" onclick="toggle_visibility('popupBoxConfirm');">Paket Löschen</a>
+                            </p>
                         </form>
-                        <form action="#" th:action="@{/delete}" th:object="${paket}" method="post">
-                            <input type="hidden" name="id" th:value="*{id}" />
-                            <input type="submit" class="delete" value="Paket löschen" />
-                        </form>
+                        <div id="popupBoxConfirm">
+                            <div class="popupBoxWrapper">
+                                <div class="popupBoxContent" href="javascript:void(0)" tabindex="1" id="popupBoxConfirmContent" onkeypress="toggle_visibility('popupBoxConfirm');" onblur="toggle_visibility('popupBoxConfirm');">
+                                    <h3>Wollen sie das Paket wirklich Löschen?</h3>
+                                    <form action="#" th:action="@{/delete}" th:object="${paket}" method="post">
+                                        <input type="hidden" name="id" th:value="*{id}" />
+                                        <input type="submit" class="button delete" value="Ja" />
+                                        <a class="button" href="javascript:void(0)" onclick="toggle_visibility('popupBoxConfirm');">Nein</a>
+                                    </form>
+                                    <a class="close" href="javascript:void(0)" onclick="toggle_visibility('popupBoxConfirm');">&#10006;</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <a class="top-button logout" th:href="@{/logout}">Logout</a>
-                <a th:href="@{/logistics}">Back</a>
+                <a class="button" th:href="@{/logistics}">Back</a>
             </div>
             <footer>
                 <span>ESE-Team8 (c)2017</span>

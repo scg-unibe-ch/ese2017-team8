@@ -76,6 +76,7 @@ a.top-button {
     padding: 8px;
     color: white;
     text-decoration: none;
+    text-align: center;
 }
 
 a.logout {
@@ -125,4 +126,26 @@ input.small {
 img.symbol {
     width: 25px;
     height: auto;
+}
+
+.button {
+    text-decoration: none;
+    color: initial;
+    background-color: #5960B0;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 2px;
+}
+
+:hover.button{
+    background-color: #000000;
+    color: #ffffff;
+    transition: 0.6s;
 }

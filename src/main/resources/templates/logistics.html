@@ -15,7 +15,7 @@
 					<table class="nice" id="logisticsOverview">
 						<thead>
 							<tr>
-								<th onclick="sortTable('logisticsOverview', 0)">Paket-ID</th>
+								<th onclick="sortTable('logisticsOverview', 0)">ID</th>
 								<th onclick="sortTable('logisticsOverview', 1)">Länge</th>
 								<th onclick="sortTable('logisticsOverview', 2)">Breite</th>
 								<th onclick="sortTable('logisticsOverview', 3)">Höhe</th>
@@ -32,10 +32,10 @@
 							<tr th:each="parcel : ${getParcelList}">
 								<form th:action="@{/logistics}" th:method="post">
 									<td th:value="${parcel.id}" 		th:text="${parcel.id}">...</td>
-									<td th:value="${parcel.length}" 	th:text="${parcel.length}">...</td>
-									<td th:value="${parcel.width}" 		th:text="${parcel.width}">...</td>
-									<td th:value="${parcel.height}" 	th:text="${parcel.height}">...</td>
-									<td th:value="${parcel.weight}" 	th:text="${parcel.weight}"></td>
+									<td th:value="${parcel.length}" 	th:text="${parcel.length + 'cm'}">...</td>
+									<td th:value="${parcel.width}" 		th:text="${parcel.width + 'cm'}">...</td>
+									<td th:value="${parcel.height}" 	th:text="${parcel.height + 'cm'}">...</td>
+									<td th:value="${parcel.weight}" 	th:text="${parcel.weight + 'kg'}"></td>
 									<td style="white-space: nowrap;">
 										<div style="width: 30px; float: left;" th:if="${parcel.dangerous}">
 											<img class="symbol" src="../media/gefahr.jpg" />
@@ -71,7 +71,7 @@
 					<p>Es existieren keine Pakete.</p>
 				</div>
 
-				<a th:href="@{/neworder}">Neues Paket erfassen</a><br />
+				<a class="button" th:href="@{/neworder}">+ Neues Paket erfassen</a><br />
 				<a class="top-button archive" th:href="@{/archive}">Archiv</a><br />
 				<a class="top-button driverstat" th:href="@{/driverstatsoverview}">Fahrerstatistik</a>
 				<a class="top-button logout" th:href="@{/logout}">Logout</a>

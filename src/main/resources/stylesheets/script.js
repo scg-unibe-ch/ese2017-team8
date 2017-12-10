@@ -52,3 +52,16 @@ function sortTable(tableId, n) {
         }
     }
 }
+
+function toggle_visibility(id) {
+    var e = document.getElementById(id);
+    if(e.style.display == 'block') {
+        //die verzögerung ist nötig da man sonst keine links öffnen kann
+        var meinTimeout = setTimeout(function() {
+            e.style.display = 'none';
+        }, 200);
+    } else {
+        e.style.display = 'block';
+        document.getElementById(id+'Content').focus();
+    }
+}
