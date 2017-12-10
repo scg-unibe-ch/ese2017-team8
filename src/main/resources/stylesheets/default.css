@@ -28,8 +28,8 @@ html, body {
     margin-bottom: 3em;
 }
 
-p, td, tr {
-    font-size: 12px;
+p, td, tr, input {
+    font-size: 14px;
 }
 
 table {
@@ -138,7 +138,7 @@ img.symbol {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: normal;
     font-family: 'Open Sans', sans-serif;
     margin-top: 2px;
