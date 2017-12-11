@@ -8,19 +8,19 @@
 <body>
     <div id="wrapper" style="width: 400px">
         <div class="content">
-            <h1>Welcome!</h1>
+            <h1>Willkommen!</h1>
             <div th:if="${param.error}">
-                Invalid username and password.
+                Ungültiger Nutzername oder Passwort.
             </div>
             <div th:if="${param.logout}">
-                You have been logged out.
+                Sie wurden ausgeloggt.
             </div>
             <form th:action="@{/home}" method="post">
                 <table class="nogrid">
-                    <tr><td><label>User Name:</label></td><td><input type="text" name="username"/></td></tr>
-                    <tr><td><label>Password:</label></td><td><input type="password" name="password"/></td></tr>
+                    <tr><td><label>Nutzername:</label></td><td><input type="text" name="username"/></td></tr>
+                    <tr><td><label>Passwort:</label></td><td><input type="password" name="password"/></td></tr>
                 </table>
-                <div><input class="button" type="submit" value="Sign In"/></div>
+                <div><input class="button" type="submit" value="Login"/></div>
             </form>
         </div>
         <footer>

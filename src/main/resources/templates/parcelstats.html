@@ -10,8 +10,8 @@
     <body>
         <div id="wrapper">
             <div class="content">
-                <h1>Logistics Backend</h1>
-                <h2>Paket Statistik</h2>
+                <h1>Backend Logistik</h1>
+                <h2>Paket-Statistik</h2>
                 <!-- works like that: takes the list of all parcels, then compares with the id parameter in the url -->
                 <div th:each="paket : ${getAllParcels}">
                     <div th:if="${paket.idString == param.id[0]}">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <a class="top-button logout" th:href="@{/logout}">Logout</a>
-                <a class="button" th:href="@{/logistics}">Back</a>
+                <a class="button" th:href="@{/logistics}">Zurück</a>
             </div>
             <footer>
                 <span>ESE-Team8 (c)2017</span>

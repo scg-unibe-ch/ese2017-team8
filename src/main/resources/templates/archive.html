@@ -40,13 +40,13 @@
                                 <td th:value="${parcel.recipient}"	th:text="${parcel.recipient}"></td>
                                 <td th:value="${parcel.city}"	th:text="${parcel.city}"></td>
                                 <td>
-                                    <a class="button" th:href="@{/changeorder(id=${parcel.id})}">edit</a>
+                                    <a class="button" th:href="@{/changeorder(id=${parcel.id})}">Bearbeiten</a>
                                 </td>
                                 <td>
-                                    <a class="button" th:href="@{/reactivate(id=${parcel.id})}">reactivate</a>
+                                    <a class="button" th:href="@{/reactivate(id=${parcel.id})}">Erneut Planen</a>
                                 </td>
                                 <td>
-                                    <a class="button" th:href="@{/parcelstats(id=${parcel.id})}">stat</a>
+                                    <a class="button" th:href="@{/parcelstats(id=${parcel.id})}">Statistik</a>
                                 </td>
                             </form>
                         </tr>
@@ -57,7 +57,7 @@
                     <p>Bisher sind keine Pakete fertig verarbeitet worden.</p>
                 </div>
                 <a class="top-button logout" th:href="@{/logout}">Logout</a>
-                <a class="button" th:href="@{/logistics}">Back</a>
+                <a class="button" th:href="@{/logistics}">Zurück</a>
             </div>
             <footer>
                 <span>ESE-Team8 (c)2017</span>
