@@ -4,7 +4,6 @@
     <title>Hello Driver!</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
-    <META HTTP-EQUIV="refresh" CONTENT="1500"/>
     <script src="stylesheets/script.js"></script>
     <script src="stylesheets/route.js"></script>
 </head>
@@ -12,7 +11,7 @@
     <div id="wrapper">
         <div class="content">
             <h1 th:text="${loggedInUser}"></h1>
-            <div id="parcelOverview">
+            <div id="parceloverview">
                 <div th:if="${!deliveriesForDriver.empty}">
                     <p>Hier sind alle zugeordneten Lieferungen.</p>
                     <table class="nice" id="driverOverview">
@@ -72,6 +71,7 @@
                 <div th:if="${deliveriesForDriver.empty}">
                     <p>Aktuell sind keine Lieferungen zugeordnet für Sie.</p>
                 </div>
+                <a class="top-button changeview" id="showroute" onclick="toggleView()">Route</a>
             </div>
             <div id="route">
                 <div th:if="${!deliveriesForDriver.empty}" id="right-panel">
@@ -79,13 +79,14 @@
                     <div id="map"></div>
                     <div id="directions-panel"></div>
                 </div>
+                <a class="top-button changeview" id="showparcels" onclick="toggleView()">Pakete</a>
             </div>
+            <script async="async" defer="defer" th:src="@{https://maps.googleapis.com/maps/api/js(key=${'AIzaSyAZNuJGGgGevoGeEigqdV6Bd3qr1h6IvCQ'},callback=initMap)}"></script>
             <a class="top-button logout" th:href="@{/logout}">Logout</a>
         </div>
         <footer>
             <span>ESE-Team8 (c)2017</span>
         </footer>
     </div>
-    <script async="async" defer="defer" th:src="@{https://maps.googleapis.com/maps/api/js(key=${'AIzaSyAZNuJGGgGevoGeEigqdV6Bd3qr1h6IvCQ'},callback=initMap)}"></script>
 </body>
 </html>

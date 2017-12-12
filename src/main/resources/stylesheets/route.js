@@ -1,6 +1,25 @@
 var mp;
 var mk;
 
+function toggleView(){
+    var e = document.getElementById("route");
+    var f = document.getElementById("parceloverview");
+    var g = document.getElementById("showparcels");
+    var h = document.getElementById("showroute");
+
+    if(e.style.height == 'auto') {
+        e.style.height = '0px';
+        f.style.height = 'auto';
+        g.style.display = 'none';
+        h.style.display = 'block';
+    } else {
+        e.style.height = 'auto';
+        f.style.height = '0px';
+        g.style.display = 'block';
+        h.style.display = 'none';
+    }
+}
+
 function initMap() {
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
