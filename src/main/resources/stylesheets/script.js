@@ -17,21 +17,35 @@ function sortTable(tableId, n) {
             shouldSwitch = false;
             /* Get the two elements you want to compare,
             one from current row and one from the next: */
-            x = rows[i].getElementsByTagName("TD")[n];
-            y = rows[i + 1].getElementsByTagName("TD")[n];
+            var x = rows[i].getElementsByTagName("TD")[n].innerHTML.replace("kg","").replace("cm","");
+            var y = rows[i + 1].getElementsByTagName("TD")[n].innerHTML.replace("kg","").replace("cm","");;
             /* Check if the two rows should switch place,
             based on the direction, asc or desc: */
             if (dir == "asc") {
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    // If so, mark as a switch and break the loop:
-                    shouldSwitch= true;
-                    break;
+                if (!(/^\d+$/.test(x))){
+                    if (x.toLowerCase() > y.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch= true;
+                        break;
+                    }
+                } else {
+                    if(x - y > 0){
+                        shouldSwitch= true;
+                        break;
+                    }
                 }
             } else if (dir == "desc") {
-                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                    // If so, mark as a switch and break the loop:
-                    shouldSwitch= true;
-                    break;
+                if (!(/^\d+$/.test(x))){
+                    if (x.toLowerCase() < y.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch= true;
+                        break;
+                    }
+                } else {
+                    if(x - y < 0){
+                        shouldSwitch= true;
+                        break;
+                    }
                 }
             }
         }

@@ -32,10 +32,10 @@
 							<tr th:each="parcel : ${getParcelList}">
 								<form th:action="@{/logistics}" th:method="post">
 									<td th:value="${parcel.id}" 		th:text="${parcel.id}">...</td>
-									<td th:value="${parcel.length}" 	th:text="${parcel.length + 'cm'}">...</td>
-									<td th:value="${parcel.width}" 		th:text="${parcel.width + 'cm'}">...</td>
-									<td th:value="${parcel.height}" 	th:text="${parcel.height + 'cm'}">...</td>
-									<td th:value="${parcel.weight}" 	th:text="${parcel.weight + 'kg'}"></td>
+									<td th:value="${parcel.length}" 	th:text="${#numbers.formatDecimal(parcel.length,1,0,'NONE') + 'cm'}">...</td>
+									<td th:value="${parcel.width}" 		th:text="${#numbers.formatDecimal(parcel.width,1,0,'NONE') + 'cm'}">...</td>
+									<td th:value="${parcel.height}" 	th:text="${#numbers.formatDecimal(parcel.height,1,0,'NONE') + 'cm'}">...</td>
+									<td th:value="${parcel.weight}" 	th:text="${#numbers.formatDecimal(parcel.weight,1,1,'COMMA') + 'kg'}"></td>
 									<td style="white-space: nowrap;">
 										<div style="width: 30px; float: left;" th:if="${parcel.dangerous}">
 											<img class="symbol" src="../media/gefahr.jpg" />
