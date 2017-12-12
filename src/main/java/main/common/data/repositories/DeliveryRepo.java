@@ -50,5 +50,11 @@ public interface DeliveryRepo extends CrudRepository<Delivery, Long> {
 	 */
 	public List<Delivery> getDeliveriesByCustomerId(Long customerId);
 
+	@Query("SELECT COUNT(status) FROM Delivery WHERE status = 4")
+	public Long countCanceledParcels();
+
+	@Query("SELECT COUNT(status) FROM Delivery WHERE status = 5")
+	public Long countArchivedParcels();
+
 }
 

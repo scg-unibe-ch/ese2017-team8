@@ -5,6 +5,7 @@ import main.common.data.models.Delivery;
 import main.common.data.models.ParcelStat;
 import main.common.data.repositories.DeliveryRepo;
 import main.common.data.repositories.ParcelRepo;
+import main.common.data.repositories.ParcelStatRepo;
 import main.logistics.business.LogisticsMainUseCases;
 import main.common.data.models.Parcel;
 import main.logistics.presentation.viewmodels.AssignDriverModel;
@@ -55,6 +56,16 @@ public class LogisticsMainViewController {
 	@ModelAttribute("getParcelList")
 	public List<Parcel> getParcelList() {
 		return interactor.getActiveParcels();
+	}
+
+	@ModelAttribute("countCanceledParcels")
+	public Long countCanceledParcels() {
+		return deliveryRepo.countCanceledParcels();
+	}
+
+	@ModelAttribute("countArchivedParcels")
+	public Long countArchivedParcels() {
+		return deliveryRepo.countArchivedParcels();
 	}
 
 	/**

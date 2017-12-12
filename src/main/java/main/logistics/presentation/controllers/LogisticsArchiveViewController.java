@@ -38,20 +38,6 @@ public class LogisticsArchiveViewController {
 		return interactor.getArchivedParcels();
 	}
 
-	@ModelAttribute("getCanceledParcelList")
-	public List<Parcel> getCanceledParcelList() {
-		return interactor.getCanceledParcels();
-	}
-
-	/**
-	 * At the moment is used to insert some hardcoded drivers.
-	 * @return List with all hardcoded drivers.
-	 */
-	@ModelAttribute("getDriverList")
-	public List<DriverListModel> getDriverList(Model model) {
-		return interactor.getDriversList();
-	}
-
 	/**
 	 * reactivates parcel, changes status to unscheudled and save stat
 	 * @param id of parcel over url

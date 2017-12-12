@@ -72,7 +72,8 @@
 				</div>
 
 				<a class="button" th:href="@{/neworder}">+ Neues Paket erfassen</a><br />
-				<a class="top-button archive" th:href="@{/archive}">Archiv</a><br />
+				<a class="top-button archive" th:href="@{/archive}">Archiv  (<span th:text="${countArchivedParcels}"></span>)</a><br />
+				<a class="top-button canceled" th:href="@{/canceled}">Storniert (<span th:text="${countCanceledParcels}"></span>)</a><br />
 				<a class="top-button driverstat" th:href="@{/driverstatsoverview}">Fahrerstatistik</a>
 				<a class="top-button logout" th:href="@{/logout}">Logout</a>
 			</div>

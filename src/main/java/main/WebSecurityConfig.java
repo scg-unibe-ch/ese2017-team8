@@ -50,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/driverstatsoverview/**").hasRole("LOGISTICIAN")
 				.antMatchers("/driverstats/**").hasRole("LOGISTICIAN")
 				.antMatchers("/archive/**").hasRole("LOGISTICIAN")
+				.antMatchers("/canceled/**").hasRole("LOGISTICIAN")
 				.antMatchers("/driver/**").hasRole("DRIVER")
 				.and()
 				.formLogin().loginPage("/home").successHandler(successHandler)

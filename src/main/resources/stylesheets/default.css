@@ -97,8 +97,12 @@ a.archive, a.changeview {
     right: 150px;
 }
 
-a.driverstat {
+a.canceled {
     right: 270px;
+}
+
+a.driverstat {
+    right: 390px;
 }
 
 a.top-button:hover {
