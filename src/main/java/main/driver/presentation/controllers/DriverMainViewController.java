@@ -49,15 +49,6 @@ public class DriverMainViewController {
 			del.setStatus(delivery.getStatus());
 		}
 
-		/**
-		 * saves changement of status into parcelStat
-		 */
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		assert(authentication != null);
-		UserDetailsImpl currentUser = (UserDetailsImpl)authentication.getPrincipal();
-		Long currentUserId = currentUser.getId();
-		ParcelStat newParcelStat = new ParcelStat(del.getParcelId(), del.getStatus(), currentUserId, currentUserId);
-		parcelStatRepo.save(newParcelStat);
 		deliveryRepo.save(del);
 		return "redirect:/driver";
 	}
