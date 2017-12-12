@@ -74,16 +74,28 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         origin: {lat: 46.9479739, lng: 7.447446799999966},
         destination: {lat: 46.9479739, lng: 7.447446799999966},
         waypoints: waypts,
-        optimizeWaypoints: true,
+        optimizeWaypoints: false,
         travelMode: 'DRIVING'
     }, function(response, status) {
         var summaryPanel = document.getElementById('directions-panel');
+        var exactNavi = document.getElementById('navi-panel');
         if (status === 'OK') {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
             summaryPanel.innerHTML = '';
+            exactNavi.innerHTML = '';
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
+
+                    exactNavi.innerHTML += '<br>' + (i+1) + ". Paket nach: " + route.legs[i].end_address.replace(", Schweiz", " ") + '<br>';
+                    for(var j = 0; j < route.legs[i].steps.length; j++){
+                        exactNavi.innerHTML += route.legs[i].steps[j].instructions + '<br>';
+                        exactNavi.innerHTML += "für " + (route.legs[i].steps[j].distance.value) + " Meter folgen" + '<br>';
+
+                    }
+
+                    exactNavi.innerHTML += '<br>';
+
                 var routeSegment ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(i+1);
                 if (i == route.legs.length-1){
                     summaryPanel.innerHTML += '<strong>Route in den Feierabend</strong><br>';
