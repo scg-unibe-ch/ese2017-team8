@@ -13,7 +13,7 @@
 //
 //public class ParcelControllerTest
 //{
-//	private ParcelController controller;
+//	private ParcelController controllers;
 //	private Parcel parcel;
 //	private BindingResult br;
 //	private Model model;
@@ -21,7 +21,7 @@
 //	@Before
 //	public void constructor()
 //	{
-//		controller =  new ParcelController();
+//		controllers =  new ParcelController();
 //		parcel = mock(Parcel.class);
 //		br = mock(BindingResult.class);
 //		model= mock(Model.class);
@@ -31,12 +31,12 @@
 //	@Test
 //	public void parcelSubmitTest()
 //	{
-//		assertEquals(controller.parcelSubmit(parcel, br, model),"result");
+//		assertEquals(controllers.parcelSubmit(parcel, br, model),"result");
 //	}
 //
 //	@Test
 //	public void parcelFormTest()
 //	{
-//		assertEquals(controller.parcelForm(model), "logistics");
+//		assertEquals(controllers.parcelForm(model), "logistics");
 //	}
 //}

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * This class is used to setup the web view.
- * It maps the controller to the paths.
+ * It maps the controllers to the paths.
  *
  * @author team8
  * @version 1.0
@@ -24,7 +24,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/logistics").setViewName("logistics");
 		registry.addViewController("/neworder").setViewName("neworder");
 		registry.addViewController("/changeorder").setViewName("changeorder");
+		registry.addViewController("/parcelstats").setViewName("parcelstats");
+		registry.addViewController("/driverstatsoverview").setViewName("driverstatsoverview");
+		registry.addViewController("/driverstats").setViewName("driverstats");
+		registry.addViewController("/logistics").setViewName("reactivate");
+		registry.addViewController("/archive").setViewName("archive");
+		registry.addViewController("/canceled").setViewName("canceled");
 		registry.addViewController("/driver").setViewName("driver");
+		registry.addViewController("/error").setViewName("error");
 	}
 
 	@Override

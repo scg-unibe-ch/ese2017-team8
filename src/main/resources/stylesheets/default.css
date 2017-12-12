@@ -18,18 +18,18 @@ html, body {
 }
 
 .content {
-    margin-top: 50px;
-    padding: 20px;
+    margin: 50px 0px 3em;
+    padding: 2.5%;
     background: white;
     position: relative;
     -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-    margin-bottom: 3em;
+    width: 95%;
 }
 
-p, td, tr {
-    font-size: 12px;
+p, td, tr, input {
+    font-size: 14px;
 }
 
 table {
@@ -56,11 +56,15 @@ td, th {
 }
 
 .nice tr:nth-child(even) {
-    background: #aaaaaa;
+    background: #dddddd;
 }
 
 a {
     color: #5960b0;
+}
+
+a.black {
+    color: #ffffff;
 }
 
 a:hover {
@@ -68,18 +72,53 @@ a:hover {
     transition: 0.6s;
 }
 
-a.logout {
+a.black:hover {
+    color: #000000;
+}
+
+a.top-button {
     position: absolute;
     top: 60px;
-    right: 20px;
+    width: 100px;
     background: #000000;
     padding: 8px;
     color: white;
     text-decoration: none;
+    text-align: center;
 }
 
-a.logout:hover {
+a.logout {
+    right: 20px;
+}
+
+a.archive, a.changeview {
+    right: 150px;
+}
+
+a.canceled {
+    right: 270px;
+}
+
+a.driverstat {
+    right: 390px;
+}
+
+a.top-button:hover {
     background: #5960b0;
+    transition: 0.6s;
+}
+
+a.finishtour {
+    background: #000000;
+    padding: 8px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+a.finishtour:hover {
+    background: #60af59;
     transition: 0.6s;
 }
 
@@ -99,4 +138,103 @@ input.small {
 img.symbol {
     width: 25px;
     height: auto;
+}
+
+.button {
+    text-decoration: none;
+    color: initial;
+    background-color: #5960B0;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 2px;
+}
+
+:hover.button{
+    background-color: #000000;
+    color: #ffffff;
+    transition: 0.6s;
+}
+
+/*
+Stuff for Driver Navigation
+ */
+
+#route {
+    height: 0px;
+}
+
+#parceloverview {
+    height: auto;
+}
+
+#route, #parceloverview {
+    overflow: hidden;
+}
+
+#showparcels {
+    display: none;
+}
+
+#showroute {
+    display: block;
+}
+
+#left, #right {
+    height: 600px;
+}
+
+#left {
+    width: 70%;
+    float: left;
+}
+
+#right {
+    margin-left: 1%;
+    width: 29%;
+    float: right;
+}
+
+#map {
+    height: 450px;
+}
+
+#navi-panel {
+    height: 150px;
+}
+
+#directions-panel {
+    background-color: #5960B0;
+    color: white;
+    height: 580px;
+    padding: 10px;
+}
+
+#navi-panel, #directions-panel {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#right-panel select, #right-panel input {
+    font-size: 15px;
+}
+
+#right-panel select {
+    width: 100%;
+}
+
+#navi-panel, #navi-panel div {
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+body.error {
+    background-size: cover;
+    background: url("astronaut.jpg") no-repeat fixed bottom;
 }

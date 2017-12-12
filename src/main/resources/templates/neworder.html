@@ -9,7 +9,7 @@
 
         <div id="wrapper">
             <div class="content">
-                <h1>Logistics Backend</h1>
+                <h1>Backend Logistik</h1>
                 <h2>Neues Paket erfassen</h2>
                 <form action="#" th:action="@{/neworder}" th:object="${parcel}" method="post">
                     <table class="nogrid">
@@ -62,10 +62,13 @@
                             <td><input id="parcel_city" type="text" name="city" maxlength="100" required="required"/></td>
                         </tr>
                     </table>
-                    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+                    <p>
+                        <input class="button" type="submit" value="Paket erstellen" />
+                        <input class="button" type="reset" value="Formular leeren" />
+                    </p>
                 </form>
-                <a class="logout" th:href="@{/logout}">Logout</a>
-                <a th:href="@{/logistics}">Back</a>
+                <a class="top-button logout" th:href="@{/logout}">Logout</a>
+                <a class="button" th:href="@{/logistics}">Zurück</a>
             </div>
             <footer>
                 <span>ESE-Team8 (c)2017</span>

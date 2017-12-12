@@ -1,5 +1,6 @@
 package main;
 
+import main.common.data.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,14 +9,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.activation.DataSource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * WebSecurityConfig is used to authorize user request.
@@ -48,9 +43,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/", "/home", "/stylesheets/**").permitAll()
 				.antMatchers("/", "/home", "/media/**").permitAll()
+				.antMatchers("/error/**").permitAll()
 				.antMatchers("/logistics/**").hasRole("LOGISTICIAN")
 				.antMatchers("/neworder/**").hasRole("LOGISTICIAN")
 				.antMatchers("/changeorder/**").hasRole("LOGISTICIAN")
+				.antMatchers("/parcelstats/**").hasRole("LOGISTICIAN")
+				.antMatchers("/driverstatsoverview/**").hasRole("LOGISTICIAN")
+				.antMatchers("/driverstats/**").hasRole("LOGISTICIAN")
+				.antMatchers("/archive/**").hasRole("LOGISTICIAN")
+				.antMatchers("/canceled/**").hasRole("LOGISTICIAN")
 				.antMatchers("/driver/**").hasRole("DRIVER")
 				.and()
 				.formLogin().loginPage("/home").successHandler(successHandler)
@@ -67,17 +68,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		User user1 = new User("logistician", "$2a$11$PwMXw8qBRz06bCEFxvUNQeDgKERPB3ZQjBfGoXNZ4nsv2X4cFMrUK", Arrays.asList(AuthorityLogistician.instance));
-		User user2 = new User("Christiane T", "$2a$11$PwMXw8qBRz06bCEFxvUNQeDgKERPB3ZQjBfGoXNZ4nsv2X4cFMrUK", Arrays.asList(AuthorityDriver.instance));
-		User user3 = new User("Donald Duck", "$2a$11$PwMXw8qBRz06bCEFxvUNQeDgKERPB3ZQjBfGoXNZ4nsv2X4cFMrUK", Arrays.asList(AuthorityDriver.instance));
-		User user4 = new User("Hans Nötig", "$2a$11$PwMXw8qBRz06bCEFxvUNQeDgKERPB3ZQjBfGoXNZ4nsv2X4cFMrUK", Arrays.asList(AuthorityDriver.instance));
-
-		List<User> userList = Arrays.asList(user1, user2, user3, user4);
-
-		userRepo.save(userList);
-
-		userRepo.findOne(new Long(1)).getAuthorities();
-
 		auth.authenticationProvider(authenticationProvider());
 	}
 

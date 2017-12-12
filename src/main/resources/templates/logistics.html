@@ -4,64 +4,78 @@
 		<title>Hello Logistician!</title>
 		<link rel="stylesheet" type="text/css" media="all"
 			  href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
+		<script src="stylesheets/script.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">
 			<div class="content">
 				<h1>Backend Logistik</h1>
 				<h2>Erfasste Pakete</h2>
-				<table class="nice">
-					<thead>
-						<tr>
-							<th>Paket-ID</th>
-							<th>Länge</th>
-							<th>Breite</th>
-							<th>Höhe</th>
-							<th>Gewicht</th>
-							<th>Hinweise</th>
-							<th>Kommentar</th>
-							<th>Zielort</th>
-							<th>Fahrer</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="parcel : ${getParcelList}">
-							<form th:action="@{/logistics}" th:method="post">
-								<td th:value="${parcel.id}" 		th:text="${parcel.id}">...</td>
-								<td th:value="${parcel.length}" 	th:text="${parcel.length}">...</td>
-								<td th:value="${parcel.width}" 		th:text="${parcel.width}">...</td>
-								<td th:value="${parcel.height}" 	th:text="${parcel.height}">...</td>
-								<td th:value="${parcel.weight}" 	th:text="${parcel.weight}"></td>
-								<td style="white-space: nowrap;">
-									<div style="width: 30px; float: left;" th:if="${parcel.dangerous}">
-										<img class="symbol" src="../media/gefahr.jpg" />
-									</div>
-									<div style="width: 30px; float: right;" th:if="${parcel.fragile}">
-										<img class="symbol" src="../media/fragil.jpg" />
-									</div>
-								</td>
-								<td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>
-								<td th:value="${parcel.city}"	th:text="${parcel.city}"></td>
-								<td>
-									<!--We use the name property to map the following values into the model-->
-									<input th:value="${parcel.id}" name="parcelId" class="form-control" type="hidden"/>
-									<select name="driver" class="form-control" onchange="this.form.submit()">
-										<option value="" disabled="disabled" selected="selected">Fahrer wählen</option>
-										<th:block th:each="driverListModel : ${getDriverList}">
-											<option th:value="${driverListModel.driverId}" th:text="${driverListModel.driverName}" th:selected="(${#arrays.contains(driverListModel.parcelIds, parcel.id)})">th:selected="${selected}" ...</option>
-										</th:block>
-									</select>
-								</td>
-								<td>
-									<a class="button" th:href="@{/changeorder(id=${parcel.id})}">edit</a>
-								</td>
-							</form>
-						</tr>
-					</tbody>
-				</table>
-				<a th:href="@{/neworder}">Neues Paket erfassen</a>
-				<a class="logout" th:href="@{/logout}">Logout</a>
+				<div th:if="${!getParcelList.empty}">
+					<table class="nice" id="logisticsOverview">
+						<thead>
+							<tr>
+								<th onclick="sortTable('logisticsOverview', 0)">ID</th>
+								<th onclick="sortTable('logisticsOverview', 1)">Länge</th>
+								<th onclick="sortTable('logisticsOverview', 2)">Breite</th>
+								<th onclick="sortTable('logisticsOverview', 3)">Höhe</th>
+								<th onclick="sortTable('logisticsOverview', 4)">Gewicht</th>
+								<th onclick="sortTable('logisticsOverview', 5)">Hinweise</th>
+								<th onclick="sortTable('logisticsOverview', 6)">Kommentar</th>
+								<th onclick="sortTable('logisticsOverview', 7)">Zielort</th>
+								<th onclick="sortTable('logisticsOverview', 8)">Fahrer</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="parcel : ${getParcelList}">
+								<form th:action="@{/logistics}" th:method="post">
+									<td th:value="${parcel.id}" 		th:text="${parcel.id}">...</td>
+									<td th:value="${parcel.length}" 	th:text="${#numbers.formatDecimal(parcel.length,1,0,'NONE') + 'cm'}">...</td>
+									<td th:value="${parcel.width}" 		th:text="${#numbers.formatDecimal(parcel.width,1,0,'NONE') + 'cm'}">...</td>
+									<td th:value="${parcel.height}" 	th:text="${#numbers.formatDecimal(parcel.height,1,0,'NONE') + 'cm'}">...</td>
+									<td th:value="${parcel.weight}" 	th:text="${#numbers.formatDecimal(parcel.weight,1,1,'COMMA') + 'kg'}"></td>
+									<td style="white-space: nowrap;">
+										<div style="width: 30px; float: left;" th:if="${parcel.dangerous}">
+											<img class="symbol" src="../media/gefahr.jpg" />
+										</div>
+										<div style="width: 30px; float: right;" th:if="${parcel.fragile}">
+											<img class="symbol" src="../media/fragil.jpg" />
+										</div>
+									</td>
+									<td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>
+									<td th:value="${parcel.city}"	th:text="${parcel.city}"></td>
+									<td>
+										<!--We use the name property to map the following values into the model-->
+										<input th:value="${parcel.id}" name="parcelId" class="form-control" type="hidden"/>
+										<select name="driver" class="form-control" onchange="this.form.submit()">
+											<option value="" disabled="disabled" selected="selected">Fahrer wählen</option>
+											<th:block th:each="driverListModel : ${getDriverList}">
+												<option th:value="${driverListModel.driverId}" th:text="${driverListModel.driverName}" th:selected="(${#arrays.contains(driverListModel.parcelIds, parcel.id)})">th:selected="${selected}" ...</option>
+											</th:block>
+										</select>
+									</td>
+									<td>
+										<a class="button" th:href="@{/changeorder(id=${parcel.id})}">Edit</a>
+									</td>
+									<td>
+										<a class="button" th:href="@{/parcelstats(id=${parcel.id})}">Stat</a>
+									</td>
+								</form>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div th:if="${getParcelList.empty}">
+					<p>Es existieren keine Pakete.</p>
+				</div>
+
+				<a class="button" th:href="@{/neworder}">+ Neues Paket erfassen</a><br />
+				<a class="top-button archive" th:href="@{/archive}">Archiv  (<span th:text="${countArchivedParcels}"></span>)</a><br />
+				<a class="top-button canceled" th:href="@{/canceled}">Storniert (<span th:text="${countCanceledParcels}"></span>)</a><br />
+				<a class="top-button driverstat" th:href="@{/driverstatsoverview}">Fahrerstatistik</a>
+				<a class="top-button logout" th:href="@{/logout}">Logout</a>
 			</div>
 			<footer>
 				<span>ESE-Team8 (c)2017</span>
