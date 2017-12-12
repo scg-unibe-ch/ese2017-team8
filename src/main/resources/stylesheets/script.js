@@ -17,12 +17,14 @@ function sortTable(tableId, n) {
             shouldSwitch = false;
             /* Get the two elements you want to compare,
             one from current row and one from the next: */
-            var x = rows[i].getElementsByTagName("TD")[n].innerHTML.replace("kg","").replace("cm","");
-            var y = rows[i + 1].getElementsByTagName("TD")[n].innerHTML.replace("kg","").replace("cm","");;
+            //remove cm and kg from string to compare numbers
+            var x = rows[i].getElementsByTagName("TD")[n].innerHTML.replace("kg","").replace("cm","").replace(",",".");
+            var y = rows[i + 1].getElementsByTagName("TD")[n].innerHTML.replace("kg","").replace("cm","").replace(",",".");
             /* Check if the two rows should switch place,
             based on the direction, asc or desc: */
             if (dir == "asc") {
-                if (!(/^\d+$/.test(x))){
+                //either compare numbers or string
+                if (isNaN(parseFloat(x.replace(/[^\d.-]/g, '')))){
                     if (x.toLowerCase() > y.toLowerCase()) {
                         // If so, mark as a switch and break the loop:
                         shouldSwitch= true;
@@ -35,7 +37,8 @@ function sortTable(tableId, n) {
                     }
                 }
             } else if (dir == "desc") {
-                if (!(/^\d+$/.test(x))){
+                //either compare numbers or string
+                if (isNaN(parseFloat(x.replace(/[^\d.-]/g, '')))){
                     if (x.toLowerCase() < y.toLowerCase()) {
                         // If so, mark as a switch and break the loop:
                         shouldSwitch= true;
