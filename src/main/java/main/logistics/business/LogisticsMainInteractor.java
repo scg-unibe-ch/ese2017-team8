@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Collections;
 
 @Component
 public class LogisticsMainInteractor implements LogisticsMainUseCases {
@@ -124,6 +125,7 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 			viewModel.add(parcelStatListModel);
 		}
 
+		Collections.reverse(viewModel);
 		return viewModel;
 	}
 
