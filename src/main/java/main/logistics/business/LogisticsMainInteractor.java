@@ -83,6 +83,20 @@ public class LogisticsMainInteractor implements LogisticsMainUseCases {
 		return filteredParcels;
 	}
 
+	public List<Parcel> getCanceledParcels() {
+		List<Parcel> allParcels = parcelRepo.findAll();
+		List<Parcel> filteredParcels = new ArrayList<Parcel>();
+
+		for (Parcel parcel : allParcels) {
+			Delivery del = deliveryRepo.findByParcelId(parcel.getId());
+
+			if (del != null && del.getStatus() == Delivery.Status.cancelled) {
+				filteredParcels.add(parcel);
+			}
+		}
+		return filteredParcels;
+	}
+
 	public List<DriverListModel> getDriversList() {
 		List<User> driverList = userRepo.findAllByAuthoritiesContains(AuthorityDriver.instance);
 

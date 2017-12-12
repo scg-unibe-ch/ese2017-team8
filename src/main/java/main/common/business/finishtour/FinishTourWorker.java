@@ -2,6 +2,7 @@ package main.common.business.finishtour;
 
 import main.common.data.repositories.DeliveryRepo;
 import main.common.data.repositories.ParcelRepo;
+import main.common.data.repositories.ParcelStatRepo;
 import main.common.data.repositories.UserRepo;
 import main.common.data.models.Delivery;
 import main.common.data.models.User;
@@ -20,6 +21,9 @@ public class FinishTourWorker implements FinishTourUseCases {
 	ParcelRepo parcelRepo;
 
 	@Autowired
+	ParcelStatRepo parcelStatRepo;
+
+	@Autowired
 	UserRepo userRepo;
 
 	public void finishTourForDriver(User driver) {
@@ -28,7 +32,12 @@ public class FinishTourWorker implements FinishTourUseCases {
 		for (Delivery d : assignedDeliveries) {
 			switch (d.getStatus()) {
 				case attempted:
-					d.setStatus(Delivery.Status.unscheduled);
+					Long anz_versuche = parcelStatRepo.countAttemptedForParcel(d.getParcelId()) + 1;
+					if (anz_versuche > 1) {
+						d.setStatus(Delivery.Status.cancelled);
+					} else {
+						d.setStatus(Delivery.Status.unscheduled);
+					}
 					d.setDriverId(null);
 					d.setScheduledDate(null);
 					d.setSequence(0);

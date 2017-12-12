@@ -25,7 +25,11 @@ public interface ParcelStatRepo extends CrudRepository<ParcelStat, Long> {
 	@Query("SELECT COUNT(newStatus) FROM ParcelStat WHERE newStatus = 2 AND driverId = :driverId")
 	public Long countDeliveredParcelsForDriver(@Param("driverId") Long driverId);
 
+	@Query("SELECT COUNT(newStatus) FROM ParcelStat WHERE newStatus = 2 AND parcelId = :parcelId")
+	public Long countAttemptedForParcel(@Param("parcelId") Long parcelId);
+
 	@Query("SELECT COUNT(newStatus) FROM ParcelStat WHERE newStatus = 3 AND driverId = :driverId")
 	public Long countAttemptedParcelsForDriver(@Param("driverId") Long driverId);
+
 }
 

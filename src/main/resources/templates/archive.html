@@ -56,6 +56,53 @@
                 <div th:if="${getArchivedParcelList.empty}">
                     <p>Bisher sind keine Pakete fertig verarbeitet worden.</p>
                 </div>
+                <h2>Abgebrochene Zustellungen</h2>
+                <div th:if="${!getCanceledParcelList.empty}">
+                    <table class="nice" id="logisticsCanceled">
+                        <thead>
+                        <tr>
+                            <th onclick="sortTable('logisticsCanceled', 0)">Paket-ID</th>
+                            <th onclick="sortTable('logisticsCanceled', 1)">Hinweise</th>
+                            <th onclick="sortTable('logisticsCanceled', 2)">Kommentar</th>
+                            <th onclick="sortTable('logisticsCanceled', 3)">Empfänger</th>
+                            <th onclick="sortTable('logisticsCanceled', 4)">Zielort</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="parcel : ${getCanceledParcelList}">
+                            <form th:action="@{/logistics}" th:method="post">
+                                <td th:value="${parcel.id}" 		th:text="${parcel.id}">...</td>
+                                <td style="white-space: nowrap;">
+                                    <div style="width: 30px; float: left;" th:if="${parcel.dangerous}">
+                                        <img class="symbol" src="../media/gefahr.jpg" />
+                                    </div>
+                                    <div style="width: 30px; float: right;" th:if="${parcel.fragile}">
+                                        <img class="symbol" src="../media/fragil.jpg" />
+                                    </div>
+                                </td>
+                                <td th:value="${parcel.comment}"	th:text="${parcel.comment}"></td>
+                                <td th:value="${parcel.recipient}"	th:text="${parcel.recipient}"></td>
+                                <td th:value="${parcel.city}"	th:text="${parcel.city}"></td>
+                                <td>
+                                    <a class="button" th:href="@{/changeorder(id=${parcel.id})}">Bearbeiten</a>
+                                </td>
+                                <td>
+                                    <a class="button" th:href="@{/reactivate(id=${parcel.id})}">Erneut Planen</a>
+                                </td>
+                                <td>
+                                    <a class="button" th:href="@{/parcelstats(id=${parcel.id})}">Statistik</a>
+                                </td>
+                            </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:if="${getCanceledParcelList.empty}">
+                    <p>Bisher konnten alle Pakete zugestellt werden in zwei Versuchen.</p>
+                </div>
                 <a class="top-button logout" th:href="@{/logout}">Logout</a>
                 <a class="button" th:href="@{/logistics}">Zurück</a>
             </div>

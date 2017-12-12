@@ -38,6 +38,11 @@ public class LogisticsArchiveViewController {
 		return interactor.getArchivedParcels();
 	}
 
+	@ModelAttribute("getCanceledParcelList")
+	public List<Parcel> getCanceledParcelList() {
+		return interactor.getCanceledParcels();
+	}
+
 	/**
 	 * At the moment is used to insert some hardcoded drivers.
 	 * @return List with all hardcoded drivers.
