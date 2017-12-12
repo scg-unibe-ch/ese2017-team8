@@ -77,10 +77,10 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         optimizeWaypoints: true,
         travelMode: 'DRIVING'
     }, function(response, status) {
+        var summaryPanel = document.getElementById('directions-panel');
         if (status === 'OK') {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
-            var summaryPanel = document.getElementById('directions-panel');
             summaryPanel.innerHTML = '';
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
@@ -95,20 +95,21 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
                 summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
             }
         } else {
+            summaryPanel.innerHTML += '<strong>Fehler!</strong><br />'
             if (status == 'ZERO_RESULTS') {
-                window.alert('No route could be found between the origin and destination.');
+                summaryPanel.innerHTML += 'Es konnte keine Route gefunden werden.';
             } else if (status == 'UNKNOWN_ERROR') {
-                window.alert('A directions request could not be processed due to a server error. The request may succeed if you try again.');
+                summaryPanel.innerHTML += 'Aufgrund eines Serverporblems konnte keine Route berechnet werden. Versuchen sie die Seite neu zu laden.';
             } else if (status == 'REQUEST_DENIED') {
-                window.alert('This webpage is not allowed to use the directions service.');
+                summaryPanel.innerHTML += 'Diese Seite verbietet den gebrauch vom Routen Service';
             } else if (status == 'OVER_QUERY_LIMIT') {
-                widnow.alert('The webpage has gone over the requests limit in too short a period of time.');
+                summaryPanel.innerHTML += 'The webpage has gone over the requests limit in too short a period of time.';
             } else if (status == 'NOT_FOUND') {
-                window.alert('At least one of the origin, destination, or waypoints could not be geocoded.');
+                summaryPanel.innerHTML += 'At least one of the origin, destination, or waypoints could not be geocoded.';
             } else if (status == 'INVALID_REQUEST') {
-                window.alert('The DirectionsRequest provided was invalid.');
+                summaryPanel.innerHTML += 'The DirectionsRequest provided was invalid.';
             }else{
-                window.alert('Directions request failed due to ' + status);
+                summaryPanel.innerHTML += 'Directions request failed due to ' + status;
             }
         }
     });
