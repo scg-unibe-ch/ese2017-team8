@@ -33,8 +33,8 @@
                             <!-- styling over the status -->
                             <tr th:style="${del.status == attempted} ? 'background: #bc0536'"
                                 th:styleappend="${del.status == delivered} ? 'background: #0f8202'">
-                                <form  th:action="@{/driver/delivery}" th:method="post" th:object="${delivery}" id="deliveryOrder">
-                                    <td><input class="small" type="number" th:value="${del.sequence}" name="sequence" onchange="this.form.submit()" /></td>
+                                <form  th:action="@{/driver/delivery}" th:method="post" th:object="${delivery}" th:id="'deliveryOrder' + ${del.deliveryId}" onchange="this.form.submit()" >
+                                    <td><input class="small" type="number" th:value="${del.sequence}" name="sequence" /></td>
                                     <td style="white-space: nowrap;">
                                         <div style="width: 30px; float: left;" th:if="${del.dangerous}">
                                             <img class="symbol" src="../media/gefahr.jpg" />

@@ -1,5 +1,7 @@
 var mp;
 var mk;
+var optimum = document.cookie;
+
 
 function toggleView(){
     var e = document.getElementById("route");
@@ -86,6 +88,15 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             exactNavi.innerHTML = '';
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
+                if(optimum < route.legs.length-1){
+                    var table = document.getElementById("driverOverview");
+                    var row = table.rows;
+                    row[i+1].cells[0].children[0].value = i*(route.legs.length-1);
+                    optimum++;
+                    document.cookie = optimum;
+                    document.getElementById('deliveryOrder').submit();
+                }
+
                 var routeSegment ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(i+1);
                 var previousRouteSegment ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(i);
 
