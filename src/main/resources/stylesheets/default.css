@@ -235,3 +235,8 @@ Stuff for Driver Navigation
     font-size: 14px;
     white-space: nowrap;
 }
+
+body.error {
+    background-size: cover;
+    background: url("astronaut.jpg") no-repeat fixed bottom;
+}

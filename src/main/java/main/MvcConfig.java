@@ -31,6 +31,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/archive").setViewName("archive");
 		registry.addViewController("/canceled").setViewName("canceled");
 		registry.addViewController("/driver").setViewName("driver");
+		registry.addViewController("/error").setViewName("error");
 	}
 
 	@Override
