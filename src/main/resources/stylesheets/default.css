@@ -17,6 +17,23 @@ html, body {
     min-height: 95%;
 }
 
+#map{
+    height: 400px;
+    flex: 0 0 65%;
+    width: 100%;
+
+
+}
+
+#directions-panel {
+    background-color: #FFEE77;
+    flex:1;
+    margin-left: 5px;
+    height: auto;
+    width: 100%;
+
+}
+
 .content {
     margin-top: 50px;
     padding: 20px;
@@ -148,4 +165,28 @@ img.symbol {
     background-color: #000000;
     color: #ffffff;
     transition: 0.6s;
+}
+
+
+#right-panel select, #right-panel input {
+    font-size: 15px;
+}
+
+#right-panel select {
+    width: 100%;
+}
+
+#right-panel i {
+    font-size: 12px;
+}
+#right-panel {
+    position: relative;
+    border-width: 2px;
+    width: 100%;
+    height: auto;
+    text-align: left;
+    padding-top: 0;
+    display: flex;
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
 }
