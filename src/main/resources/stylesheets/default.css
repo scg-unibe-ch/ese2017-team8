@@ -30,44 +30,6 @@ html, body {
     width: 100%;
 }
 
-#route {
-    height: 0px;
-}
-
-#parceloverview {
-    height: auto;
-}
-
-#route, #parceloverview {
-    overflow: hidden;
-}
-
-#showparcels {
-    display: none;
-}
-
-#showroute {
-    display: block;
-}
-
-#map{
-    height: 500px;
-    width: 70%;
-    float: left;
-}
-
-#directions-panel {
-    background-color: #5960B0;
-    color: white;
-    margin-left: 1%;
-    width: 27%;
-    float: right;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 480px;
-    padding: 10px 1%;
-}
-
 p, td, tr, input {
     font-size: 14px;
 }
@@ -103,9 +65,17 @@ a {
     color: #5960b0;
 }
 
+a.black {
+    color: #ffffff;
+}
+
 a:hover {
     color: #000000;
     transition: 0.6s;
+}
+
+a.black:hover {
+    color: #000000;
 }
 
 a.top-button {
@@ -190,6 +160,64 @@ img.symbol {
     transition: 0.6s;
 }
 
+/*
+Stuff for Driver Navigation
+ */
+
+#route {
+    height: 0px;
+}
+
+#parceloverview {
+    height: auto;
+}
+
+#route, #parceloverview {
+    overflow: hidden;
+}
+
+#showparcels {
+    display: none;
+}
+
+#showroute {
+    display: block;
+}
+
+#left, #right {
+    height: 600px;
+}
+
+#left {
+    width: 70%;
+    float: left;
+}
+
+#right {
+    margin-left: 1%;
+    width: 29%;
+    float: right;
+}
+
+#map {
+    height: 450px;
+}
+
+#navi-panel {
+    height: 150px;
+}
+
+#directions-panel {
+    background-color: #5960B0;
+    color: white;
+    height: 580px;
+    padding: 10px;
+}
+
+#navi-panel, #directions-panel {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 
 #right-panel select, #right-panel input {
     font-size: 15px;
@@ -199,13 +227,7 @@ img.symbol {
     width: 100%;
 }
 
-#right-panel i {
-    font-size: 12px;
-}
-#right-panel {
-    position: relative;
-    border-width: 2px;
-    text-align: left;
-    padding-top: 0;
-    line-height: 30px;
+#navi-panel, #navi-panel div {
+    font-size: 14px;
+    white-space: nowrap;
 }

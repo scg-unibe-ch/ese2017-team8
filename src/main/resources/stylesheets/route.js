@@ -74,7 +74,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         origin: {lat: 46.9479739, lng: 7.447446799999966},
         destination: {lat: 46.9479739, lng: 7.447446799999966},
         waypoints: waypts,
-        optimizeWaypoints: false,
+        optimizeWaypoints: true,
         travelMode: 'DRIVING'
     }, function(response, status) {
         var summaryPanel = document.getElementById('directions-panel');
@@ -86,25 +86,21 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             exactNavi.innerHTML = '';
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
-
-                    exactNavi.innerHTML += '<br>' + (i+1) + ". Paket nach: " + route.legs[i].end_address.replace(", Schweiz", " ") + '<br>';
-                    for(var j = 0; j < route.legs[i].steps.length; j++){
-                        exactNavi.innerHTML += route.legs[i].steps[j].instructions + '<br>';
-                        exactNavi.innerHTML += "für " + (route.legs[i].steps[j].distance.value) + " Meter folgen" + '<br>';
-
-                    }
-
-                    exactNavi.innerHTML += '<br>';
-
                 var routeSegment ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(i+1);
-                if (i == route.legs.length-1){
-                    summaryPanel.innerHTML += '<strong>Route in den Feierabend</strong><br>';
-                } else {
-                    summaryPanel.innerHTML += '<strong>Route nach Ziel ' + routeSegment + '</strong><br>';
+                var previousRouteSegment ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(i);
+
+                exactNavi.innerHTML += '<h4 id="'+routeSegment+'">' + (i+1) + ". Paket nach: " + route.legs[i].end_address.replace(", Schweiz", " ") + '</h4>';
+                for(var j = 0; j < route.legs[i].steps.length; j++){
+                    exactNavi.innerHTML += '<p>' + route.legs[i].steps[j].instructions.replace("font-size:0.9em", "") + ' und für ' + (route.legs[i].steps[j].distance.value) + ' Meter folgen</p>';
                 }
-                summaryPanel.innerHTML += route.legs[i].start_address.replace(", Schweiz", " ") + ' nach ';
-                summaryPanel.innerHTML += route.legs[i].end_address.replace(", Schweiz", " ") + '<br>';
-                summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+
+                if (i == route.legs.length-1){
+                    summaryPanel.innerHTML += '<strong>Dein Ziel für Feierabend</strong><br>';
+                } else {
+                    summaryPanel.innerHTML += '<strong>Adresse für Ziel ' + routeSegment + '</strong><br>';
+                }
+                summaryPanel.innerHTML += route.legs[i].end_address.replace(", Schweiz", " ").replace(", ", "<br>") + '<br>';
+                summaryPanel.innerHTML += route.legs[i].distance.text + ' Distanz von  ' + previousRouteSegment + '<br><a class="link black" href="#' + routeSegment + '">Zeige Route</a><br><br>';
             }
         } else {
             summaryPanel.innerHTML += '<strong>Fehler!</strong><br />'
