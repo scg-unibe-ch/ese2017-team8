@@ -57,7 +57,8 @@ html, body {
 }
 
 #directions-panel {
-    background-color: #FFEE77;
+    background-color: #5960B0;
+    color: white;
     margin-left: 1%;
     width: 27%;
     float: right;

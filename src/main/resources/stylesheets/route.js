@@ -84,9 +84,12 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             summaryPanel.innerHTML = '';
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
-                var routeSegment = i + 1;
-                summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-                    '</b><br>';
+                var routeSegment ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(i+1);
+                if (i == route.legs.length-1){
+                    summaryPanel.innerHTML += '<strong>Route in den Feierabend</strong><br>';
+                } else {
+                    summaryPanel.innerHTML += '<strong>Route nach Ziel ' + routeSegment + '</strong><br>';
+                }
                 summaryPanel.innerHTML += route.legs[i].start_address.replace(", Schweiz", " ") + ' nach ';
                 summaryPanel.innerHTML += route.legs[i].end_address.replace(", Schweiz", " ") + '<br>';
                 summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
