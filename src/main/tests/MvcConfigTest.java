@@ -49,11 +49,12 @@ public class MvcConfigTest
 		when(registry.addViewController("/logistics")).thenReturn(controller);
 		when(registry.addViewController("/archive")).thenReturn(controller);
 		when(registry.addViewController("/driver")).thenReturn(controller);
+		when(registry.addViewController("/canceled")).thenReturn(controller);
+		when(registry.addViewController("/error")).thenReturn(controller);
 		
 		mc.addViewControllers(registry);
-		verify(registry).addViewController("/home");
-//		verify(controllers).setViewName("home");
-		verify(registry,times(12)).addViewController(anyString());
+
+		verify(registry,times(14)).addViewController(anyString());
 
 	}
 		

@@ -111,21 +111,4 @@ public class DriverMainViewControllerTest
 		.andExpect(model().attribute("deliveriesForDriver", hasSize(0)));
 	}
 	
-	@Test
-	public void possibleParcelStatusDriverTest()
-	{
-		List<Delivery.Status> driverStatus = new ArrayList<>();
-		driverStatus.add(Delivery.Status.attempted);
-		driverStatus.add(Delivery.Status.delivered);
-		//assertEquals(driverStatus, driver.possibleParcelStatusDriver());
-	}
-	
-//	@Test
-//	public void returnLoggedInNameTest()
-//	{
-//		//driver.returnLoggedInName();
-//		verify(SecurityContextHolder.getContext().getAuthentication());
-//	}
-
-	
 }
