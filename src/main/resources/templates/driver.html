@@ -6,179 +6,86 @@
           href="stylesheets/default.css" th:src="@{../stylesheets/default.css}" />
     <META HTTP-EQUIV="refresh" CONTENT="1500"/>
     <script src="stylesheets/script.js"></script>
+    <script src="stylesheets/route.js"></script>
 </head>
 <body>
     <div id="wrapper">
         <div class="content">
             <h1 th:text="${loggedInUser}"></h1>
-            <div th:if="${!deliveriesForDriver.empty}">
-                <p>Hier sind alle zugeordneten Lieferungen.</p>
-                <table class="nice" id="driverOverview">
-                    <thead>
-                    <tr>
-                        <th onclick="sortTable('driverOverview', 0)">Position</th>
-                        <th onclick="sortTable('driverOverview', 1)">Hinweis</th>
-                        <th onclick="sortTable('driverOverview', 2)">Kommentar</th>
-                        <th onclick="sortTable('driverOverview', 3)">Annahmefenster</th>
-                        <th onclick="sortTable('driverOverview', 4)">Empfänger</th>
-                        <th onclick="sortTable('driverOverview', 5)">Adresse</th>
-                        <th onclick="sortTable('driverOverview', 6)">PLZ</th>
-                        <th onclick="sortTable('driverOverview', 7)">Ort</th>
-                        <th onclick="sortTable('driverOverview', 8)">Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <th:block th:each="del : ${deliveriesForDriver}">
-                        <!-- styling over the status -->
-                        <tr th:style="${del.status == attempted} ? 'background: #bc0536'"
-                            th:styleappend="${del.status == delivered} ? 'background: #0f8202'">
-                            <form  th:action="@{/driver/delivery}" th:method="post" th:object="${delivery}" id="deliveryOrder">
-                                <td><input class="small" type="number" th:value="${del.sequence}" name="sequence" onchange="this.form.submit()" /></td>
-                                <td style="white-space: nowrap;">
-                                    <div style="width: 30px; float: left;" th:if="${del.dangerous}">
-                                        <img class="symbol" src="../media/gefahr.jpg" />
-                                    </div>
-                                    <div style="width: 30px; float: right;" th:if="${del.fragile}">
-                                        <img class="symbol" src="../media/fragil.jpg" />
-                                    </div>
-                                </td>
-                                <td th:value="${del.comment}"	th:text="${del.comment}"></td>
-                                <td th:value="${del.zeitfenster}" 	th:text="${del.zeitfenster}"></td>
-                                <td th:value="${del.recipient}" 	th:text="${del.recipient}">...</td>
-                                <td th:value="${del.address}" 	th:text="${del.address}">...</td>
-                                <td th:value="${del.plz}" 		th:text="${del.plz}">...</td>
-                                <td th:value="${del.city}" 	th:text="${del.city}">...</td>
-                                <td>
-                                     <!--because every delivery contains only one parcel, we can find a delivery with the parcel id-->
-                                    <input th:value="${del.parcelId}" name="parcelId" class="form-control" type="hidden"/>
-                                    <select name="status" onchange="this.form.submit()">
-                                         <!--each package for a driver is scheduled-->
-                                        <option selected="selected" disabled="disabled">scheduled</option>
-                                         <!--the driver changes in either delivered or attempted-->
-                                        <th:block th:each="stat : ${possibleParcelStatusDriver}">
-                                            <option th:text="${stat}" th:selected="${del.status == stat}"></option>
-                                        </th:block>
-                                    </select>
-                                </td>
-                            </form>
+            <div id="parcelOverview">
+                <div th:if="${!deliveriesForDriver.empty}">
+                    <p>Hier sind alle zugeordneten Lieferungen.</p>
+                    <table class="nice" id="driverOverview">
+                        <thead>
+                        <tr>
+                            <th onclick="sortTable('driverOverview', 0)">Position</th>
+                            <th onclick="sortTable('driverOverview', 1)">Hinweis</th>
+                            <th onclick="sortTable('driverOverview', 2)">Kommentar</th>
+                            <th onclick="sortTable('driverOverview', 3)">Annahmefenster</th>
+                            <th onclick="sortTable('driverOverview', 4)">Empfänger</th>
+                            <th onclick="sortTable('driverOverview', 5)">Adresse</th>
+                            <th onclick="sortTable('driverOverview', 6)">PLZ</th>
+                            <th onclick="sortTable('driverOverview', 7)">Ort</th>
+                            <th onclick="sortTable('driverOverview', 8)">Status</th>
                         </tr>
-                    </th:block>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="del : ${deliveriesForDriver}">
+                            <!-- styling over the status -->
+                            <tr th:style="${del.status == attempted} ? 'background: #bc0536'"
+                                th:styleappend="${del.status == delivered} ? 'background: #0f8202'">
+                                <form  th:action="@{/driver/delivery}" th:method="post" th:object="${delivery}" id="deliveryOrder">
+                                    <td><input class="small" type="number" th:value="${del.sequence}" name="sequence" onchange="this.form.submit()" /></td>
+                                    <td style="white-space: nowrap;">
+                                        <div style="width: 30px; float: left;" th:if="${del.dangerous}">
+                                            <img class="symbol" src="../media/gefahr.jpg" />
+                                        </div>
+                                        <div style="width: 30px; float: right;" th:if="${del.fragile}">
+                                            <img class="symbol" src="../media/fragil.jpg" />
+                                        </div>
+                                    </td>
+                                    <td th:value="${del.comment}"	th:text="${del.comment}"></td>
+                                    <td th:value="${del.zeitfenster}" 	th:text="${del.zeitfenster}"></td>
+                                    <td th:value="${del.recipient}" 	th:text="${del.recipient}">...</td>
+                                    <td th:value="${del.address}" 	th:text="${del.address}">...</td>
+                                    <td th:value="${del.plz}" 		th:text="${del.plz}">...</td>
+                                    <td th:value="${del.city}" 	th:text="${del.city}">...</td>
+                                    <td>
+                                         <!--because every delivery contains only one parcel, we can find a delivery with the parcel id-->
+                                        <input th:value="${del.parcelId}" name="parcelId" class="form-control" type="hidden"/>
+                                        <select name="status" onchange="this.form.submit()">
+                                             <!--each package for a driver is scheduled-->
+                                            <option selected="selected" disabled="disabled">scheduled</option>
+                                             <!--the driver changes in either delivered or attempted-->
+                                            <th:block th:each="stat : ${possibleParcelStatusDriver}">
+                                                <option th:text="${stat}" th:selected="${del.status == stat}"></option>
+                                            </th:block>
+                                        </select>
+                                    </td>
+                                </form>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                    <a class="finishtour" th:href="@{/driver/finishTour}">Tour abschliessen</a>
+                </div>
+                <div th:if="${deliveriesForDriver.empty}">
+                    <p>Aktuell sind keine Lieferungen zugeordnet für Sie.</p>
+                </div>
             </div>
-            <div th:if="${deliveriesForDriver.empty}">
-                <p>Aktuell sind keine Lieferungen zugeordnet für Sie.</p>
+            <div id="route">
+                <div th:if="${!deliveriesForDriver.empty}" id="right-panel">
+                    <h2>Ihre Route</h2>
+                    <div id="map"></div>
+                    <div id="directions-panel"></div>
+                </div>
             </div>
             <a class="top-button logout" th:href="@{/logout}">Logout</a>
-            <a class="finishtour" th:href="@{/driver/finishTour}">Tour abschliessen</a>
         </div>
-        <div th:if="${!deliveriesForDriver.empty}" id="right-panel">
-        <div id="map"></div>
-        <div id="directions-panel"></div>
-        </div>
-            <footer>
+        <footer>
             <span>ESE-Team8 (c)2017</span>
         </footer>
     </div>
-
-    <script type="text/javascript" th:inline="javascript">
-        /*<![CDATA[*/
-        var mp;
-        var mk;
-
-        function initMap() {
-            var directionsService = new google.maps.DirectionsService;
-            var directionsDisplay = new google.maps.DirectionsRenderer;
-
-            var mapProp = {
-                center: {lat: 46.9479739, lng: 7.447446799999966},
-                zoom: 8,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var marker = new google.maps.Marker({
-                position: {lat: 46.9479739, lng: 7.447446799999966},
-                title: 'Zentrale'
-            });
-            mk = marker;
-
-            var map = new google.maps.Map(document.getElementById('map'), mapProp);
-            mp = map;
-
-            directionsDisplay.setMap(map);
-
-            window.onload = function () {
-
-                    calculateAndDisplayRoute(directionsService, directionsDisplay);
-                };
-        }
-
-        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-
-              var waypts = [];
-              var table = document.getElementById("driverOverview");
-              var row = table.rows;
-
-              var rowtext;
-              for (var i = 1; i < row.length; i++) {
-                 // var rowText = rows[i].cells[3].innerHTML + "," + rows.cells[4].innerHTML + "" + rows.cells[5].innerHTML + "CH";
-                  rowtext = row[i].cells[5].innerHTML + "," + row[i].cells[6].innerHTML + " " + row[i].cells[7].innerHTML + ", CH";
-                      waypts.push({
-                          location: rowtext,
-                          stopover: true
-                      });
-
-              }
-
-           /* //test waypoint working
-           waypts.push({
-                location: "Luzern, CH",
-                stopover: true
-            });*/
-
-            directionsService.route({
-
-                origin: {lat: 46.9479739, lng: 7.447446799999966},
-                destination: {lat: 46.9479739, lng: 7.447446799999966},
-                waypoints: waypts,
-                optimizeWaypoints: true,
-                travelMode: 'DRIVING'
-        }, function(response, status) {
-                if (status === 'OK') {
-                    directionsDisplay.setDirections(response);
-                    var route = response.routes[0];
-                    var summaryPanel = document.getElementById('directions-panel');
-                    summaryPanel.innerHTML = '';
-                    // For each route, display summary information.
-                    for (var i = 0; i < route.legs.length; i++) {
-                        var routeSegment = i + 1;
-                        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-                            '</b><br>';
-                        summaryPanel.innerHTML += route.legs[i].start_address + ' nach ';
-                        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-                        summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-                        }
-                    } else {
-                    if (status == 'ZERO_RESULTS') {
-                        window.alert('No route could be found between the origin and destination.');
-                    } else if (status == 'UNKNOWN_ERROR') {
-                        window.alert('A directions request could not be processed due to a server error. The request may succeed if you try again.');
-                    } else if (status == 'REQUEST_DENIED') {
-                        window.alert('This webpage is not allowed to use the directions service.');
-                    } else if (status == 'OVER_QUERY_LIMIT') {
-                        widnow.alert('The webpage has gone over the requests limit in too short a period of time.');
-                    } else if (status == 'NOT_FOUND') {
-                        window.alert('At least one of the origin, destination, or waypoints could not be geocoded.');
-                    } else if (status == 'INVALID_REQUEST') {
-                        window.alert('The DirectionsRequest provided was invalid.');
-                    }else{
-                            window.alert('Directions request failed due to ' + status);
-                    }
-                }
-            });
-        }
-
-        /*]]>*/
-    </script>
     <script async="async" defer="defer" th:src="@{https://maps.googleapis.com/maps/api/js(key=${'AIzaSyAZNuJGGgGevoGeEigqdV6Bd3qr1h6IvCQ'},callback=initMap)}"></script>
 </body>
 </html>
