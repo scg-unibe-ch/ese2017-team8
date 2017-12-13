@@ -38,7 +38,7 @@ public class FinishTourWorker implements FinishTourUseCases {
 			interactor.logParcelEvent(d.getParcelId(), d.getStatus(),driver.getId(), driver.getId());
 			switch (d.getStatus()) {
 				case attempted:
-					Long anz_versuche = parcelStatRepo.countAttemptedForParcel(d.getParcelId()) + 1;
+					Long anz_versuche = parcelStatRepo.countAttemptedForParcel(d.getParcelId());
 					if (anz_versuche > 1) {
 						d.setStatus(Delivery.Status.cancelled);
 					} else {
